@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS盒模型</title>
+  <style>
+    
+    /*ie盒模型、标准盒模型*/
+
+    /*ie盒模型的内容区域的 width、height 包括了padding、border的宽高度*/
+
+    /*标准盒模型的内容区域的 width、height 不包括 padding、border的宽高度*/
+
+
+    /*默认标准盒模型*/
+
+    /*转ie：box-sizing: border-box*/
+    /*转标准：box-sizing: content-box*/
+
+
+
+
+    /*块元素和行元素*/
+
+
+    /*块元素：独占一行，并且有自动填满父元素，可以设置margin和pading以及高度和宽度。*/
+
+    /*行元素：不会独占一行，width和height会失效，并且在垂直方向的padding和margin会失效。*/
+
+    /*常见的块级元素有 div, form, table, p, pre, h1~h6, dl, ol, ul 等。*/
+
+    /*常见的内联元素有 span, a, strong, em, label, input, select, textarea, img, br 等 */
+
+    /*P 元素，只能包含inline元素，而不能包含block元素。*/
+
+
+    /*首行缩进：text-indent: 5em; 无法将该属性应用于行内元素，属性可以继承*/
+
+
+    /*文字间隔：word-spacing 属性接受一个正长度值或负长度值*/
+
+
+    /*字母间隔：letter-spacing 属性与 word-spacing 的区别在于，字母间隔修改的是字符或字母之间的间隔。*/
+
+
+    /*文本大小写：text-transform: uppercase*/
+
+
+    /*文本装饰线：text-decoration: none;*/
+
+
+    /*文档空白符处理：
+
+      合并空格忽略回车：white-space: normal;
+      保留原始回车和空格：white-space: pre-wrap;
+      只保留回车：white-space: pre-line;*/
+
+
+    /*剪裁图片：img {position:absolute;clip:rect(0px 50px 200px 0px)}*/
+
+    
+
+    /*单行元素的文本省略号*/
+    p {
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+
+    /*多行元素的文本省略号*/
+
+    p {
+      width: 100px;
+      height: 32px;
+      font-size: 14px;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow:hidden;
+    }
+    
+
+  </style>
+</head>
+<body>
+  <p>该元素隐藏起来了，但不会改变页面布局，并且，如果该元素已经绑定一些事件，如click事件，那么点击该区域，也能触发点击事件的</p>
+
+  <!-- <map>常用在为图像的某区域添加超链接!  -->
+  <!-- <img>的usemap属性与<map>name id属性关联
+  <area>的shape属性规定形状 coords设置坐标 矩形设置左上角右下角 圆形设置圆心和半径 -->
+  <img src ="" alt="Planets" usemap ="#planetmap" />
+  <map name="planetmap" id="planetmap">
+    <area shape="rect" coords="0,0,110,260" href="sun.htm" alt="Sun" />
+    <area shape="circle" coords="129,161,10" href="mercur.htm" alt="Mercury" />
+    <area shape="circle" coords="180,139,14" href="venus.htm" alt="Venus" />
+  </map>
+</body>
+</html>

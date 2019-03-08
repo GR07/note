@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>浮动及解决方案</title>
+
+  <style>
+    /*特点：*/
+    /*浮动会脱离文档流直到碰到父元素或浮动元素，浮动会导致父元素高度坍塌。*/
+
+
+    /*清除浮动：*/
+    /*清除浮动主要有两种方式，clear(强烈推荐)清除浮动和BFC清除浮动。*/
+
+
+    /*注意：*/
+    /*1.不要在浮动元素上加 clear: both */
+    /*2.可以加在浮动元素的上面或下面*/
+    
+
+
+    /*BFC解释*/
+    /*BFC容器是一个隔离的容器，和其他元素互不干扰*/
+
+
+
+    /*BFC的触发方式*/
+
+    /*我们可以给父元素添加以下属性来触发BFC：
+    float 为 left | right
+    overflow 为 hidden | auto | scorll
+    display 为 table-cell | table-caption | inline-block | flex | inline-flex
+    position 为 absolute | fixed*/
+
+    .box-wrapper {
+      border: 5px solid red;
+    }
+    .box-wrapper .box {
+      float: left; 
+      width: 100px; 
+      height: 100px; 
+      margin: 20px; 
+      background-color: green;
+    }
+
+
+    /*全浏览器通用的clearfix方案【推荐】
+    引入了zoom以支持IE6/7
+    同时加入:before以解决现代浏览器上边距折叠的问题*/
+    .clearfix:before, 
+    .clearfix:after {
+      display: table;
+      content: " ";
+    }
+    .clearfix:after{
+      clear: both;
+    }
+    .clearfix {
+      *zomm: 1;
+    }
+
+
+
+    /*浮动的应用*/
+
+    /*浮动实现常规的多列布局，但推荐使用inline-block。*/
+    /*浮动更适合实现自适应多列布局，比如左侧固定宽度，右侧根据父元素宽度自适应。*/
+
+  </style>
+</head>
+<body>
+  <div class="box-wrapper clearfix">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <!-- <div style="clear:both;"></div> -->
+  </div>
+</body>
+</html>

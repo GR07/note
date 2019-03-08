@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS-布局集合</title>
+  <style>
+
+
+
+
+    /*文字水平居中
+    对于单行文字来说，直接使用text-align: center即可。
+    多行文字可以看作一个块级元素参考margin法和定位法。*/
+    
+    /*单行文本垂直居中
+    将其line-height设置成和height的值一样*/
+
+
+     
+    /*水平垂直居中总结：
+
+    PC端有兼容要求，宽高固定，推荐absolute + 负margin
+    PC端有兼容要求，宽高不固定，推荐css-table
+    PC端无兼容性要求，推荐flex
+    移动端推荐使用flex*/
+
+
+
+
+    /*仅元素固定宽高适用
+
+    absolute + 负margin
+    absolute + margin auto
+    absolute + calc
+
+
+    居中元素不定宽高
+
+    absolute + transform
+    lineheight
+    writing-mode
+    table
+    css-table
+    flex
+    grid*/
+
+
+
+
+    /*宽高固定*/
+
+
+    /*absolute + margin负值*/
+
+    /*缺点：需要知道子元素的宽高*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+
+      position: relative;
+    }
+    .item {
+      display: block;
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+
+      position: absolute;
+      top: 50%;     
+      left: 50%;
+      margin-top: -50px;     
+      margin-left: -50px;
+    }
+
+
+
+
+    /*absolute + margin auto*/
+
+    /*缺点：需要知道子元素的宽高*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+
+      position: relative;
+    }
+    .item {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }
+
+
+
+    /*absolute + calc*/
+
+    /*缺点：需要知道子元素的宽高*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+
+      position: relative;
+    }
+    .item {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+
+      position: absolute;
+      top: calc(50% - 50px);
+      left: calc(50% - 50px);
+    }
+
+
+
+
+    /*宽高不固定*/
+
+
+    /*absolute + transform*/
+    
+    /*依赖translate2d的兼容性*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+      position: relative;
+    }
+    .item {
+      width: 33%;
+      height: 33%;
+      background-color: skyblue;
+      position: absolute;
+      top: 50%;
+      left: 50%;   
+      transform: translate(-50%, -50%);
+    }
+
+
+
+
+    /*text-align: center; + vertical-align: middle*/
+    
+    /*核心转为行内元素*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+
+      line-height: 400px;
+      text-align: center;
+      font-size: 0;
+    }
+    .item {
+      width: 33%;
+      height: 33%;
+      background-color: skyblue;
+
+      display: inline-block;
+      vertical-align: middle;
+      line-height: initial;
+      text-align: left;
+      font-size: 14px;
+    }
+
+
+
+    /*writing-mode*/
+
+    /*增加中间一层结构，通过改变文字的显示方向*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+    }
+    .box-inner {
+      writing-mode: horizontal-tb;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+    .item {
+      width: 33%;
+      height: 33%;
+      display: inline-block;
+      margin: auto;
+      text-align: left;
+    }
+
+
+
+    /*table-cell*/
+
+    /*把普通元素变为table显示效果，兼容性也还不错*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .item {
+      width: 33%;
+      height: 33%;
+      background-color: skyblue;
+
+      display: inline-block;
+      text-align: left;
+    }
+
+    
+    
+    
+    /*flex*/
+
+    /*缺点兼容性，移动端已经完全可以使用*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .item {
+      width: 33%;
+      height: 33%;
+      background-color: skyblue;
+    }
+
+
+
+
+
+    /*grid*/
+
+    /*css新出的网格布局，由于兼容性不太好*/
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+
+      display: grid;
+    }
+    .item {
+      width: 33%;
+      height: 33%;
+      background-color: skyblue;
+
+      align-self: center;
+      justify-self: center;
+    }
+    
+
+    
+    
+    
+
+  </style>
+</head>
+<body>
+
+    <div class="box">
+      <div class="item">我是子元素</div>
+    </div>
+
+</body>
+</html>
