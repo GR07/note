@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>闭包</title>
+</head>
+<body>
+  <script>
+
+    // 闭包就是指有权访问另一个函数作用域中的变量的函数。
+
+    // 通常，函数的作用域及其所有变量都会在函数执行结束后被销毁。
+    // 但是，在创建了一个闭包以后，这个函数的作用域就会一直保存到闭包不存在为止。
+
+    // 闭包的缺陷：
+    // 闭包的缺点就是常驻内存会增大内存使用量，并且使用不当很容易造成内存泄露
+
+
+ 
+    for (var i = 0; i < 5; i++) {  
+      setTimeout(function() {
+        console.log(new Date, i);
+      }, 1000 * i);
+    }
+    // 每秒打印 5 共 5 次
+    // 我们期望的是开始打印 0 每秒打印 + 1 共 5 次
+    // 所以可以用闭包解决。
+
+
+    // 闭包解决
+    for (var i = 0; i < 5; i++) {
+      (function (i) {
+        setTimeout(function() {
+          console.log(new Date, i);
+        }, 1000 * i);
+      })(i)
+        
+    }
+    setTimeout(function() { // 这里增加定时器，超时设置为 5 秒
+      console.log(new Date, i);
+    }, 1000 * i);
+    // 结果开始打印 0 每秒打印 + 1 共5次，最后打印全局的变量 i 的值
+
+
+
+    // Promise解决
+    const arr = [];
+    for (var i = 0; i < 5; i++) {
+      arr.push(new Promise((resolve, reject) => {
+        ((i) => {
+          setTimeout(() => {
+            console.log(new Date, i);
+            resolve();
+          }, i * 1000)
+        })(i);       
+      }))
+    }
+    Promise.all(arr).then(() => {
+      setTimeout(() => console.log(new Date, i), 1000)   
+    })
+    // 结果开始打印 0 每秒打印 + 1 共5次，最后打印全局的变量 i 的值
+
+
+
+    // async await 解决
+    (async function () {
+      for (var i = 0; i < 5; i++) {
+        console.log(new Date(), i)
+        await new Promise((resolve, reject) => {
+          setTimeout(resolve, 1000);
+        });       
+      }
+      console.log(new Date(), i)
+    })()
+    // 结果开始打印 0 每秒打印 + 1 共5次，最后打印全局的变量 i 的值
+    
+
+  </script>
+</body>
+</html>

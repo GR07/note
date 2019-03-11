@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>响应式布局常用解决方案</title>
+  <style>
+
+    /*像素是什么：*/
+
+    /*像素是网页布局的基础，一个像素表示了计算机屏幕所能显示的最小区域，像素分为两种类型：css像素和物理像素。*/
+
+    /*有两种像素*/
+
+    /*css像素 —— 为web开发者提供，在css中使用的一个抽象单位*/
+
+    /*物理像素 —— 只与设备的硬件密度有关，任何设备的物理像素都是固定的*/
+
+    
+    /*DPR（Device pixel ratio）设备像素比*/
+
+    /*
+        1 DPR = 物理像素／分辨率
+    */
+      /*在不缩放的情况下，一个css像素就对应一个dpr*/
+    /*
+        1 CSS像素 = 物理像素／分辨率
+    */
+    
+
+
+    /*viewport*/
+
+    /*在移动端的布局中，我们可以通过viewport元标签来控制布局*/
+    <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;">
+
+    /*
+    width 正整数 定义布局视口的宽度，单位为像素。
+    在移动端布局时，在meta标签中我们会将width设置称为device-width，device-width一般是表示分辨率的宽，通过width=device-width的设置我们就将布局视口设置成了理想的视口。
+
+    height  正整数 定义布局视口的高度，单位为像素，很少使用
+
+    initial-scale [0,10]  初始缩放比例，1表示不缩放
+
+    minimum-scale [0,10]  最小缩放比例
+
+    maximum-scale [0,10]  最大缩放比例
+
+    user-scalable yes／no  是否允许手动缩放页面，默认值为yes
+    */
+
+
+    /*当设计稿 750px * 1134px */
+
+    /*PC端： 1 CSS像素 = 物理像素／分辨率 = 750 ／ 980 =0.76 px*/
+
+    /*iphone6：1 CSS像素 = 物理像素 ／分辨率 = 750 ／ 375 = 2 px*/
+
+    /*也就是说在PC端，一个CSS像素可以用0.76个物理像素来表示，而iphone6中 一个CSS像素表示了2个物理像素。此外不同的移动设备分辨率不同，也就是1个CSS像素可以表示的物理像素是不同的，因此如果在css中仅仅通过px作为长度和宽度的单位，造成的结果就是无法通过一套样式，实现各端的自适应。*/
+
+
+
+    /*媒体查询实现*/
+
+    /*针对不同分辨率的设备设置不同样式*/
+
+    /*缺点：如果在浏览器大小改变时，需要改变的样式太多，那么多套样式代码会很繁琐。*/
+    @media screen and (max-width: 960px){
+        body{
+          background-color:#FF6699
+        }
+    }
+
+    @media screen and (max-width: 768px){
+        body{
+          background-color:#00FF66;
+        }
+    }
+
+    @media screen and (max-width: 550px){
+        body{
+          background-color:#6633FF;
+        }
+    }
+
+    @media screen and (max-width: 320px){
+        body{
+          background-color:#FFFF00;
+        }
+    }
+    
+
+
+    /*百分比实现*/
+
+    /*缺点*/
+
+    /*
+    计算困难，各个属性中如果使用百分比，相对父元素的属性并不是唯一的。比如width和height相对于父元素的width和height，而margin、padding不管垂直还是水平方向都相对比父元素的宽度、border-radius则是相对于元素自身等等，造成我们使用百分比单位容易使布局问题变得复杂。*/
+
+
+
+    /*rem解决方案*/
+
+    /*rem单位无论嵌套层级如何，都只相对于浏览器的根元素（HTML元素）的font-size。默认情况下，html元素的font-size为16px，所以1 rem = 16px*/
+
+    /*为了计算方便，通常可以将html的font-size设置成：html{ font-size: 62.5% }，这种情况下：1 rem = 10px*/
+    
+    /*缺点：在响应式布局中，必须通过js来动态控制根元素font-size的大小。
+    也就是说css样式和js代码有一定的耦合性。
+    且必须将改变font-size的代码放在css样式之前。*/
+
+
+    /*配置 postcss-pxtorem 自动转换px为rem*/
+
+    /*使用插件把所有px自动转换为rem*/
+    css: {
+      loaderOptions: {
+        postcss: {
+          plugins: [
+            require('postcss-pxtorem')({
+              rootValue: 16, // 换算的基数
+              // 注意：如果有使用第三方UI如VUX，则需要配置下忽略选择器不转换。
+              // 规则是class中包含的字符串，如vux中所有的class前缀都是weui-。也可以是正则。
+              selectorBlackList: [], // 忽略选择器不转换
+              propList: ['*'],
+            }),
+          ]
+        }
+      }
+    },
+
+
+
+    /*vw/vh来实现*/
+
+    /*任意层级元素，在使用vw单位的情况下，1vw都等于视图宽度的百分之一。*/
+
+    /*也可以通过postcss的相应插件把px转vw*/
+
+    /*缺点：ie9-11不支持vmin和vmax*/
+
+  </style>
+</head>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie / sessionStorage / localStorage的区别</title>
+</head>
+<body>
+  <script>
+    
+    // 共同点：都是保存在浏览器端，并且是同源的
+
+
+    // 是否在HTTP请求中携带给服务器并返回
+    // cookie始终在同源的http请求中携带（即使不需要），即cookie在浏览器和服务器间来回传递。
+    // sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
+    // cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下，存储的大小只有4K左右。
+
+
+    // 有效期
+    // sessionStorage：仅在当前浏览器窗口关闭前有效，
+    // localStorage：始终有效，窗口或浏览器关闭也一直保存
+    // cookie设置过期时间之前一直有效，即使窗口或浏览器关闭，否则关闭失效。
+
+
+    // 同源窗口中是否共享
+    // localStorage、cookie 在所有同源窗口中都是共享的，sessionStorage不共享。（key：同源窗口都会共享，并且不会失效，不管窗口或者浏览器关闭与否都会始终生效）
+
+
+    // 补充说明一下cookie的作用：
+    // 记住密码30天 / 记住当前选择地区 / 记住当前用户的定制皮肤
+
+
+
+
+
+
+
+    // storage API
+    // ------
+    // setItem
+    localStorage.setItem('a', 'myNameIsA');
+    localStorage.setItem('b', 'myNameIsB');
+    localStorage.c = 'myNameIsC';
+    localStorage.d = 'myNameIsD';
+    // getItem
+    console.log(
+      localStorage.getItem('a')
+    );
+    // removeItem
+    localStorage.removeItem('a');
+    console.log(localStorage.getItem('a'));
+    // key
+    console.log(
+      localStorage.key(0)
+    );
+    // clear
+    localStorage.clear();
+    console.log(
+      localStorage.getItem('b'),
+      localStorage.getItem('c'),
+      localStorage.getItem('d')
+    )
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
