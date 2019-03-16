@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖和节流</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <input type="text">
+  <p></p>
+  <script>
+
+
+    // 防抖和节流都是控制函数的执行频率
+    
+    /**
+     * 区别：
+     *
+       函数节流不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数，而函数防抖只是在最后一次事件后才触发一次函数。 
+       比如在页面的无限加载场景下，我们需要用户在滚动页面时，每隔一段时间发一次 Ajax 请求，而不是在用户停下滚动页面操作时才去请求数据。
+       这样的场景，就适合用节流技术来实现。
+
+
+    
+    /**
+     * 防抖：
+     * 当持续触发事件时，会合并事件不会立即执行处理函数，2秒内没有再触发事件，事件处理函数才会执行一次，
+     * 如果2秒内又一次触发了事件，就重新开始延时2秒。
+     */
+    // 防抖
+    const debounce = (fn, delay, ...params) => {
+      let timer;
+      return function () {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+          fn.apply(this, params) 
+        }, delay)
+      }
+    }
+
+    /**
+     * 节流：
+     * 在持续触发事件的过程中，函数不会立即执行，但会保证2秒内只执行一次处理函数，
+     * 再过2秒再执行一次处理函数。
+     */
+    // 节流
+    const throttle = (fn, delay, ...params) => {
+      let timer;
+      return function () {
+        if (!timer) {
+          timer = setTimeout(() => {           
+            fn.apply(this, params)
+            timer = null;
+          }, delay)
+        }       
+      }
+    };
+
+    
+
+    // demo
+    const p = document.querySelector('p');
+    const input = document.querySelector('input');
+
+    const doSome = () => {
+      p.innerHTML = input.value;
+    };
+
+    const debounceFn = debounce(doSome, 2000);
+    const throttleFn = throttle(doSome, 2000);
+    input.addEventListener('input', throttleFn);
+
+  </script>
+</body>
+</html>

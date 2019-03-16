@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>defer async 用处和区别</title>
+</head>
+<body>
+  <script>
+    /**
+     * <script>的问题
+     * 
+     * 1.当浏览器渲染页面时遇到 <script> 时，下载不会阻塞页面渲染，执行会阻塞页面渲染。
+     * 
+     * 2.script之间是相互阻塞的，按照引入顺序。
+     * 
+     * 
+     * 
+     * 解决方案：
+     * 
+     * *把常规的script标签放置到</ body>标签前。
+     * 
+     * *给script标签添加 defer，async 标志位，使它的加载与HTML解析并行进行。
+     * 
+     * 
+     * 
+     * defer 和 async 介绍
+     * 
+     * 
+     * defer:
+     * 1.异步加载脚本。
+     * 2.加载回来的脚本会在 HTML 解析完之后，DOMContendLoaded事件 发生之前执行。
+     * 3.如果有多个 defer ,它们之间会按照在文档出现的顺序来加载和执行的。
+     * 
+     * async:
+     * 1.异步加载脚本。
+     * 2.加载回来的脚本会立即执行。
+     * 3.如果有多个 defer ,它们之间会乱序来加载和执行的。
+     * 
+     * 
+     * 总结：
+     * 综上所述，通过调整外部脚本的加载和执行次序来优化首屏渲染速度诸多方案中，
+     * 为script标签添加defer是最优的。
+     * 
+     * 
+     * 
+     * 
+     * 
+     * integrity属性:
+     * 
+     * <script integrity="sha256-PJJrxrJLzT6CCz1jDfQXTRWOO9zmemDQbmLtSlFQluc="" src="">
+     * integrity属性是资源完整性规范的一部分，它允许你为script提供一个hash，用来进行验签，检验加载的JavaScript文件是否完整。
+     * 
+     * 作用：
+     * 
+     * 1.减少由【托管在CDN的资源被篡改】而引入的XSS 风险
+     * 
+     * 2.减少通信过程资源被篡改而引入的XSS风险（同时使用https会更保险）
+     * 
+     * 3.可以通过一些技术手段，不执行有脏数据的CDN资源，同时去源站下载对应资源
+     * 
+     * 
+     * DOMContentLoaded 和 load 区别
+     * 
+     * DOMContentLoaded事件将在DOM层次结构完全构建后立即触发。
+     * 
+     * load事件将在所有图像和CSS文件完成加载后执行。
+     * 
+     */
+
+
+
+    
+  </script>
+</body>
+</html>

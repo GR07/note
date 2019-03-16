@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DOM操作集合</title>
+</head>
+<body>
+  <script>
+
+    innerHTML // 获取全部内容, 不包括自身Html标签 
+    outerHTML // 获取全部内容, 包括自身Html标签
+    // <div id="test">
+    //   <span style="color:red">test1</span> test2
+    // </div>
+    // innerHTML的值是  <span style="color:red">test1</span> test2
+    // outerHTML的值是  <div id="test"><span style="color:red">test1</span> test2</div>
+
+
+
+
+    // 直接获取dom元素
+    dom.parentElement           // 指向元素的父元素
+    dom.previousElementSibling  // 指向元素的前一个兄弟元素
+    dom.nextElementSibling      // 指向元素的下一个兄弟元素
+    dom.firstElementChild       // 父元素的第一个子元素
+    dom.lastElementChild        // 父元素的最后一个子元素
+    dom.children                // 所有子元素的集合（类数组）
+    dom.childNodes              // 所有子元素的集合（类数组） 注意：不但包括元素 还包括 文本节点
+    dom.hasChildNodes()         // 判断某个元素是否包含子节点
+
+
+
+    document.getElementById()
+    document.getElementsByClassName()
+    document.getElementsByTagName()
+    document.getElementsByName()
+    document.querySelector()
+    document.querySelectorAll()
+
+
+    elem.matches(css)             // 用来检查elem是否匹配指定的css选择器
+    elem.closest(css)             // 用来查找匹配给定的CSS选择器的最近的祖先
+    elemA.contains(elemB)         //表示的是如果elemB是否包含elemA，如果包含就返回true
+
+
+    insertBefore()         // 方法可在已有的子节点前插入一个新的子节点。
+    appendChild()          // 方法可向节点的子节点列表的末尾添加新的子节点。
+    removeChild()          // 方法可从子节点列表中删除某个节点。
+    replaceChild()         // 方法可将某个子节点替换为另一个。
+    hasChildNodes()        // 方法可在某节点用于任何子节点时返回 true，否则返回 false。
+    attributes.length      // 属性返回指定节点属性的集合
+    hasAttribute()         // 方法用于判断是否有指定的属性存在，如果存在返回 true，否则返回 false。
+    getAttribute("target")         // 方法通过名称获取属性的值。
+    setAttribute("type","button")         // 方法创建或改变某个新属性。
+    removeAttribute("style")              // 方法删除指定的属性
+    hasAttributes()                  // 方法如果某节点有任何属性时返回 true，否则返回 false。
+
+
+    // 位置，尺寸
+
+    clientHeight clientWidth clientLeft clientTop
+
+    offsetHeight offsetWidth offsetLeft offsetTop
+
+    offsetParent
+
+    scrollHeight scrollWidth scrollLeft scrollTop
+
+    getBoundingClientRect()
+
+    getClientRects()
+
+
+    /* DOM节点类型 */
+    // nodeType：该属性返回节点类型的常数值。不同的类型对应不同的常数值，12种类型分别对应1到12的常数值，如下面的表格所示
+    // nodeName：该属性返回节点的名称
+    // nodeValue：该属性返回或设置当前节点的值，格式为字符串
+
+  </script>
+</body>
+</html>

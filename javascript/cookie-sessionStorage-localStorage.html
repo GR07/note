@@ -7,7 +7,7 @@
 <body>
   <script>
     
-    // 共同点：都是保存在浏览器端，并且是同源的
+    // 共同点：都是保存在浏览器端本地存储，并且是同源的
 
 
     // 是否在HTTP请求中携带给服务器并返回
@@ -33,34 +33,27 @@
 
 
 
+    // API
 
-
-    // storage API
-    // ------
     // setItem
-    localStorage.setItem('a', 'myNameIsA');
-    localStorage.setItem('b', 'myNameIsB');
-    localStorage.c = 'myNameIsC';
-    localStorage.d = 'myNameIsD';
+    localStorage.setItem('a', 'test1');
     // getItem
-    console.log(
-      localStorage.getItem('a')
-    );
+    localStorage.getItem('a')
     // removeItem
     localStorage.removeItem('a');
-    console.log(localStorage.getItem('a'));
+    localStorage.getItem('a');
     // key
-    console.log(
-      localStorage.key(0)
-    );
+    localStorage.key(0)
     // clear
     localStorage.clear();
-    console.log(
-      localStorage.getItem('b'),
-      localStorage.getItem('c'),
-      localStorage.getItem('d')
-    )
+    localStorage.getItem('d')
 
+
+    // 存储类型：
+
+    // 数组：要先序列化成字符串
+
+    // json对象：要序列化成字符串
 
 
 
