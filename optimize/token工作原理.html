@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>token应用</title>
+</head>
+<body>
+  <script>
+
+    https://juejin.im/search?query=%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8&type=all
+
+    https://juejin.im/post/58da720b570c350058ecd40f
+
+    // Token前后交互工作原理:
+
+    // 1.前端发送用户名密码请求登陆。
+
+    // 2.后端收到请求验证账号密码。
+
+    // 3.如果通过，后端签发一个Token，再把Token发给前端。
+
+    // 4.前端收到Token，存储到本地浏览器，如Cookie、localStorage、sessionStorage。
+
+    // 5.前端每次发送请求都要带上Token。
+
+    // 6.后端收到请求，验证Token，如果通过就返回数据，否则返回报错信息，前端跳转到登录页。
+
+
+    // 比如我们后端有这样一个接口：
+    // // http://localhost/yiiserver/web/index.php/token?client_appid=aaa&client_appkey=bbb 
+
+    // 请求成功后端返回的Token：
+    // {"access-token": "8FEPEWDEUj2cf8n"}
+  </script>
+</body>
+</html>
