@@ -4,6 +4,92 @@
   <meta charset="UTF-8">
   <title>css常用备忘</title>
   <style>
+
+
+    /*改变 placeholder 样式*/
+    ::-webkit-input-placeholder { color:#f00; }
+    input:-moz-placeholder { color:#f00; }
+
+
+
+    /*伪类画斜线*/
+    .item
+        display: inline-block
+        margin-right: 30px
+        a
+          color: #fff
+          position:relative
+          font-size: 14px
+        a::before
+          content:"";
+          position:absolute;
+          left:16px;
+          top: 5px;
+          width:100%;
+          height:10px;
+          box-sizing:border-box;
+          border-right:1px solid #fff;
+          transform-origin:right center;
+          transform:rotateZ(25deg) scale(1.414);
+          animation:slash 5s infinite ease;
+
+    
+    /*首行缩进：
+    text-indent: 5em; 无法将该属性应用于行内元素，属性可以继承*/
+
+
+    /*文字间隔：
+    word-spacing 属性接受一个正长度值或负长度值*/
+
+
+    /*字母间隔：
+    letter-spacing 属性与 word-spacing 的区别在于，字母间隔修改的是字符或字母之间的间隔。*/
+
+
+    /*文本大小写：
+    text-transform: uppercase*/
+
+
+    /*文本装饰线：
+    text-decoration: none;*/
+
+
+    /*文档空白符处理：
+
+      合并空格忽略回车：white-space: normal;
+      保留原始回车和空格：white-space: pre-wrap;
+      只保留回车：white-space: pre-line;*/
+
+
+    /*剪裁图片：
+    img {position:absolute;clip:rect(0px 50px 200px 0px)}*/
+
+    
+
+    /*单行元素的文本省略号*/
+    p {
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+
+    /*多行元素的文本省略号*/
+
+    p {
+      width: 100px;
+      height: 32px;
+      font-size: 14px;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow:hidden;
+    }
+    
+
+
+
+
     /*需要用到图片时：
     1.用span标签
     2.设置为背景图片
@@ -43,6 +129,15 @@
 
     /*要想在手机里看效果
     index.js设置host改为本机IP*/
+
+
+
+
+
+
+
+
+
 
 
 
