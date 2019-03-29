@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Git使用</title>
+  <style>
+    
+    /*
+
+      下载安装：
+
+      下载：https://git-scm.com/downloads
+      安装：默认下一步
+      安装完成后：还需要最后一步设置，在命令行输入：
+      $ git config --global user.name "Your Name"
+      $ git config --global user.email "email@example.com"
+
+
+
+
+      设置为Git仓库：
+
+      cd 进入目标文件夹执行 git init 把当前目录变成Git可以管理的仓库，
+      目录下多了一个.git的目录。
+      也不一定必须在空目录下创建Git仓库，选择一个已经有东西的目录也是可以的。
+
+
+
+
+      把文件代码放进仓库：
+
+      第一步：先拷贝文件到仓库，再执行 git add 把文件添加到仓库。
+      第二步：git commit -m "本次提交代码的原因说明" 彻底把文件提交到了仓库。
+      有了 -m "" 这样你就能从历史记录里方便地找到改动记录。
+
+      注：git add 文件夹/      // 提交单个文件夹 
+          git add index.html   // 提交单个文件夹
+          git add .            // 提交所有      
+
+
+
+      
+      有修改时候，但未提交（休假回来后）
+
+      先查看状态 git status 哪些文件改动了
+      再 git diff 文件名.html  // 查看具体有哪些修改。
+      知道作了什么修改后，再把它提交到仓库就放心多了（git add、git commit）。
+      再用git status命令看看仓库的当前状态（养成好习惯）
+      
+      
+      
+
+      查看 git commit 提交的历史记录
+
+      Git中，我们用git log命令查看 git commit 的历史记录
+      
+
+
+      
+      回退版本：
+
+      方式一：git reset --hard HEAD^
+      注释：
+      HEAD指当前版本
+      HEAD^指上一个版本
+      HEAD^^指上上一个版本
+      方法二：git reset --hard 版本号
+      注意!：当到历史版本时，未来的版本信息就会从 git log 记录中消失。
+
+      
+
+
+      去未来版本：
+
+      git reset --hard 版本号
+      如果不知道忘记了版本号：git reflog 通过查看命令历史查看版本号
+
+      
+      
+
+      丢掉工作区的修改：
+      
+      git checkout -- 文件名
+      注！：还没有 git add 之前丢掉
+
+
+
+
+      删除文件：
+
+      当你直接删除文件管理器中没用的文件后：
+
+      情况一：确实要删除，  git rm 文件名    git commit -m "注明删除了什么文件"
+
+      情况二：删错了， 恢复被删除文件的最新状态  git checkout -- 文件名
+
+
+
+
+
+      命令：
+      mkdir 文件夹name // 创建文件夹
+      pwd // 查看当前目录路径
+
+      git status // 查看仓库状态（是否有 待处理的文件 比如有修改的未提交）
+
+      cat 文件名 // 显示文档内容
+
+
+
+
+      概念：
+
+
+      工作区 / 版本库
+
+      工作区就是我们能看到的那些项目文件夹
+
+      版本库就是隐藏的 .git目录
+
+
+
+      .git版本库
+
+      里面存了很多东西，
+
+      1.暂存区
+
+      2.Git为我们自动创建的第一个分支master
+
+      3.以及指向master的一个指针叫HEAD
+
+
+      git add 文件名
+      只是提交到了版本库中的暂存区。
+
+      git commit -m "提交说明"
+      把暂存区的东西一次性提交到分支
+
+
+
+
+
+
+      远程仓库：
+
+
+      先有本地库，后有远程库的时候：
+
+      关联github：
+      第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+
+      $ ssh-keygen -t rsa -C "guo163@qq.com"
+      然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。
+
+      如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。
+
+
+      第2步：（切记首次千万不要创建README.md）登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+      然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
+      点“Add Key”，你就应该看到已经添加的Key：
+
+
+
+      本地仓库关联具体远程仓库：
+
+      在本地的仓库下运行命令：$ git remote add origin git@github.com:GR07/webpack3.git
+      远程库的名字就是origin，这是Git默认的叫法。
+      git remote add origin https://github.com/GR07/note.git // 关联
+      git push -u origin master // 本地推送到远程
+
+
+
+      提交到远程仓库失败：
+
+      情况一：git push origin master 失败
+      推送失败，因为你的小伙伴的最新提交和你试图推送的提交有冲突，解决办法也很简单，
+      先用git pull把最新的提交从origin/dev抓下来，然后，在本地合并，解决冲突，再推送。
+
+      情况二：git pull 失败
+      因是没有指定本地分支与远程分支的链接，
+      根据提示，设置本地分支和远程分支的链接，
+      git branch
+
+
+
+      
+
+      先有远程库，后有本地库的时候：
+      
+      直接克隆到本地即可：git clone git@github.com:GR07/asdasd.git
+      即使没有 git init 为 git仓库
+
+    */
+
+
+
+
+
+  </style>
+</head>
+<body>
+  
+</body>
+</html>
