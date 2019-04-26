@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>css固定div头部，滚动条滚动内容</title>
+  <style type="text/css">
+
+
+  /* 实现原理：
+
+      总体分为2部分： 头部（相对于浏览器fixed定位）   内容容器（相对于浏览器fixed定位）
+
+      内容容器分为左右2部分： 滚动左边（相对于容器绝对定位）   滚动右边（相对于容器绝对定位）
+
+   */
+   /* 头部 */
+  .headDiv {
+    position: fixed;
+    /*固定定位*/
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    color: #fff;
+    background-color: cornflowerblue;
+  }
+
+  /* 内容容器 */
+  .contentDiv {
+    position: fixed;
+    /*固定定位*/
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+  }
+
+  /* 内容容器滚动左边 */
+  .content-left {
+    position: absolute;
+    /*绝对定位*/
+    top: 0;
+    right: 0;
+    bottom: 60px; /* 这里是精髓必须跟顶部高度一致*/
+    left: 0;
+    width: 200px;
+    overflow-y: scroll;/*显示y轴滚动条*/
+    overflow-x: hidden;/*隐藏x轴滚动条*/
+    background-color: aquamarine
+  }
+  
+  /* 内容容器滚动右边 */
+  .content-right {
+    position: absolute;
+    /*绝对定位*/
+    top: 0;
+    right: 0;
+    bottom: 60px; /* 这里是精髓必须跟顶部高度一致*/
+    left: 210px;
+    overflow-y: scroll;/*显示y轴滚动条*/
+    overflow-x: hidden;/*隐藏x轴滚动条*/    
+  }
+  </style>
+</head>
+
+<body>
+  <div class="fixedDiv">
+    <div class="headDiv">我是头部，我要固定</div>
+    <div class="contentDiv">
+      <div class="content-left">
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+        <div>我是左边left的内容，我要滚动</div>
+      </div>
+      <div class="content-right">
+        <div>我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，</div>
+        <div>我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，</div>
+        <div>我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，</div>
+        <div>我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，</div>
+        <div>我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，</div>
+        <div>我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，</div>
+        <div>我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，</div>
+        <div>我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，我要滚动我是右边right的内容，</div>
+      </div>
+    </div>
+</body>
+
+</html>
