@@ -9,7 +9,8 @@
 <body>
   <script>
 
-    API:
+    // API:
+
     // 获取
     this.$route.params // 获取路由参数 ---------- 类型: Object
     this.$route.query // 获取查询参数 -----------类型: Object
@@ -17,9 +18,15 @@
     this.$route.fullPath // 获取包括 当前绝对路径 + 查询参数 + hash 的完整路径 ----------类型: string
     this.$route.hash // 获取hash值 （带 # 往后的部分，history取不到）-------类型: string
     this.$route.name // 路由设置的name
-
+    this.$route // 访问当前路由的信息
+    // 类似操作 history 对象
     this.$router.go(-1)
     this.$router.push('/')
+    // 对应的路由匹配成功，将自动设置 class 属性值 .router-link-active。
+
+
+
+
 
     // 基础使用4个步骤：
 
@@ -45,15 +52,13 @@
       router
     }).$mount('#app')
 
-    // API:
-    this.$router.go(-1) // 访问路由器
-    this.$router.push('/') // 访问路由器
-    this.$route // 访问当前路由
-    // 对应的路由匹配成功，将自动设置 class 属性值 .router-link-active。
+    
 
 
 
-    // 动态路由(所有 ID 各不相同的用户)
+
+    // 动态路由 ( 针对 ID 各不相同的用户传值 )
+    
     const routes = [
       { path: '/foo/:id', component: Foo },
       { path: '/bar/:id', component: Bar }
@@ -62,7 +67,7 @@
 
     /user/:username/post/:post_id // 规则模式
     /user/evan/post/123 // 可以匹配的路径
-    { username: 'evan', post_id: '123' } // $route.params 的值
+    this.$route.params  // { username: 'evan', post_id: '123' }
 
 
 

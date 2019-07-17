@@ -114,6 +114,33 @@
   // 　　除了包含innerHTML的全部内容外, 还包含对象标签本身。
 
 
+
+    // render函数
+    Vue.component('anchored-heading', {
+      render: function (createElement) {
+        return createElement(
+          'div',   // 标签名称
+          '我是dom元素'
+        )
+      },
+      props: {}
+    })
+    
+    // 上面render函数等同于下面
+    
+    Vue.component('anchored-heading', {
+      template: '<div>我是dom元素</div>',
+      props: {}
+    })
+    
+    // createElement() 函数：
+    
+    // 这个函数的作用就是生成一个 VNode节点（虚拟dom），
+    
+    // render 函数得到createElement() 创建的 VNode 节点之后，返回给 Vue.js 的 mount 函数，
+    // 渲染成真实 DOM 节点，并挂载到根节点上。
+    
+    // 就是这么简单 别想多了。
   </script>
 </body>
 </html>
