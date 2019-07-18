@@ -46,3 +46,12 @@ let myFavoriteNumber: any = 'seven';
 myFavoriteNumber = 7;
 let anyThing: any = 'Tom';
 anyThing.setName('Jerry');
+
+
+
+/**
+ * | 联合类型
+ */
+let myFavorite: string | number;
+myFavorite = 'seven';
+myFavorite = 7;
