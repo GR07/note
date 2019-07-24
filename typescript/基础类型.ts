@@ -55,3 +55,26 @@ anyThing.setName('Jerry');
 let myFavorite: string | number;
 myFavorite = 'seven';
 myFavorite = 7;
+
+
+
+/**
+ * type 类型别名
+ */
+type Name = string;
+type NameResolver = () => string;
+type NameOrResolver = Name | NameResolver;
+
+
+
+/**
+ * type 字符串字面量
+ */
+
+type EventNames = 'click' | 'scroll' | 'mousemove';
+// event 只能取三种字符串中的一种
+function handleEvent(ele: Element, event: EventNames) {
+  // do something
+}
+handleEvent(document.getElementById('hello'), 'scroll');  // 没问题
+// handleEvent(document.getElementById('world'), 'dbclick'); // 报错，event 不能为 'dbclick'
