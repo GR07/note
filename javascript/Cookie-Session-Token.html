@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie / sessionStorage / localStorage的区别</title>
+</head>
+<body>
+  <script>
+
+    /**
+     * Cookie: 仅仅是浏览器实现的一种数据存储功能。
+     * 由服务器生成，发送给浏览器，浏览器把 cookie 以 kv形式保存到某个目录下的文本文件内，
+     * 下一次请求同一网站时会把该cookie发送给服务器。
+     */
+
+    /**
+     * Session: 服务器要知道当前发请求给自己的是谁。为了做这种区分，服务器就要给每个客户端分配不同的“身份标识”，标识存在cookie中。
+     * 客户端每次向服务器发请求的时候，都带上这个“身份标识”。
+     * 服务器使用session把用户的信息临时保存在了服务器上，用户离开网站后session会被销毁。
+     */
+
+
+    /**
+     * Token: 1.无状态、可扩展 2.支持移动设备 3.跨程序调用 4.安全
+     *
+     * 过程:
+     * 1.用户通过用户名和密码发送请求。
+     * 2.程序验证。
+     * 3.程序返回一个签名的token 给客户端。
+     * 4.客户端储存token,并且每次用于每次发送请求。
+     * 5.服务端验证token并返回数据。
+     *
+     * 每一次请求都需要token。
+     * token应该在HTTP的头部发送从而保证了Http请求无状态。
+     *
+     *
+     * 我们同样通过设置服务器属性Access-Control-Allow-Origin:* ，让服务器能接受到来自所有域的请求。
+     * 需要主要的是，在ACAO头部标明(designating)*时，不得带有像HTTP认证，客户端SSL证书和cookies的证书。
+     *
+     */
+
+
+
+  </script>
+</body>
+</html>
