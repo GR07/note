@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-router</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+  <script>
+
+    /**
+     * methods: 可以定义方法来进行属性的修改，（不同）每次都会调用。
+     */
+
+
+    /**
+     * computed: 当依赖的data中的属性发生改变时会调用，起到一个缓存的作用，所以性能更好。
+     */
+
+
+    /**
+     * watch: 可以支持异步操作。
+     */
+
+    // 三种方式分别实现：根据input的改变输出不同的数组。
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          input: '',
+          languages: []
+        }
+      },
+      methods: {
+        handleSearch() {
+          this.languages = [
+            'JavaScript',
+            'Ruby',
+            'Scala',
+            'Python',
+            'Java',
+            'Kotlin',
+            'Elixir'
+          ].filter(item => item.toLowerCase().includes(this.input.toLowerCase()))
+        }
+      },
+      //
+      computed: {
+        filteredList() {
+          return this.languages.filter((item) => {
+            return item.toLowerCase().includes(this.input.toLowerCase())
+          })
+        }
+      },
+      watch: {
+        input: {
+          handler() {
+            this.languages = [
+              'JavaScript',
+              'Ruby',
+              'Scala',
+              'Python',
+              'Java',
+              'Kotlin',
+              'Elixir'
+            ].filter(item => item.toLowerCase().includes(this.input.toLowerCase()))
+          },
+          immediate: true
+        }
+      }
+    })
+
+
+  </script>
+</body>
+</html>
