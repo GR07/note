@@ -20,7 +20,7 @@ let myName: string = 'Tom';
 
 
 /**
- * void 表示没有任何返回值的函数, 只能将它赋值为 undefined 和 null
+ * void 表示没有任何返回值的函数。 void 只能将它赋值为 undefined 和 null。
  */
 function alertName(): void {
   alert('My name is Tom');

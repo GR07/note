@@ -95,9 +95,9 @@ function reverse(x: number | string): number | string {
 
 /**
  * 类型断言
- * 在需要断言的变量前加上 <Type> 即可
- * 语法：<类型>值   或者   值 as 类型
- * 联合类型时，我们需要在还不确定类型的时候就访问其中一个类型的属性或方法
+ * 1.联合类型只能访问共有的属性或方法，所以要强行断言为指定类型。
+ * 在变量前加上 <Type>
+ * 断言为一个联合类型中不存在的类型是不允许的
  */
 function getLength(something: string | number): number {
   if ((<string>something).length) {
