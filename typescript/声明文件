@@ -1,0 +1,37 @@
+/**
+ * 声明语句：ts 中 引入第三方库比如 jquery ，但是编译器 不认识 $('#foo') ，所以需要使用 declare var 来定义它的类型
+ */
+$('#foo');
+// or
+jQuery('#foo');
+// 使用 declare var 来定义它的类型
+declare const jQuery: (selector: string) => any;
+
+
+/**
+ * 声明文件：把声明语句放到单独一个文件，就叫声明文件
+ */
+
+
+/**
+ * 第三方声明文件：推荐使用 @types 统一管理第三方库的声明文件。
+ */
+// 使用方式用 npm 安装对应的声明模块即可
+// npm install @types/jquery --save-dev
+
+
+
+
+/**
+ * 全局变量：
+ * declare var 声明全局变量
+ * declare function 声明全局方法
+ * declare class 声明全局类
+ * declare enum 声明全局枚举类型
+ * declare namespace 声明（含有子属性的）全局对象
+ */
+declare function jQuery(selector: string): any;
+declare namespace jQuery {
+  function ajax(url: string, settings?: any): void;
+}
+
