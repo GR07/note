@@ -83,3 +83,23 @@ class Animal {
  * 1.抽象类是不允许被实例化
  * 2.抽象类中的抽象方法必须被子类实现
  */
+
+
+
+/**
+ * 类的类型:
+ *
+ * 给类加上 TypeScript 的类型很简单，与接口类似:
+ */
+class Animal {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+  sayHi(): string {
+    return `My name is ${this.name}`;
+  }
+}
+
+let a: Animal = new Animal('Jack');
+console.log(a.sayHi()); // My name is Jack

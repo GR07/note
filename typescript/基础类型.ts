@@ -59,7 +59,7 @@ myFavorite = 7;
 
 
 /**
- * type 类型别名
+ * type 类型别名 用来给一个类型起个新名字
  */
 type Name = string;
 type NameResolver = () => string;
@@ -68,7 +68,7 @@ type NameOrResolver = Name | NameResolver;
 
 
 /**
- * type 字符串字面量
+ * type 字符串字面量 约束取值只能是某几个字符串中的一个
  */
 
 type EventNames = 'click' | 'scroll' | 'mousemove';

@@ -16,6 +16,14 @@ guor[1].toFixed(2);
 
 
 /**
+ * 直接对元组初始化 或者 赋值 时，必须提供所有类型项
+ */
+let xcatliu: [string, number];
+xcatliu = ['Xcat Liu', 25];
+
+
+
+/**
  * 添加越界的元素时，它的类型会被限制为元组中每个类型的联合类型。
  */
 let yue: [string, number];
