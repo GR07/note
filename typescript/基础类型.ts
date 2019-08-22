@@ -1,4 +1,22 @@
 /**
+ *
+ * typescript中的数据类型
+ *
+ * 布尔类型
+ * 数字类型
+ * 字符串类型
+ * 数组类型
+ * 元组类型
+ * 枚举类型
+ * 任意类型
+ * null 和 undefined
+ * void类型
+ * never类型
+ */
+
+
+
+/**
  * Boolean
  */
 let isDone: boolean = false;
