@@ -37,6 +37,7 @@ let myName: string = 'Tom';
 
 
 
+
 /**
  * void 表示没有任何返回值的函数。 void 只能将它赋值为 undefined 和 null。
  */
@@ -47,7 +48,28 @@ let unusable: void = undefined;
 
 
 
+
+
 /**
+ * never类型: 是其他类型的子类型，代表从不会出现的值，
+ * 意味着声明never类型的变量只能被never类型所赋值。
+ */
+// 只能被never类型所赋值。
+let a: undefined;
+a = undefined;
+
+// 代表从不会出现的值，比如赋值一个自执行函数。一般用不上。可以 any 替代。
+let b: never;
+b = (() => {
+  throw new Error('错误');
+})()
+
+
+
+
+/**
+ * null、undefined 是其他数据类型（never类型）的子类型。
+ *
  * undefined 只能被赋值为 undefined
  * null 只能被赋值为 null
  */
@@ -67,12 +89,15 @@ anyThing.setName('Jerry');
 
 
 
+
 /**
  * | 联合类型
+ * 一个变量可能是 string 可能 number
  */
 let myFavorite: string | number;
 myFavorite = 'seven';
 myFavorite = 7;
+
 
 
 

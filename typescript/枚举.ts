@@ -1,22 +1,21 @@
 /**
- * 枚举（Enum）类型用于取值被限定在一定范围内的场景，比如一周只能有七天，颜色限定为红绿蓝等。
- * 成员默认会被赋值为从 0 开始递增的数字 类似数组索引。
- * 递增步长始终为 1
+ * 枚举（Enum）：
+ * 它的存在就是为了 把数字转换为具有语义的单词。
+ * 比如：支付状态：pay_state: 1（成功）2（未支付）3（取消），用枚举表示：enum pay_state {ok, err, no}
+ *
+ * 成员默认会被赋值为从 0 开始递增的数字，递增步长始终为 1，类似数组索引。
+ *
  * 如果重复则后面覆盖前面
  */
-enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};
+// 赋值 1、2、3 是手动赋值，如果没有手动赋值，就从0开始递增1。
 
+// 赋值不可以为非 number、string
+enum pay_state {ok = 1, err = 2, no = 3};
 
+let abc: pay_state = pay_state.ok;
 
-/**
- * 手动赋值
- */
-enum Days {a = 7, b = 1, c, d, e, f, g};
+console.log(abc)  // 1
 
-console.log(Days["a"] === 7); // true
-console.log(Days["b"] === 1); // true
-console.log(Days["c"] === 2); // true
-console.log(Days["g"] === 6); // true
 
 
 
@@ -53,4 +52,4 @@ declare const enum a {
   Right
 }
 
-let abc = [a.Up, a.Down, a.Left, a.Right];
+let efg = [a.Up, a.Down, a.Left, a.Right];
