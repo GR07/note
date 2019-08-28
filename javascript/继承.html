@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+
+  // 常用3种继承： 原型继承、对象冒充继承、原型链 + 构造函数的组合继承方式
+
+
+
+
+  // 对象冒充继承：子类只可以继承父类构造函数里面的方法和属性
+  // 缺点：没办法继承父类原型链上的属性和方法
+  function Too (name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  Too.prototype.work = function () {
+    console.log('工作')
+  }
+  var a = new Too('张三', 20);
+
+  function Yoo () {
+    Too.call(this)
+  }
+  var b = new Yoo();
+
+  d.work() // 执行失败方法undefined（对象冒充继承没办法继承父类原型链上的属性和方法）
+
+
+
+
+
+  // 原型继承：子类可以继承父类构造函数里面的方法和属性，也可以继承父类原型上的方法和属性。
+  // 缺点：不能给父类传参。
+  function Per (name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  Per.prototype.work = function () {
+    console.log('工作')
+  }
+  var c = new Per('张三', 20);
+
+  function Ber (name, age) {
+
+  }
+  Ber.prototype = new Per();
+
+  var d = new Ber('李四', 30) // 这里的传参无效（原型继承不可以给父类传参）
+
+
+
+
+
+  // 综合以上两种都不完美，就出现了原型链 + 构造函数的组合继承方式。
+  // 对象冒充继承： 解决原型继承不能传参问题
+  // 原型继承：解决对象冒充继承不能继承原型链上的方法和属性
+  function Moo (name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  Moo.prototype.work = function () {
+    console.log('工作')
+  }
+  var e = new Moo('张三', 20);
+
+  function Noo (name, age) {
+    Moo.call(this, name, age) // 对象冒充继承： 解决原型继承不能传参问题
+  }
+  // 或者 = Moo.prototype; 都可以
+  Noo.prototype = new Moo(); // 原型继承：解决对象冒充继承不能继承原型链上的方法和属性
+
+  var f = new Noo('李四', 30) // 这里的传参无效（原型继承不可以给父类传参）
+
+</script>
+</body>
+</html>
