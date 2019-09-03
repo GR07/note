@@ -2,7 +2,7 @@
  * ES6 中的类
  */
 class Animal {
-  constructor(name) {
+  constructor(name) { // 实例化类的时候，直接触发 constructor
     this.name = name;
   }
   sayHi() {
@@ -36,15 +36,15 @@ console.log(c.sayHi()); // Meow, My name is Tom
  * ES7 中的类
  * 可以把构造函数中的 this.xx = xx 简化为 直接在类里面定义 xx = xx
  */
-class Animal {
+class An {
   name = 'Jack';
   constructor() {
     // ...
   }
 }
 
-let a = new Animal();
-console.log(a.name); // Jack
+let b = new An();
+console.log(b.name); // Jack
 
 
 
