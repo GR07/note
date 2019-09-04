@@ -1,7 +1,7 @@
 /**
  * ES6 中的类
  */
-class Animal {
+class Aes6 {
   constructor(name) { // 实例化类的时候，直接触发 constructor
     this.name = name;
   }
@@ -10,20 +10,21 @@ class Animal {
   }
 }
 
-let a = new Animal('Jack');
-console.log(a.sayHi()); // My name is Jack
+let es6 = new Aes6('Jack');
+console.log(es6.sayHi()); // My name is Jack
+
 
 
 /**
- * ES6 中类的继承
+ * ES6 中类的继承：必须使用 extends 和 super 关键字
+ * super：表示调用父类的 constructor(name)
  */
-class Cat extends Animal {
+class Cat extends Aes6 {
   constructor(name) {
-    super(name); // 调用父类的 constructor(name)
-    console.log(this.name);
+    super(name); // 表示：调用父类的 constructor(name)
   }
   sayHi() {
-    return 'Meow, ' + super.sayHi(); // 调用父类的 sayHi()
+    return 'Meow, ' + super.sayHi() + this.name; // super.sayHi(): 调用父类的 sayHi()  this.name: 父类的name
   }
 }
 
@@ -51,15 +52,20 @@ console.log(b.name); // Jack
 /**
  * 静态属性 / 静态方法
  * 它们不需要实例化，而是直接通过类来调用。
+ * 注意：静态方法内 不能访问类中的属性，但是可以访问静态属性
  */
 class Animal {
   static num = 42;
+  str = 'aaaaa';
 
   constructor() {
     // ...
   }
   static isAnimal(a) {
     return a instanceof Animal;
+  }
+  static abc(a) {
+    return this.str; // str undefined
   }
 }
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 实例化Base函数换个$名称
+  function $(element) {
+    return new Base(element);
+  }
+  // 给 $ 添加静态方法
+  $.get = function () {}
+  // 利用构造函数 进行封装
+  function Base(element) {
+    this.element = document.getElementById(element);
+    this.css = function (type, value) { // 构造函数里面的 实例方法
+      this.element.style.type = value;
+    }
+  }
+  // 使用
+  $('#box')
+
+  // 实际就是调用 $ 上面的静态方法
+  $.get('url', function () {})
+
+</script>
+</body>
+</html>
