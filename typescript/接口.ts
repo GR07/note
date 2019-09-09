@@ -1,8 +1,30 @@
 /**
- * 使用接口（Interfaces）来定义对象的类型。
+ * 接口（Interfaces）定义规则标准。
  *
- * 我的理解：新创建的对象必须以接口的规则来定义。
+ * 我的理解：新创建的对象必须以接口的规则来定义，是抽象类的升级版。
  */
+
+
+/**
+ * 定义: interface
+ */
+// 定义接口
+interface FullName {
+  firstName: string;
+  lastName: string;
+}
+function printName (name: FullName) {
+  // 必须传入一个对象：firstName: string; lastName: string;
+  console.log(`${name.firstName}${name.lastName}`)
+}
+const obj = {
+  firstName: '张',
+  lastName: '三',
+  age: 18
+}
+// 建议这种写法，但是对象的属性要严格按照接口的定义
+printName(obj) // 这样传参只要对象里包含接口定义的两个属性就可以
+printName({firstName: '张', lastName: '三'}) // 这样传参必须只有接口定义的两个属性
 
 
 
@@ -22,7 +44,7 @@ let a: Person = {
 
 
 /**
- * 可选属性 该属性可以不存在
+ * 可选属性 该属性可以不存在，和可传参数一样。
  */
 interface Optional {
   name: string;
@@ -41,7 +63,7 @@ let b: Optional = {
 interface AtWill {
   name: string;
   age?: number;
-  [propName: string]: any; // name和age的类型都是any的子集
+  [propName: string]: any; // name和age的类型都必须是 any 的子集
 }
 let c: AtWill = {
   name: 'Tom',
