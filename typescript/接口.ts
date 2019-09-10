@@ -28,6 +28,21 @@ printName({firstName: '张', lastName: '三'}) // 这样传参必须只有接口
 
 
 
+
+/**
+ * 接口 在函数中的应用
+ */
+interface SearchFunc {
+  (a: string, b: string): string;
+}
+let mySearch: SearchFunc;
+mySearch = function(a: string, b: string) {
+  return a + b;
+};
+
+
+
+
 /**
  * a 的形状必须和接口 Person 一致。
  * 属性数量也必须一致

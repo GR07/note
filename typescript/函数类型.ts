@@ -63,18 +63,6 @@ let jim = defaultName('Jim');
 
 
 
-/**
- * 接口 在函数中的应用
- */
-interface SearchFunc {
-  (a: string, b: string): boolean;
-}
-let mySearch: SearchFunc;
-mySearch = function(a: string, b: string) {
-  return a.search(b) !== -1;
-};
-
-
 
 
 /**

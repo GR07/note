@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dbcdf2b1-5f97-43fb-84d4-68447278d451" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typescript/函数类型.ts" beforeDir="false" afterPath="$PROJECT_DIR$/typescript/函数类型.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/typescript/接口.ts" beforeDir="false" afterPath="$PROJECT_DIR$/typescript/接口.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -29,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/typescript/接口.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+            <state relative-caret-position="399">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -88,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typescript/函数类型.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1805">
-              <caret line="95" column="21" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
+            <state relative-caret-position="95">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
             </state>
           </provider>
         </entry>
@@ -103,14 +104,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/optimize/git.html" />
+        <option value="$PROJECT_DIR$/typescript/函数类型.ts" />
         <option value="$PROJECT_DIR$/typescript/接口.ts" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="198" />
-    <option name="y" value="122" />
-    <option name="width" value="1313" />
+    <option name="x" value="452" />
+    <option name="y" value="147" />
+    <option name="width" value="1334" />
     <option name="height" value="821" />
   </component>
   <component name="ProjectView">
@@ -174,21 +176,30 @@
       <updated>1567758254740</updated>
       <workItem from="1567758256833" duration="479000" />
       <workItem from="1567990852591" duration="427000" />
-      <workItem from="1568025462860" duration="4128000" />
+      <workItem from="1568025462860" duration="4265000" />
+      <workItem from="1568077460761" duration="117000" />
+      <workItem from="1568093020784" duration="1784000" />
     </task>
+    <task id="LOCAL-00001" summary="笔记更新">
+      <created>1568032858157</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1568032858158</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5643000" />
+    <option name="totallyTimeSpent" value="7681000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="198" y="122" width="1313" height="821" extended-state="0" />
+    <frame x="895" y="114" width="1334" height="821" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19137254" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18827161" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -200,6 +211,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32896653" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -207,6 +219,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="笔记更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="笔记更新" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/optimize/git.html">
@@ -217,6 +233,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/optimize/mk.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascript/防抖和节流.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/javascript/继承.html">
@@ -259,18 +278,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typescript/函数类型.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1805">
-          <caret line="95" column="21" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
+        <state relative-caret-position="95">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascript/防抖和节流.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/typescript/接口.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+        <state relative-caret-position="399">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>
