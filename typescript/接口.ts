@@ -47,14 +47,20 @@ mySearch = function(a: string, b: string) {
  * a 的形状必须和接口 Person 一致。
  * 属性数量也必须一致
  */
-interface Person {
-  name: string;
-  age: number;
+// 对象
+interface PerObj {
+  [index: string]: string;
 }
-let a: Person = {
-  name: 'Tom',
-  age: 25
+let a: PerObj = {
+  name: 'Tom'
 };
+// 数组
+interface PerArr {
+  [index: number]: string;
+}
+let cd: PerArr = ['a', 'b', 'c']
+console.log(cd)
+
 
 
 
@@ -77,8 +83,7 @@ let b: Optional = {
  */
 interface AtWill {
   name: string;
-  age?: number;
-  [propName: string]: any; // name和age的类型都必须是 any 的子集
+  [propName: string]: any; // name的类型都必须是 any 的子集
 }
 let c: AtWill = {
   name: 'Tom',

@@ -1,11 +1,11 @@
 /**
- * 类与接口一起用：目的是对类的一部分抽象
+ * 类与接口一起用：目的是对类的一部分抽象，把不同类之间的一些共有的特性提取成接口。
  */
 
 
 
 /**
- * 类实现接口（implements）：把不同类之间的一些共有的特性提取成接口。
+ * 类实现接口（implements）：实现接口的时候必须有接口中的属性和方法。
  */
 // 接口
 interface Alarm {
@@ -14,15 +14,19 @@ interface Alarm {
 // 类
 class Door {
 }
-// SecurityDoor 继承 Door 类 最后通过 implements关键字 实现 Alarm 接口
+// SecurityDoor 继承 Door类, 最后通过 implements关键字 实现 Alarm接口
 class SecurityDoor extends Door implements Alarm {
-  alert() {
+  alert() {// 必须有 接口Alarm里面的 alert()方法
     console.log('SecurityDoor alert');
   }
 }
 
-class Car implements Alarm {
-  alert() {
+class Dog implements Alarm {
+  name: string;
+  constructor (name: string) {
+    this.name = name;
+  }
+  alert() {// 必须有 接口Alarm里面的 alert()方法
     console.log('Car alert');
   }
 }
