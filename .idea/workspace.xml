@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dbcdf2b1-5f97-43fb-84d4-68447278d451" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typescript/接口.ts" beforeDir="false" afterPath="$PROJECT_DIR$/typescript/接口.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typescript/泛型.ts" beforeDir="false" afterPath="$PROJECT_DIR$/typescript/泛型.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/typescript/类与接口.ts" beforeDir="false" afterPath="$PROJECT_DIR$/typescript/类与接口.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -18,24 +18,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/javascript/防抖和节流.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typescript/接口.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="1121">
               <caret line="59" column="1" lean-forward="true" selection-start-line="59" selection-start-column="1" selection-end-line="59" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/typescript/类.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1425">
+              <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typescript/类与接口.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+            <state relative-caret-position="466">
+              <caret line="52" column="1" lean-forward="true" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -54,11 +58,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/typescript/泛型.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+            <state relative-caret-position="38">
+              <caret line="2" column="32" lean-forward="true" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -110,13 +114,15 @@
         <option value="$PROJECT_DIR$/optimize/git.html" />
         <option value="$PROJECT_DIR$/typescript/函数类型.ts" />
         <option value="$PROJECT_DIR$/typescript/接口.ts" />
+        <option value="$PROJECT_DIR$/typescript/类.ts" />
         <option value="$PROJECT_DIR$/typescript/类与接口.ts" />
+        <option value="$PROJECT_DIR$/typescript/泛型.ts" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="567" />
-    <option name="y" value="174" />
+    <option name="x" value="683" />
+    <option name="y" value="94" />
     <option name="width" value="1334" />
     <option name="height" value="821" />
   </component>
@@ -125,7 +131,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -147,6 +152,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -184,7 +190,8 @@
       <workItem from="1568025462860" duration="4265000" />
       <workItem from="1568077460761" duration="117000" />
       <workItem from="1568093020784" duration="2084000" />
-      <workItem from="1568189656068" duration="2986000" />
+      <workItem from="1568189656068" duration="3141000" />
+      <workItem from="1568254334210" duration="7434000" />
     </task>
     <task id="LOCAL-00001" summary="笔记更新">
       <created>1568032858157</created>
@@ -200,14 +207,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568107811019</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="笔记更新">
+      <created>1568193861420</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1568193861420</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10967000" />
+    <option name="totallyTimeSpent" value="18556000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="567" y="174" width="1334" height="821" extended-state="0" />
+    <frame x="814" y="38" width="1334" height="821" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18827161" />
@@ -261,13 +275,6 @@
     <entry file="file://$PROJECT_DIR$/javascript/运算符的数据转换.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/typescript/泛型.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/typescript/声明合并.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -298,15 +305,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typescript/接口.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="1121">
           <caret line="59" column="1" lean-forward="true" selection-start-line="59" selection-start-column="1" selection-end-line="59" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/typescript/类与接口.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+        <state relative-caret-position="466">
+          <caret line="52" column="1" lean-forward="true" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typescript/类.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1425">
+          <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typescript/泛型.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="32" lean-forward="true" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
         </state>
       </provider>
     </entry>

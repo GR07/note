@@ -13,10 +13,17 @@ interface Alarm {
 }
 // 类
 class Door {
+  name: string;
+  constructor (name: string) {
+    this.name = name;
+  }
 }
 // SecurityDoor 继承 Door类, 最后通过 implements关键字 实现 Alarm接口
 class SecurityDoor extends Door implements Alarm {
-  alert() {// 必须有 接口Alarm里面的 alert()方法
+  constructor (name: string) {
+    super(name)
+  };
+  alert() {// 要实现接口就必须有 接口Alarm里面的 alert()方法
     console.log('SecurityDoor alert');
   }
 }
@@ -70,6 +77,23 @@ interface LightableAlarm extends Alarm {
   lightOn();
   lightOff();
 }
+// 类实现接口（继承后的接口）
+class Bar implements LightableAlarm {
+  name: string;
+  constructor (name: string) {
+    this.name = name;
+  };
+  alert() { // 必须实现
+    console.log('Car alert');
+  }
+  lightOn() { // 必须实现
+    console.log('Car light on');
+  }
+  lightOff() { // 必须实现
+    console.log('Car light off');
+  }
+}
+const people = new Bar('李四')
 
 
 
