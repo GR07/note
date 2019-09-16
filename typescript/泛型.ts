@@ -84,3 +84,83 @@ const m = new MinClass<number>() // 实例化时指定类的T类型是 number
 m.add(1);
 m.add(2);
 m.add(3);
+
+
+
+
+/**
+ * 类作为参数，约束传入数据类型
+ * 缺点：如果传入参数类型不一致时候，就要修改 user: User
+ */
+class Mysq {
+  add (user: User): boolean {
+    console.log(user);
+    return true;
+  }
+}
+class User {
+  use: string | undefined;
+  pas: string | undefined;
+}
+const u = new User();
+u.use = 'zhangsan';
+u.pas = '123';
+const db = new Mysq();
+db.add(u);
+
+// class User {
+//   use: string | undefined;
+//   pas: string | undefined;
+// }
+// const u = new User();
+// u.use = 'zhangsan';
+// u.pas = '123';
+
+// 以上也可以写成
+
+// class User {
+//   use: string | undefined;
+//   pas: string | undefined;
+//    constructor (params: {use: string | undefined, pas: string | undefined}) {
+//      this.use = params.use;
+//      this.pas = params.pas;
+//    }
+// }
+// const u = new User({use: 'zhangsan', pas: '123'});
+
+
+
+
+/**
+ * 升级版 类作为参数 使用泛型
+ */
+class Mysq2<T> {
+  add (user: T): boolean {
+    console.log(user);
+    return true;
+  }
+}
+class User2 {
+  use: string | undefined;
+  pas: string | undefined;
+}
+const u2 = new User2();
+u2.use = 'zhangsan'; // 也可以在创建类的时候在 constructor 中定义 (上面有示例)
+u2.pas = '123'; // 也可以在创建类的时候在 constructor 中定义 (上面有示例)
+const db2 = new Mysq2<User2>();
+db2.add(u2);
+
+
+
+/**
+ * 泛型接口
+ */
+// 定义
+interface ConfigFn {
+  <T>(value: T): T;
+}
+// 使用
+const getData: ConfigFn = <T>(value: T): T{
+  return value;
+}
+getData<string>('张三');
