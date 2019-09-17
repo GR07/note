@@ -1,0 +1,81 @@
+/**
+ * namespace 命名空间
+ *
+ * 作用：防止命名冲突
+ */
+
+
+/**
+ * 命名空间和模块的区别：
+ *
+ * 命名空间：内部模块，主要用于组织代码，避免命名冲突。
+ *
+ * 模    块：外部模块的简称，用于代码复用，一个模块里面会有多个命名空间
+ */
+
+
+/**
+ * 1.A 、 B 两个命名空间里面的命名可以一致
+ *
+ * 2.内部的 都是私有的，需要 export 字段暴露出来
+ *
+ * 3.使用 命名空间.方法名字  例： const abc = new A.Dog('小狗');
+ */
+
+// 命名空间A
+namespace A {
+  // 接口
+  interface Animal {
+    name: string;
+    eat (): void;
+  }
+  // 类1
+  export class Dog implements Animal { // 用 export 暴露出来
+    name: string;
+    construstor (theName: string) {
+      this.name = theName;
+    }
+    eat () {
+      console.log('123')
+    }
+  }
+  // 类2
+  export class Cat implements Animal {
+    name: string;
+    construstor (theName: string) {
+      this.name = theName;
+    }
+    eat () {
+      console.log('123')
+    }
+  }
+}
+
+// 命名空间B
+namespace B {
+  // 接口
+  interface Animal {
+    name: string;
+    eat (): void;
+  }
+  // 类1
+  export class Dog implements Animal { // 用 export 暴露出来
+    name: string;
+    construstor (theName: string) {
+      this.name = theName;
+    }
+    eat () {
+      console.log('123')
+    }
+  }
+  // 类2
+  export class Cat implements Animal {
+    name: string;
+    construstor (theName: string) {
+      this.name = theName;
+    }
+    eat () {
+      console.log('123')
+    }
+  }
+}
