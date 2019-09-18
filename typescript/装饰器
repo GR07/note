@@ -1,0 +1,124 @@
+/**
+ * 装饰器：可以动态的对 类、方法、属性、参数、进行扩展。
+ *
+ * 装饰器写法：普通装饰器（无参数）、装饰器工厂（可传参）
+ *
+ * js最大成就之一，是ES7标准特性之一。
+ */
+
+
+
+
+/**
+ * 类装饰器（无参数）：可以动态的对类的方法和属性扩展，在类声明之前声明（紧挨着类声明）。
+ */
+// 类装饰器
+function logClass(params: any) {
+  console.log(params); // params 就是要装饰的类
+  params.prototype.myUrl = 'guor0707@qq.com'; // 动态扩展 给params类增加了 myUrl 属性
+}
+// 类
+@logClass
+class HttpCli {
+  consturctor () {
+
+  }
+  getData() {
+
+  }
+}
+const myHttp: any = new HttpCli();
+console.log(myHttp.myUrl); // guor0707@qq.com
+
+
+
+/**
+ * 类装饰器（可传参）：可以动态的对类的方法和属性扩展，在类声明之前声明（紧挨着类声明）。
+ */
+// 类装饰器
+function abcClass(abc: string) {
+  return function (params: any) {
+    console.log(params); // params 就是要装饰的类
+    console.log(abc); // abc 就是 @abcClass('guor0707@qq.com') 传的参数
+    params.prototype.myUrl = abc;
+  }
+}
+// 类
+@abcClass('guor0707@qq.com')
+class HttpAbc {
+  consturctor () {
+
+  }
+  getData() {
+
+  }
+}
+const myAbc: any = new HttpAbc();
+console.log(myAbc.myUrl) // guor0707@qq.com
+
+
+
+/**
+ * 构造函数装饰器 （修改 构造函数、方法）
+ */
+function f1(params: any) {
+  console.log(params); // params 当前装饰的类
+  return class extends params{
+    apiUrl: any = '装饰器修改后的数据';
+    getData() {
+      console.log(123)
+    };
+  }
+}
+@f1
+class myClass {
+  apiUrl: string | undefined;
+  constructor() {
+    this.apiUrl = '构造函数修改前的数据'
+  }
+  getData() {
+    console.log(this.apiUrl)
+  }
+}
+const my = new myClass();
+my.getData(); // 装饰器修改后的数据
+
+
+
+
+/**
+ * 属性装饰器 （修改 属性）
+ *
+ * 接收两个参数（类原型、属性名）
+ */
+function logProperty(abc: any) {
+  return function (params: any, attr: any) {
+    console.log(params); // 原型对象
+    console.log(attr); // 属性名称
+    params[attr] = abc; // 修改属性 abc 是 @logProperty('guor0707')传入的
+  }
+}
+class Class1 {
+  @logProperty('guor0707')
+  myUrl: any | undefined;
+  constructor() {
+
+  }
+  getData() {
+    console.log(this.myUrl)
+  }
+}
+const ab = new Class1();
+ab.getData()
+
+
+
+/**
+ * 方法修饰器：和类修饰器一样都可以修改属性和方法，还有看不太懂。总之不常用，因为类装饰器已经足够用了。
+ */
+
+/**
+ * 装饰器执行顺序： 属性装饰器 > 方法装饰器 > 参数装饰器 > 类装饰器
+ *
+ * 同种装饰器时：先执行后面的再前面的
+ */
