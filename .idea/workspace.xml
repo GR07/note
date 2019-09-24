@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbcdf2b1-5f97-43fb-84d4-68447278d451" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/react/环境安装.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/目录结构.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/JSX语法.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,24 +19,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/typescript/装饰器">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1330">
-              <caret line="70" column="3" selection-start-line="70" selection-start-column="3" selection-end-line="70" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/typescript/类.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typescript/基础类型.ts">
           <provider selected="true" editor-type-id="text-editor" />
@@ -61,11 +42,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react/目录结构.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+            <state relative-caret-position="190">
+              <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/optimize/git.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="870">
+              <caret line="192" selection-start-line="192" selection-end-line="192" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/react/JSX语法.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -145,12 +144,14 @@
         <option value="$PROJECT_DIR$/typescript/装饰器" />
         <option value="$PROJECT_DIR$/react/环境安装.html" />
         <option value="$PROJECT_DIR$/react/目录结构.html" />
+        <option value="$PROJECT_DIR$/react/JSX语法" />
+        <option value="$PROJECT_DIR$/react/JSX语法.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="30" />
-    <option name="y" value="89" />
+    <option name="x" value="526" />
+    <option name="y" value="117" />
     <option name="width" value="1302" />
     <option name="height" value="733" />
   </component>
@@ -159,7 +160,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -171,6 +171,11 @@
               <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="D:\note" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="javascript" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\note" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="optimize" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -191,6 +196,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -238,6 +244,8 @@
       <workItem from="1568947166420" duration="1767000" />
       <workItem from="1569221487718" duration="1923000" />
       <workItem from="1569225454982" duration="812000" />
+      <workItem from="1569231130848" duration="210000" />
+      <workItem from="1569312545045" duration="4027000" />
     </task>
     <task id="LOCAL-00001" summary="笔记更新">
       <created>1568032858157</created>
@@ -295,14 +303,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568799526902</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="react学习笔记">
+      <created>1569231188049</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1569231188049</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53566000" />
+    <option name="totallyTimeSpent" value="57803000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="583" y="16" width="1302" height="733" extended-state="0" />
+    <frame x="683" y="101" width="1302" height="733" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19224684" />
@@ -334,16 +349,10 @@
     <MESSAGE value="模块" />
     <MESSAGE value="命名空间" />
     <MESSAGE value="装饰器" />
-    <option name="LAST_COMMIT_MESSAGE" value="装饰器" />
+    <MESSAGE value="react学习笔记" />
+    <option name="LAST_COMMIT_MESSAGE" value="react学习笔记" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/optimize/git.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="192" selection-start-line="192" selection-end-line="192" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/optimize/mk.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -402,6 +411,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/react/目录结构" />
     <entry file="file://$PROJECT_DIR$/typescript/装饰器">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1330">
@@ -423,6 +433,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react/环境安装.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -454,20 +471,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react/目录结构">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react/环境安装.html">
+    <entry file="file://$PROJECT_DIR$/react/目录结构.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        <state relative-caret-position="190">
+          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react/目录结构.html">
+    <entry file="file://$PROJECT_DIR$/react/JSX语法">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/optimize/git.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="192" selection-start-line="192" selection-end-line="192" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react/JSX语法.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
         </state>
       </provider>
     </entry>

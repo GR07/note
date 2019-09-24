@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * JSX就是Javascript和XML结合的一种格式。React发明了JSX，可以方便的利用HTML语法来创建虚拟DOM，
+   * 当遇到 < JSX就当作HTML解析，遇到 { 就当JavaScript解析.
+   *
+   * 大小写：jsx 语句中 如果是自定义的组件，必须开头大写，html标签小写。
+   *
+   * 组件中最外层必须是被一个容器包着：react中用<Fragment> 相当于vue中的<templete>
+   *
+   *
+   *
+   * 与vue组件的写法区别在于：
+   *
+   * 1.vue的html 放在了 render()方法中
+   * 2.vue的data 放在了 consturctor()构造函数中
+   * 3.vue的方法 放在了 与render() 同级函数
+   *
+   */
+  // 在react中写 JSX 语法
+  // <ul className="my-list">
+  //   <li>abc</li>
+  //   <li>I love React</li>
+  // </ul>
+
+  // 以前写
+  // var child1 = React.createElement('li', null, 'abc');
+  // var child2 = React.createElement('li', null, 'I love React');
+  // var root = React.createElement('ul', { className: 'my-list' }, child1, child2);
+
+
+  /**
+   * 组件中模板字符串的方法需要 用bind() 绑定this为当前组件对象。
+   *
+   * 对state 对象赋值必须用 this.setState() 方法
+   */
+
+
+
+
+</script>
+</body>
+</html>
