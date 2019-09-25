@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbcdf2b1-5f97-43fb-84d4-68447278d451" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/react/JSX语法.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react/JSX语法.html" beforeDir="false" afterPath="$PROJECT_DIR$/react/JSX语法.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -54,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/optimize/git.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="192" selection-start-line="192" selection-end-line="192" />
+            <state relative-caret-position="354">
+              <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
             </state>
           </provider>
         </entry>
@@ -63,8 +63,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/react/JSX语法.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+            <state relative-caret-position="383">
+              <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -150,9 +150,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="526" />
-    <option name="y" value="117" />
-    <option name="width" value="1302" />
+    <option name="x" value="307" />
+    <option name="y" value="143" />
+    <option name="width" value="1369" />
     <option name="height" value="733" />
   </component>
   <component name="ProjectView">
@@ -245,7 +245,9 @@
       <workItem from="1569221487718" duration="1923000" />
       <workItem from="1569225454982" duration="812000" />
       <workItem from="1569231130848" duration="210000" />
-      <workItem from="1569312545045" duration="4027000" />
+      <workItem from="1569312545045" duration="4115000" />
+      <workItem from="1569383176491" duration="1982000" />
+      <workItem from="1569393868173" duration="3514000" />
     </task>
     <task id="LOCAL-00001" summary="笔记更新">
       <created>1568032858157</created>
@@ -310,17 +312,24 @@
       <option name="project" value="LOCAL" />
       <updated>1569231188049</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="语法">
+      <created>1569318893576</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1569318893576</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57803000" />
+    <option name="totallyTimeSpent" value="63387000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="683" y="101" width="1302" height="733" extended-state="0" />
+    <frame x="307" y="143" width="1369" height="733" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19224684" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1825695" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -350,7 +359,8 @@
     <MESSAGE value="命名空间" />
     <MESSAGE value="装饰器" />
     <MESSAGE value="react学习笔记" />
-    <option name="LAST_COMMIT_MESSAGE" value="react学习笔记" />
+    <MESSAGE value="语法" />
+    <option name="LAST_COMMIT_MESSAGE" value="语法" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/optimize/mk.html">
@@ -426,6 +436,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/react/JSX语法" />
     <entry file="file://$PROJECT_DIR$/typescript/基础类型.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -440,6 +451,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react/目录结构.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -471,31 +489,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react/目录结构.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react/JSX语法">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/optimize/git.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="192" selection-start-line="192" selection-end-line="192" />
+        <state relative-caret-position="354">
+          <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/react/JSX语法.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+        <state relative-caret-position="383">
+          <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
         </state>
       </provider>
     </entry>
