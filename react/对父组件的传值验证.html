@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * 对父组件传过来的值进行类型校验
+   */
+  // 引入模块
+  import PropTypes from 'prop-types'
+
+  XiaojiejieItem.propTypes = {
+    // isRequired 指定这个属性是必传的值
+    // 不设置这个值就是可传可不传
+    avname: PropTypes.string.isRequired,
+
+    content: PropTypes.string,
+    index: PropTypes.number,
+    deleteItem: PropTypes.func
+  }
+
+  /**
+   * 如果不传值过来可以指定默认值
+   */
+  XiaojiejieItem.defaultProps = {
+    avname: 'avname的默认值'
+  }
+
+
+</script>
+</body>
+</html>
