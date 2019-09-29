@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbcdf2b1-5f97-43fb-84d4-68447278d451" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/react/对父组件的传值验证.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/生命周期.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/JSX语法.html" beforeDir="false" afterPath="$PROJECT_DIR$/react/JSX语法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/父子组件传值.html" beforeDir="false" afterPath="$PROJECT_DIR$/react/父子组件传值.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,15 +19,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react/环境安装.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react/目录结构.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -48,7 +37,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react/JSX语法.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="133">
@@ -57,10 +46,19 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/react/生命周期.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="30" column="32" lean-forward="true" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react/父子组件传值.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
+            <state relative-caret-position="304">
               <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
@@ -69,7 +67,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react/对父组件的传值验证.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
+            <state relative-caret-position="190">
               <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
             </state>
           </provider>
@@ -154,12 +152,13 @@
         <option value="$PROJECT_DIR$/react/父子组件传值.html" />
         <option value="$PROJECT_DIR$/react/对父组件的传值验证.html" />
         <option value="$PROJECT_DIR$/react/JSX语法.html" />
+        <option value="$PROJECT_DIR$/react/生命周期.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="382" />
-    <option name="y" value="47" />
+    <option name="x" value="495" />
+    <option name="y" value="124" />
     <option name="width" value="1314" />
     <option name="height" value="733" />
   </component>
@@ -257,7 +256,8 @@
       <workItem from="1569383176491" duration="1982000" />
       <workItem from="1569393868173" duration="3702000" />
       <workItem from="1569480250187" duration="2008000" />
-      <workItem from="1569548446947" duration="4138000" />
+      <workItem from="1569548446947" duration="4190000" />
+      <workItem from="1569737749362" duration="6466000" />
     </task>
     <task id="LOCAL-00001" summary="笔记更新">
       <created>1568032858157</created>
@@ -343,14 +343,21 @@
       <option name="project" value="LOCAL" />
       <updated>1569490468876</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="react 笔记">
+      <created>1569576994944</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1569576994944</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69721000" />
+    <option name="totallyTimeSpent" value="76239000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="585" y="187" width="1314" height="733" extended-state="1" />
+    <frame x="454" y="91" width="1314" height="733" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19043887" />
@@ -386,7 +393,8 @@
     <MESSAGE value="语法" />
     <MESSAGE value="JSX语法" />
     <MESSAGE value="父子组件传值" />
-    <option name="LAST_COMMIT_MESSAGE" value="父子组件传值" />
+    <MESSAGE value="react 笔记" />
+    <option name="LAST_COMMIT_MESSAGE" value="react 笔记" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/optimize/mk.html">
@@ -494,6 +502,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/react/父子组件传值.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react/对父组件的传值验证.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/typescript/声明合并.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -522,24 +544,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react/父子组件传值.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react/对父组件的传值验证.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/react/JSX语法.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react/生命周期.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="30" column="32" lean-forward="true" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
         </state>
       </provider>
     </entry>

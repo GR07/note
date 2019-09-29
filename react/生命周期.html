@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   *
+   * 什么是生命周期：在某一时刻，自动执行的函数，就是生命周期函数。
+   *
+   *
+   *
+   *
+   *
+   * 生命周期有四个大阶段：
+   *
+   * 1.初始化 Initialization
+   * 构造函数中的 state、props 就是初始化阶段。
+   *
+   *
+   *
+   *
+   * 2.虚拟Dom挂载阶段 Mounting
+   *
+   * componentWillMount: dom挂载前执行
+   *
+   * render: 当 state、props 改变时就会执行
+   *
+   * componentDidMount: dom挂载完成后执行
+   *
+   *
+   *
+   *
+   * 3.更新阶段 Updation
+   *
+   * 第一步：shouldComponentUpdate: 组件更新前执行。（用于优化组件性能）
+   * （必须返回一个布尔值）
+   * 返回 true 继续执行render，如果返回 false 执行完这个函数就结束了，不会再执行触发render阶段了。
+   *
+   *
+   *
+   *
+   *
+   *
+   * 第二步：componentWillUpdate: 在 shouldComponentUpdate 之后 执行，再执行render。
+   *
+   *
+   * 第三步：render: 当 state、props 改变时就会执行。
+   *
+   *
+   * 第四步：componentDidUpdate: 都更新完毕后已经渲染完了虚拟Dom后 执行。
+   *
+   *
+   * 第三步和第四步之间：componentWillReceiveProps: props才会触发。
+   * 第一次渲染时组件（因为是子组件）存在于dom中，函数不会执行，当props改变时候也就是第二次渲染才会执行。
+   *
+   *
+   *
+   *
+   * 4.卸载Dom阶段 Unmounting
+   *
+   * componentWillUnmounting: 当组件将要被删除时自动执行。
+   */
+
+</script>
+</body>
+</html>
