@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+
+    /*简单动画：transition*/
+    .show {
+      opacity: 1;
+      transition: all 1.5s ease-in;
+    }
+    .hide {
+      opacity: 0;
+      transition: all 1.5s ease-in;
+    }
+
+
+
+    /*复杂动画：keyframes + animation*/
+    .hide {
+      /*引用的动画名、运行时间、ease-in从慢到快的过程、forwards到最后一帧时停止，否则又跳到第一帧*/
+      animation: hide-item 2s ease-in forwards;
+    }
+    @keyframes hide-item {
+      0% {
+        opacity: 1;
+        color: yellow;
+      }
+      50% {
+        opacity: 0.5;
+        color: red;
+      }
+      100% {
+        opacity: 0;
+        color: green;
+      }
+    }
+  </style>
+</head>
+<body>
+
+</body>
+</html>
