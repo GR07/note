@@ -14,54 +14,74 @@
    *
    *
    *
-   * 生命周期有四个大阶段：
+   * 生命周期有三个大阶段：
    *
-   * 1.初始化 Initialization
-   * 构造函数中的 state、props 就是初始化阶段。
+   * 一.Mounting（加载阶段：涉及4个钩子函数）
    *
+   * 1.constructor()：加载的时候调用一次，可以初始化state。
    *
+   * 2.static getDerivedStateFromProps(props, state)：注解在下面
    *
+   * 3.render()：注解在下面
    *
-   * 2.虚拟Dom挂载阶段 Mounting
-   *
-   * componentWillMount: dom挂载前执行
-   *
-   * render: 当 state、props 改变时就会执行
-   *
-   * componentDidMount: dom挂载完成后执行。 可以用于初始化页面时候异步请求数据。
+   * 4.componentDidMount()：组件渲染之后调用，只调用一次。
    *
    *
    *
    *
-   * 3.更新阶段 Updation
-   *
-   * 第一步：shouldComponentUpdate: 组件更新前执行。（用于优化组件性能）
-   * （必须返回一个布尔值）
-   * 返回 true 继续执行render，如果返回 false 执行完这个函数就结束了，不会再执行触发render阶段了。
+   * 二.Updating（更新阶段：涉及5个钩子函数)
    *
    *
    *
+   * 1.static getDerivedStateFromProps(props, state)：注解在下面
    *
    *
    *
-   * 第二步：componentWillUpdate: 在 shouldComponentUpdate 之后 执行，再执行render。
+   * 2.shouldComponentUpdate(nextProps, nextState)：
    *
-   *
-   * 第三步：render: 当 state、props 改变时就会执行。
-   *
-   *
-   * 第四步：componentDidUpdate: 都更新完毕后已经渲染完了虚拟Dom后 执行。
-   *
-   *
-   * 第三步和第四步之间：componentWillReceiveProps: props才会触发。
-   * 第一次渲染时组件（因为是子组件）存在于dom中，函数不会执行，当props改变时候也就是第二次渲染才会执行。
+   * 组件接收到新的props或者state时调用，return true就会更新dom（使用diff算法更新），return false能阻止更新（不调用render）。
    *
    *
    *
+   * 3.render()：注解在下面
    *
-   * 4.卸载Dom阶段 Unmounting
    *
-   * componentWillUnmounting: 当组件将要被删除时自动执行。
+   *
+   * 4.getSnapshotBeforeUpdate(prevProps, prevState)：
+   *
+   * 触发时间: update发生的时候，在render之后，在组件dom渲染之前。
+   * 返回一个值，作为componentDidUpdate的第三个参数。
+   * 配合componentDidUpdate, 可以覆盖componentWillUpdate的所有用法。
+   *
+   *
+   *
+   * 5.componentDidMount:
+   *
+   * 组件加载时不调用，组件更新完成后调用。
+   *
+   *
+   *
+   *
+   *
+   *
+   * 三.Unmounting（卸载阶段：涉及1个钩子函数）
+   *
+   *
+   * 1.componentWillUnmounting：
+   *
+   * 组件渲染之后调用，只调用一次。
+   *
+   *
+   *
+   *
+   * static getDerivedStateFromProps(props, state)：
+   * 组件每次被render的时候、包括在组件构建之后(虚拟dom之后，实际dom挂载之前)、每次获取新的props或state之后，触发。
+   * 每次接收新的props之后都会返回一个对象作为新的state，返回null则说明不需要更新state。
+   * 配合componentDidUpdate，可以覆盖componentWillReceiveProps的所有用法。
+   *
+   * render()：
+   * react最重要的步骤，创建虚拟dom，进行diff算法，更新dom树都在此进行。
+   *
    */
 
 </script>
