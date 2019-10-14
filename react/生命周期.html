@@ -55,9 +55,9 @@
    *
    *
    *
-   * 5.componentDidMount:
+   * 5.componentDidMount(prevProps, prevState):
    *
-   * 组件加载时不调用，组件更新完成后调用。
+   * 组件更新完成后调用，可以操作组件更新的DOM，prevProps和prevState这两个参数指的是组件更新前的props和state。
    *
    *
    *
@@ -81,6 +81,16 @@
    *
    * render()：
    * react最重要的步骤，创建虚拟dom，进行diff算法，更新dom树都在此进行。
+   *
+   *
+   *
+   * 造成组件更新的三种情况：
+   *
+   * 1.父组件 render 导致重传props所以子组件也重新渲染
+   *
+   * 2.在componentWillReceiveProps方法中，用setState将props转换成自己的state。方法中调用 this.setState() 将不会引起第二次渲染。
+   *
+   * 3.组件本身调用setState，无论state有没有变化。
    *
    */
 
