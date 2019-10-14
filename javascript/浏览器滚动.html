@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * 滚动分全局滚动(浏览器窗口) 跟 局部滚动(自定义的盒子)。
+   *
+   * 以下内容绝大部分都是指全局滚动。
+   *
+   * 局部滚动获取指定的DOM再调用相应的API即可。
+   */
+
+
+
+
+
+  /**
+   * 设置全局滚动条高度
+   */
+
+  // 1. 最常用的方法：
+  window.scrollTo(0, 0);
+  // or
+  window.scrollTo({
+    left: 0,
+    top: 100
+  });
+
+  // 2. 也可以利用相对滚动设置
+  window.scrollBy(0, 0);
+  // or
+  window.scrollBy({
+    left: 0,
+    top: 100
+  });
+
+  // 3. 或者利用scrollTop设置
+  document.scrollingElement.scrollTop = 100;
+
+  // 注意：scrollTo跟scrollBy的参数是一样的，区别就是scrollBy滚动距离是相对与当前滚动条位置进行滚动。
+
+
+
+
+
+  /**
+   * 指定一个元素显示在视窗
+   */
+
+  // 1. 最常用的方法
+  let offsetTop = document.querySelector(".box").offsetTop; // 获取元素的offsetTop(元素距离文档顶部的距离)
+  window.scrollTo(0, offsetTop);  // 设置滚动条的高度
+
+  // 2. 或者用锚点
+  // <a href="#box">盒子出现在顶部</a> <div id="box"></div>
+
+  // 3. 或者利用scrollIntoView进行展现
+  // 指定start出现在视口顶部、center出现在视口中央、end出现在视口底部
+  document.querySelector(".box").scrollIntoView({
+    block: "start" || "center" || "end"
+  });
+
+
+
+
+
+
+  /**
+   * 设置滚动具有平滑的过渡效果
+   */
+
+  // 1. 利用每个方法的参数设置
+  window.scrollTo({
+    behavior: "smooth"
+  });
+
+  window.scrollBy({
+    behavior: "smooth"
+  });
+
+  document.querySelector(".box").scrollIntoView({
+    behavior: "smooth"
+  });
+
+  // 2. 或者用css属性设置
+  html {
+    scroll-behavior: smooth; // 全局滚动具有平滑效果
+  }
+  // 或者所有
+  * {
+    scroll-behavior: smooth;
+  }
+
+  // 注意：设置了该属性之后，所有方法都可以不用设置behavior参数了，二选一即可，
+  // 因为都是控制当前指定元素的滚动行为，所以锚点跳转、设置scrollTop也具有平滑(smooth)的滚动行为。
+
+
+
+
+
+
+  // scrollingElement：该对象可以非常兼容地获取scrollTop、scrollHeight等属性
+  let scrollHeight = document.scrollingElement.scrollHeight;
+
+
+
+
+  // 滚动到底部
+  window.scrollTo({
+    left: 0,
+    top: document.scrollingElement.scrollHeight
+  });
+  // 如果你实在是懒的话...
+  window.scrollTo(0, 999999);
+
+
+
+
+  // 判断浏览器已滚动到底部
+  window.addEventListener("scroll", () => {
+    let {
+      scrollTop,
+      scrollHeight,
+      clientHeight
+    } = document.scrollingElement;
+
+    // 当前滚动高度 + 视口高度 >= 文档总高度
+    if (scrollTop + clientHeight >= scrollHeight) {
+      console.log("已到达底部");
+    }
+  });
+
+
+
+  // 解决IOS设备局部滚动不顺畅(粘手)
+  // 除了浏览器原生滚动，自定义的滚动条都会出现这种情况，加以下属性就可以解决：
+  // .box {-webkit-overflow-scrolling: touch;}
+  // 注意：要真机才能看到效果，这里指的局部滚动是指自己定义的盒子，然后设置overflow: auto || scroll;后的滚动行为；
+
+
+
+  // 滚动传播（影响到父容器）。
+  // 指有多个滚动区域，当一个滚动区域滚动完之后，继续滚动会传播到到父区域继续滚动的行为。
+  // .box {overscroll-behavior: contain; // 阻止滚动传播}
+
+
+
+  // 横向滚动（移动端遇到此需求比较多，常用于图片展示）
+  // <ul>
+  //   <li>
+  //     <img src="">
+  //   </li>
+  // </ul>
+  //
+  // ul {
+  //   white-space: nowrap; // 超出不换行
+  //   overflow-x: auto;
+  //   scroll-snap-type: x mandatory; // 如果加上，滚动结束后，强制滚动到指定元素
+  //
+  //   li {
+  //     display: inline-block;
+  //     scroll-snap-align: start; // 如果加上，滚动结束后，强制滚动到指定元素
+  //
+  //     img {
+  //       display: block;
+  //       width: 200px;
+  //     }
+  //   }
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
