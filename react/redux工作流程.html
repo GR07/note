@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * 为什么要用redux：
+   * 在React中，数据在组件中是单向流动的，数据从一个方向父组件流向子组件（通过props）,所以，两个非父子组件之间通信就相对麻烦，redux的出现就是为了解决state里面的数据问题。
+   */
+
+
+  // redux 注意三点：
+  // 1.只能有一个 store
+  // 2.reducer 里只能接受state，不能改变state
+  // 3.reducer必须是纯函数
+  // 纯函数指：如果函数接收的参数相同，则永远返回相同的结果，
+  // 函数的输出不依赖外部的数据或状态影响，函数的输出只依赖输入的参数。
+
+
+
+  /**
+   * 工作流程：
+   *
+   * 组件首先通过 ActionCreators 去找 store 索要需要的state，
+   * store 再通过 reducers（管理state的地方） 查找到，然后返回到 store ，store再返回给组件。
+   *
+   * 类似于图书馆借书：借书人（组件）必须先找 图书管理员（ActionCreators），
+   * 图书管理员再去 图书馆（store） 找，图书馆找不到再去 管理软件（reducers）查找，
+   * 返回给图书馆，再返回给组件。
+   */
+
+</script>
+</body>
+</html>
