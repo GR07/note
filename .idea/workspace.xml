@@ -4,10 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/typescript/泛型与接口的结合运用" line="5" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dbcdf2b1-5f97-43fb-84d4-68447278d451" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/react/redux工作流程.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="dbcdf2b1-5f97-43fb-84d4-68447278d451" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -22,8 +19,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react/生命周期.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="950">
+            <state relative-caret-position="511">
               <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/javascript/深拷贝和浅拷贝.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -32,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/react/redux工作流程.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="475">
-              <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+              <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -46,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react/环境安装.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -113,8 +119,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="310" />
-    <option name="y" value="168" />
+    <option name="x" value="174" />
+    <option name="y" value="167" />
     <option name="width" value="1313" />
     <option name="height" value="733" />
   </component>
@@ -133,32 +139,7 @@
             <path>
               <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="D:\note" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="css" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\note" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="javascript" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\note" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="optimize" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\note" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="react" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\note" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="typescript" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="note" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\note" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="vue" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -174,6 +155,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="ts.external.directory.path" value="D:\Program Files\WebStorm 2019.1.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RunDashboard">
@@ -228,6 +210,7 @@
       <workItem from="1571108123599" duration="3906000" />
       <workItem from="1571124007211" duration="823000" />
       <workItem from="1571128619472" duration="214000" />
+      <workItem from="1571708122897" duration="1040000" />
     </task>
     <task id="LOCAL-00001" summary="笔记更新">
       <created>1568032858157</created>
@@ -359,10 +342,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113076000" />
+    <option name="totallyTimeSpent" value="114116000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="310" y="168" width="1313" height="733" extended-state="0" />
+    <frame x="174" y="167" width="1313" height="733" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19058824" />
@@ -586,20 +569,6 @@
     <entry file="file://$PROJECT_DIR$/optimize/mk.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/react/生命周期.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="950">
-          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react/redux工作流程.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/optimize/git.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3610">
@@ -610,7 +579,28 @@
     <entry file="file://$PROJECT_DIR$/react/环境安装.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react/redux工作流程.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react/生命周期.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascript/深拷贝和浅拷贝.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
         </state>
       </provider>
     </entry>
