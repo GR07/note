@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * 
+     * 安装：npm install --save redux-thunk
+     * 
+     * 引入：store/index.js 中
+     * import {createStore, applyMiddleware, compose} from 'redux' // compose增强函数使用
+     * import creactSagaMiddleware from 'redux-saga'
+     * 
+     * import mySages from './sagas.js' //写一个run函数
+     * 
+     * const sagaMiddleware = creactSagaMiddleware()
+     * const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}):compose
+     * const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware))
+     * const store = createStore(reducer, enhancer)
+     * 
+     * sageMiddleware.run(mySages)
+     * 
+     * // mySages.js
+     * // jspang
+     * 
+     * 
+     */
+  </script>
+</body>
+</html>
