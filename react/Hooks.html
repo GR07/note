@@ -16,11 +16,91 @@
      * 使用：import React, { useState } from 'react';
      * 
      * 
-     * useState：
+     * useState：示例地址：ReactHooksDemo/demo01/src/Example.js
      * const [age, setAge] = useState(18)
      * const [sex, setSex] = useState('男')
      * 一个方法返回一个数组，但不可以在条件判断语句中使用。
      * 
+     * 
+     * useEffect：示例地址：ReactHooksDemo/demo01/src/Example.js
+     * 主要是解决 hooks 没有生命周期函数的问题。
+     * 函数是异步的。
+     * 相当于：componentDidMount 和 conmonentDidUpdate 两个生命周期函数。
+     */
+
+    /**
+     * 在销毁组件前调用：解绑的生命周期函数
+     * 相当于：componentWillUnmounting
+     * useEffect 函数接收两个参数
+     * 参数1：函数-----------函数中如果有 return 执行的就是即将销毁前的代码，否则就是组件更新（componentDidMount、conmonentDidUpdate）执行的代码。
+     * 参数2：数组-----------数组如果为空，组件更新的时候不会触发销毁前执行的代码。如果有值（只有这个值发生改变时候才会执行销毁的代码）。
+     */
+    // Index 组件
+    function Index() {
+      const [count, setCount] = useState(0)
+      useEffect(() => {
+        console.log(`进入index页面时候执行`)
+        return () => {
+          console.log(`销毁index页面前执行`)
+        }
+      }, [count])
+      // jsx
+      return (
+        <h2>我是index</h2>
+      )
+    }
+
+
+
+
+
+
+    
+
+    /**
+     * 组件传值：示例地址：ReactHooksDemo/demo01/src/Example2.js
+     * 
+     * 第一步：创建上下文 createContext
+     * 
+     * 第二步：用 Provider 把共享的属性放进去
+     * 
+     * 第三步：在子组件里用 useContext 接收
+     */
+
+
+    /**
+     * createContext: 
+     */
+    // 使用
+    import React, { useState, createContext } from 'react';
+    // 创建一个组件
+    const CountContext = createContext()
+    // jsx 里    value就是要给子组件传递的值
+    <CountContext.Provider value={count}></CountContext.Provider>
+
+    /**
+     * useContext: hooks提供的上下文文件
+     */
+    // 使用
+    import React, { useState, createContext, useContext } from 'react';
+    // 子组件
+    function Counter() {
+      // 拿到了父组件的count
+      let count = useContext(CountContext)
+      return (
+        <h2>{count}</h2>
+      )
+    }
+
+
+
+
+    /**
+     * useReducer: 示例地址：ReactHooksDemo/demo01/src/Example3.js
+     * 
+     * 和useContext配合使用达到redux效果
+     * 
+     * 也是reducer.js的增强版
      */
   </script>
 </body>
