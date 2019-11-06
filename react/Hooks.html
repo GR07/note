@@ -29,11 +29,11 @@
      */
 
     /**
-     * 在销毁组件前调用：解绑的生命周期函数
+     * useEffect：在销毁组件前调用：解绑的生命周期函数
      * 相当于：componentWillUnmounting
      * useEffect 函数接收两个参数
-     * 参数1：函数-----------函数中如果有 return 执行的就是即将销毁前的代码，否则就是组件更新（componentDidMount、conmonentDidUpdate）执行的代码。
-     * 参数2：数组-----------数组如果为空，组件更新的时候不会触发销毁前执行的代码。如果有值（只有这个值发生改变时候才会执行销毁的代码）。
+     * 参数1：函数-----------函数中如果有 return 一个匿名函数那么就是即将销毁前执行的代码，否则组件只要更新或初始化（componentDidMount、conmonentDidUpdate）就会执行useEffect里的代码。
+     * 参数2：数组-----------数组如果为空，组件更新或初始化的时候不会触发销毁前执行的代码。如果有值（只有这个值发生改变时候才会执行销毁的代码）。
      */
     // Index 组件
     function Index() {
@@ -79,10 +79,10 @@
     <CountContext.Provider value={count}></CountContext.Provider>
 
     /**
-     * useContext: hooks提供的上下文文件
+     * useContext: hooks提供的上下文文件，可以理解为数据管理中心共享状态
      */
     // 使用
-    import React, { useState, createContext, useContext } from 'react';
+    import React, { useState, useContext } from 'react';
     // 子组件
     function Counter() {
       // 拿到了父组件的count
@@ -101,7 +101,80 @@
      * 和useContext配合使用达到redux效果
      * 
      * 也是reducer.js的增强版
+     * 
+     * 使用：
+     * 第一步：引入useReducer
+     * 第二步：创建
+     * 
      */
+      import React, { useReducer } from 'react';
+      function ReducerDemo() {
+        // useReducer 接受两个参数 ----- reducer函数、初始值
+        // useReducer 返回两个值 ------ count（经过reducer业务逻辑处理后返回的一个值）、dispatch（派发器）
+        // 就是把以前 reducer 里的业务逻辑代码放到这里了
+        // 下面jsx中的事件 dispatch('add') 就是调用 useReducer
+        const [count, dispatch] = useReducer((state, action) => {
+          switch(action) {
+            case 'add':
+              return state + 1
+            case 'sub':
+              return state - 1
+            default:
+              return state
+          }
+        }, 0)
+
+        return (
+          <div>
+            <h2>现在的分数是{count}</h2>
+            <button onClick={() => {dispatch('add')}}>加法</button>
+            <button onClick={() => {dispatch('sub')}}>减法</button>
+          </div>
+        )
+      }
+
+
+
+      
+
+
+      /**
+       * 使用 useReducer 和 useContext 代替 redux
+       * 
+       * 示例地址：ReactHooksDemo/demo01/src/Example4
+       */
+
+      // 第一步：使用 createContext + Provider 创建容器组件
+      // 示例地址：ReactHooksDemo/demo01/src/Example4/color.js
+      const ColorContext = createContext({})
+      // color 可以看作一个容器，用它包裹的组件可以接收到它的 value 值
+      const Color = (props) => {
+        return (
+          <ColorContext.Provider value={{color: 'blue'}}>
+            { props.children }
+          </ColorContext.Provider>
+        )
+      }
+
+
+      // 第二步：把需要共享数据的组件包起来
+      // 示例地址：ReactHooksDemo/demo01/src/Example4/Example4.js
+      <Color>
+        <ShowArea />
+        <Buttons />
+      </Color>
+
+
+      // 第三步：在子组件里面接收容器暴漏出来的数据
+      // 示例地址：ReactHooksDemo/demo01/src/Example4/showArea.js
+      function ShowArea() {
+        // 因为在 Example4 组件中 包裹了 ShowArea 组件，所以可以用 useContext 获取到 value
+        const { color } = useContext(ColorContext)
+        return (
+          <div style={{color: color}}>字体颜色为{color}</div>
+        )
+      }
+      
   </script>
 </body>
 </html>
