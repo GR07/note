@@ -33,7 +33,7 @@
      * 相当于：componentWillUnmounting
      * useEffect 函数接收两个参数
      * 参数1：函数-----------函数中如果有 return 一个匿名函数那么就是即将销毁前执行的代码，否则组件只要更新或初始化（componentDidMount、conmonentDidUpdate）就会执行useEffect里的代码。
-     * 参数2：数组-----------数组如果为空，组件更新或初始化的时候不会触发销毁前执行的代码。如果有值（只有这个值发生改变时候才会执行销毁的代码）。
+     * 参数2：数组-----------数组如果为空，组件更新或初始化的时候不会触发销毁前执行的代码，只执行一遍。如果有值（只有这个值发生改变时候才会执行销毁的代码）。
      */
     // Index 组件
     function Index() {
@@ -175,6 +175,76 @@
         )
       }
       
+
+      // 第四步：创建reducer业务逻辑代码
+      // 示例地址：ReactHooksDemo/demo01/src/Example4/color.js
+      const UPDATE_COLOR = "UPDATE_COLOR" 
+      const reducer= (state,action)=>{
+        switch(action.type){
+          case UPDATE_COLOR:
+            return action.color
+          default:
+            return state
+        }
+      }
+      // 把color、dispatch共享出去
+      const [color, dispatch] = useReducer(reducer, 'blue')
+
+
+      // 第五步：绑定事件触发dispatch
+      // 示例地址：ReactHooksDemo/demo01/src/Example4/Buttons.js
+      import {ColorContext, UPDATE_COLOR} from './color'
+      const { dispatch } = useContext(ColorContext)
+      <button onClick={() => {dispatch({type: UPDATE_COLOR, color: "red"})}}>红色</button>
+
+
+
+
+      /**
+       * useMemo 解决子组件重复渲染的问题。
+       * 
+       * 问题描述：以前为了避免子组件重复渲染，在 shouldComponentUpdate 中 对比 state 是否发生了改变。
+       * 
+       * 但是在 Hooks 的 useEffect 没有生命周期函数，所以用 useMemo 解决这个问题。
+       */
+      // 使用 
+      import React, {useEffect} from 'react'
+      // 接受两个参数------- 函数、数组。
+      // 当数组里的值改变时才会执行 useMemo() 更新组件
+      const actionAbc = useMemo(() => {abc(name)}, [name])
+
+
+
+
+
+      /**
+       * useRef：获取dom
+       * 
+       * useRef：保存普通变量，类似双向绑定的功能（不常用，hooks中一般用状态保存变量）
+       */
+      // 示例地址：ReactHooksDemo/demo01/src/Example5.js
+      function Example5() {
+        const inputEl = useRef(null)
+
+        const onButtonClick = () => {
+          inputEl.current.value = `我是通过useRef 获取到的 dom 元素`
+          console.log(inputEl)
+        }
+        return (
+          <>
+            <input ref={inputEl} type="text"></input>
+            <button onClick={onButtonClick}>在input中显示文字</button>
+          </>
+        )
+      }
+
+
+
+
+      /**
+       * 自定义Hooks函数
+       */
+      // 示例地址：ReactHooksDemo/demo01/src/Example6.js
   </script>
 </body>
 </html>
