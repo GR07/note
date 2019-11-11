@@ -7,92 +7,118 @@
 <body>
 <script>
   /**
-   *
    * 什么是生命周期：在某一时刻，自动执行的函数，就是生命周期函数。
-   *
-   *
-   *
-   *
-   *
-   * 生命周期有三个大阶段：
-   *
-   * 一.Mounting（加载阶段：涉及4个钩子函数）
-   *
-   * 1.constructor()：加载的时候调用一次，可以初始化state。
-   *
-   * 2.static getDerivedStateFromProps(props, state)：注解在下面
-   *
-   * 3.render()：注解在下面
-   *
-   * 4.componentDidMount()：第一次组件渲染完成之后调用，只调用一次。
-   *
-   *
-   *
-   *
-   * 二.Updating（更新阶段：涉及5个钩子函数)
-   *
-   *
-   *
-   * 1.static getDerivedStateFromProps(props, state)：注解在下面
-   *
-   *
-   *
-   * 2.shouldComponentUpdate(nextProps, nextState)：
-   *
-   * 组件接收到新的props或者state时调用，return true就会更新dom（使用diff算法更新），return false能阻止更新（不调用render）。
-   *
-   *
-   *
-   * 3.render()：注解在下面
-   *
-   *
-   *
-   * 4.getSnapshotBeforeUpdate(prevProps, prevState)：
-   *
-   * 触发时间: update发生的时候，在render之后，在组件dom渲染之前。
-   * 返回一个值，作为componentDidUpdate的第三个参数。
-   * 配合componentDidUpdate, 可以覆盖componentWillUpdate的所有用法。
-   *
-   *
-   *
-   * 5.componentDidMount(prevProps, prevState):
-   *
-   * 组件更新完成后调用，可以操作组件更新的DOM，prevProps和prevState这两个参数指的是组件更新前的props和state。
-   *
-   *
-   *
-   *
-   *
-   *
-   * 三.Unmounting（卸载阶段：涉及1个钩子函数）
-   *
-   *
-   * 1.componentWillUnmounting：
-   *
-   * 组件销毁前调用，只调用一次。
-   *
-   *
-   *
-   *
-   * static getDerivedStateFromProps(props, state)：
-   * 组件每次被render的时候、包括在组件构建之后(虚拟dom之后，实际dom挂载之前)、每次获取新的props或state之后，触发。
-   * 每次接收新的props之后都会返回一个对象作为新的state，返回null则说明不需要更新state。
-   * 配合componentDidUpdate，可以覆盖componentWillReceiveProps的所有用法。
-   *
-   * render()：
-   * react最重要的步骤，创建虚拟dom，进行diff算法，更新dom树都在此进行。
-   *
-   *
-   *
-   * 造成组件更新的三种情况：
-   *
-   * 1.父组件 render 导致重传props所以子组件也重新渲染
-   *
-   * 2.在componentWillReceiveProps方法中，用setState将props转换成自己的state。方法中调用 this.setState() 将不会引起第二次渲染。
-   *
-   * 3.组件本身调用setState，无论state有没有变化。
-   *
    */
+
+
+   /**
+    * React v16.0前的生命周期
+    */
+
+   /**
+    * 组件初始化阶段：constructor()
+    * 
+    * 继承react Component这个基类，也就继承这个react的基类，才能有render(),生命周期等方法可以使用。
+    * 
+    * super(props)用来调用基类的构造方法constructor() 也将父组件的props注入给子组件，供子组件读取(组件中props只读不可变，state可变)。
+    * 
+    * 而constructor()用来做一些组件的初始化工作，如定义this.state的初始内容。
+    */
+
+
+
+    /**
+     * 组件的挂载阶段：此阶段分为componentWillMount，render，componentDidMount三个时期。
+     * 
+     * componentWillMount: 
+     * 在组件挂载到DOM前调用，且只会被调用一次，在这边调用this.setState不会引起组件重新渲染，也可以把写在这边的内容提前到constructor()中，所以项目中很少用。
+     * 
+     * render:
+     * 根据组件的props和state，return 一个React元素（组件，即UI，创建虚拟Dom）不负责组件实际渲染工作，之后由React自身根据此元素去渲染出页面DOM。
+     * react最重要的步骤，创建虚拟dom，进行diff算法，更新dom树都在此进行。
+     * 
+     * componentDidMount:
+     * 组件挂载到DOM后调用，且只会被调用一次
+     */
+
+
+
+
+     /**
+      * 组件的更新(update)阶段：
+      * setState引起的state更新 或 父组件重新render引起的props更新，更新后的state和props相对之前无论是否有变化，都将引起子组件的重新render。
+      * 
+      * 触发更新阶段有三种情况：
+      * 
+      * 情况一：
+      * 每当父组件重新render导致的重传props，子组件将直接跟着重新渲染，无论props是否有变化。可通过shouldComponentUpdate方法优化。
+      * return true就会更新dom（使用diff算法更新），return false能阻止更新（不调用render）。
+      * 
+      * 情况二：
+      * 在componentWillReceiveProps方法中，将props转换成自己的state。
+      * this.setState({someThings: nextProps.someThings});
+      * 在该函数(componentWillReceiveProps)中调用 this.setState() 将不会引起第二次渲染。
+      * 
+      * 情况三：
+      * 组件本身调用setState，无论state有没有变化。可通过shouldComponentUpdate方法优化。
+      * 
+      * 
+      * 此阶段共五个钩子函数：
+      * 
+      * componentWillReceiveProps(nextProps)：用于props引起的组件更新，可在此方法中根据nextProps和this.props来查明重传的props是否改变。
+      * 
+      * shouldComponentUpdate(nextProps, nextState)：比较nextProps，nextState及当前组件的this.props，this.state，优化组件性能。
+      * 
+      * componentWillUpdate(nextProps, nextState)：此方法在调用render方法前执行，在这边可执行一些组件更新发生前的工作，一般较少用。
+      * 
+      * render：上文讲过，这边只是重新调用。
+      * 
+      * componentDidUpdate(prevProps, prevState)：在组件更新后被调用，可以操作组件更新的DOM，prevProps和prevState这两个参数指的是组件更新前的props和state
+      * 
+      */
+
+
+      /**
+       * 卸载阶段
+       * 
+       * 此阶段只有一个生命周期方法：componentWillUnmount
+       * 
+       * 此方法在组件被卸载前调用，可以在这里执行一些清理工作，比如清除组件中使用的定时器，清楚componentDidMount中手动创建的DOM元素等，以避免引起内存泄漏。
+       */
+
+
+
+
+       /**
+        * React v16.4 的生命周期
+        */
+       // 变更缘由 Fiber
+
+       // 在render前执行的生命周期函数
+       // componentWillMount
+       // componentWillReceiveProps
+       // shouldComponentUpdate
+       // componentWillUpdate
+
+       // 如果开发者开了async rendering，而且又在以上这些render前执行的生命周期方法做AJAX请求的话，那AJAX将被无谓地多次调用。
+
+       // 所以除了shouldComponentUpdate，其他在render函数之前的所有函数（componentWillMount，componentWillReceiveProps，componentWillUpdate）都被getDerivedStateFromProps替代。
+
+
+       // getDerivedStateFromProps：无论是因为什么引起的Updating，全部都会被调用。在render方法之前调用，它应该返回一个对象来更新状态，或者返回null来不更新任何内容。（前面要加上static保留字，声明为静态方法，不然会被react忽略掉）
+
+
+       // getSnapshotBeforeUpdate() 被调用于render之后，可以读取但无法使用DOM的时候。它使您的组件可以在可能更改之前从DOM捕获一些信息（例如滚动位置）。此生命周期返回的任何值都将作为参数传递给componentDidUpdate（）。
+       
+
+
+
+
+
+       
+       
+        
+       
 
 </script>
 </body>
