@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * pages目录下的文件 会自动配置成路由，多层路由嵌套由目录层级控制。
+     */
+
+    
+    /**
+     * 两种跳转方式
+     * 
+     * 一：标签式
+     * <Link href="/guorA"><a>标签式访问A页面</a></Link>
+     * 
+     * 二：编程式
+     * <button onClick={gotoA}>编程式访问A页面</button>
+     */
+
+
+    
+
+     /**
+      * 两种传参方式: 但是在next.js中只支持 query
+      * 
+      * 一：query
+      * ?id = 1
+      * 
+      * 二：path
+      * :id = 1
+      * 
+      */
+      
+      // 标签式参数传递
+      <Link href="/guorA?name=德莱文"><a>标签式访问A页面</a></Link>
+      // 参数接收
+      // withRouter 用来处理路由的
+      import {withRouter} from 'next/router'
+      const adcName = ({router}) => {
+        return (
+          <div>
+            <div>我是：{router.query.name}</div>
+          </div>
+        )
+      }
+      export default withRouter(adcName)
+
+      // 编程式参数传递
+      Router.push('/guorA?name=韦鲁斯')
+      // 也可以对象式
+      Router.push({
+        pathname: '/guorA',
+        query: { name: '韦鲁斯' }
+      })
+
+
+
+
+      /**
+       * 路由6个钩子事件：
+       * 
+       * routeChangeStart 路由将要变化的时候触发
+       * 
+       * routeChangeComplete 路由发生变化之后触发
+       * 
+       * beforeHistoryChange history模式下路由变化触发
+       * 
+       * routeChangeError 路由变化错误的时候触发
+       * 
+       * hashChangeStart 路由将要变化的时候触发（hash模式）
+       * 
+       * hashChangeComplete 路由发生变化之后触发（hash模式）
+       * 
+       */
+      // 用 Router.events.on('', (...args) => {监听到后做的事情}) 监听上面6个事件，args 是路由传的参数。
+      Router.events.on('routeChangeStart', (...args) => {console.log(args)})
+
+      // 应用比如说跳转页面前 做一个 loging 动画，跳转结束 关闭 loging。或者跳转页面之前关闭一些资源、定时器防止内存溢出
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
