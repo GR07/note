@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * 在next.js中 使用 axios 请求数据
+     * 
+     * 注意：所有数据请求必须写在 getInitialProps 里面
+     */
+    // 示例地址：next-create/pages/guorA.js
+    // 使用
+    adcName.getInitialProps = async () => {
+      const promise = new Promise((resolve) => {
+        axios('http://rap2api.taobao.org/app/mock/233908/getList').then((res) => {
+          console.log(res)
+          resolve(res.data.data)
+        })
+      })
+      return await promise
+    }
+
+  </script>
+</body>
+</html>
