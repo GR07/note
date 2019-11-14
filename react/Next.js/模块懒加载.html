@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * 模块懒加载的意义：提高首屏加载速度。
+     */
+
+
+
+    /**
+     * 外部库的懒加载
+     * 
+     * 示例地址：// 示例地址：next-create/next-create/pages/time.js
+     */
+    const changeTime = async () => {
+      // 懒加载时间模块 moment
+      const moment = await import('moment')
+      // default next框架要求必须使用
+      setTime(moment.default(Date.now()).format())
+    }
+
+
+    /**
+     * 自定义组件的懒加载
+     * 
+     * 需要使用 next.js 中的 dynamic 实现
+     * 
+     * 示例地址: 
+     * next-create/next-create/pages/time.js 
+     * next-create/next-create/components/lazy.js
+     */
+
+    // next.js里面带的，懒加载自定义组件
+    import dynamic from 'next/dynamic'
+    // 代码执行到这里还没有引入lazy组件
+    // 执行到 return () 里面的 <Lazy /> 才会加载进来
+    const Lazy = dynamic(import('../components/lazy'))
+
+
+  </script>
+</body>
+</html>

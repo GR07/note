@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * next.js 中不可以引入外部css文件，只能用这种类似vue的内部写法。
+     */
+     <div className="guor">github.com/gr07</div>
+     // 放在 return () 里面
+     <style jsx>
+        {`
+          div { color: blue }
+          .guor { color: red }
+        `}
+      </style>
+      // 也可以动态配置 ${}
+      // 示例地址：next-create/next-create/pages/guorStyle.js
+
+  </script>
+</body>
+</html>
