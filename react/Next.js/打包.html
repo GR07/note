@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * 如果没有使用 ui框架 AntDesignUi 直接 next build 就可以。
+     * 
+     * 
+     * 如果使用了 AntDesignUi 并且用了 css按需加载 则需要：
+     * 
+     * 第一步：
+     * 去掉 .babelrc 里的 "style":"css"
+     * 
+     * 第二步：
+     * 在 pages 目录下新建文件 _app.js-------这个文件意思就是所有全局引入的东西都写在这里。
+     * 在这里全局引入 AntDesignUi
+     * 
+     * import App from 'next/app'
+     * import 'antd/dist/antd.css'
+     * export default App
+     * 文件地址：next-create/next-create/pages/_app.js
+     * 
+     * 最后直接 build 即可
+     * 
+     * 
+     * 
+     * 
+     * 
+     * /
+  </script>
+</body>
+</html>
