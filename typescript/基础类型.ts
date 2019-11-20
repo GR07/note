@@ -1,4 +1,16 @@
 /**
+ * 安装：
+ * 
+ * 1.首先安装 node
+ * 
+ * 2.全局安装 npm install -g typescript
+ * 
+ * 3.运行 tsc 文件名.ts 即可
+ */
+
+
+ 
+/**
  *
  * typescript中的数据类型
  *
@@ -58,7 +70,7 @@ let unusable: void = undefined;
 let a: undefined;
 a = undefined;
 
-// 代表从不会出现的值，比如赋值一个自执行函数。一般用不上。可以 any 替代。
+// 代表从不会出现的值，比如赋值一个自执行函数。（一般用不上，可以 any 替代）
 let b: never;
 b = (() => {
   throw new Error('错误');
