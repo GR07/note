@@ -1,28 +1,17 @@
 /**
- * 安装：
- * 
- * 1.首先安装 node
- * 
- * 2.全局安装 npm install -g typescript
- * 
- * 3.运行 tsc 文件名.ts 即可
- */
-
-
- 
-/**
  *
- * typescript中的数据类型
+ * 10种 typescript的数据类型
  *
- * 布尔类型
- * 数字类型
- * 字符串类型
- * 数组类型
- * 元组类型
- * 枚举类型
- * 任意类型
- * null 和 undefined
- * void类型
+ * Boolean 布尔类型
+ * Number 数字类型
+ * String 字符串类型
+ * Array 数组类型
+ * Tuple 元组类型
+ * enum 枚举类型
+ * Any 任意类型
+ * null 空类型
+ * undefined
+ * void 空类型
  * never类型
  */
 
@@ -37,6 +26,8 @@ let isDone: boolean = false;
 
 /**
  * Number
+ * 
+ * 支持 整数、小数、NaN（not a number）
  */
 let decLiteral: number = 6;
 

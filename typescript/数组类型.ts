@@ -1,5 +1,5 @@
 /**
- * 定义数组类型有 3 种 ：
+ * 定义数组类型有 4 种 ：
  *
  * 数组的项中不允许出现其他的类型，数组一些方法的参数也会限制。
  */
@@ -10,6 +10,9 @@ a.push(8);
 let b: Array<number> = [1, 1, 2, 3, 5];
 // 第三种
 let c: any[] = ['Xcat Liu', 25, { website: 'http://xcatliu.com' }];
+
+// 构造函数赋值
+let f: number[] = new Array(1, 2, 3)
 
 
 

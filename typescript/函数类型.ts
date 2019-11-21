@@ -68,7 +68,7 @@ let jim = defaultName('Jim');
 /**
  * 剩余参数： ...rest 获取函数中的剩余参数
  */
-// 其实 item 就是表示剩余参数的数组  ...是扩展运算符
+// 其实 ...item 表示剩余参数的数组
 function push(array: any[], ...items: any[]) {
   items.forEach(function(item) {
     array.push(item);
