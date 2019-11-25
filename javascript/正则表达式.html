@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * 两种形式：
+     * 
+     * 构造函数（不常用）:
+     * // 两个参数，第一个字符串，第二个可选全局匹配、忽略大小写等
+     * let reg = new RegExp('guor', 'g')
+     * console.log(reg) // /guor/g
+     * 
+     * 
+     * 字面量（常用）:
+     * // 等同上面构造函数声明
+     * let reg = /guor/g
+     * 
+     * 
+     * 
+     * 
+     * 常用的两个方法：
+     * 
+     * test() // 检测字符串中是否含有正则规定的字符，返回一个布尔值。
+     * let reg = /guor/i
+     * let str = 'guor.com'
+     * reg.test(str) // true 返回一个布尔值
+     * 
+     * 
+     * exec() // 返回一些此次正则查找的信息
+     * let reg = /guor/i
+     * let str = 'guor.com'
+     * reg.exec(str) // ['guor', index: 0, 'guor.com'] 返回一个数组 [ 匹配的字符、位置、在哪个字符串查找 ]
+     * 
+     * 
+     * 
+     * 
+     * /
+  </script>
+</body>
+</html>

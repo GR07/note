@@ -111,7 +111,7 @@ class Def extends Abc {
   constructor (name: any) {
     super(name)
   }
-  eat () { // 子类中必须实现 eat（抽象方法）
+  eat () { // 子类中必须实现 抽象类中的eat（抽象方法）
     console.log(this.name);
   }
 }
