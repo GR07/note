@@ -1,21 +1,3 @@
-/**
- *
- * 10种 typescript的数据类型
- *
- * Boolean 布尔类型
- * Number 数字类型
- * String 字符串类型
- * Array 数组类型
- * Tuple 元组类型
- * enum 枚举类型
- * Any 任意类型
- * null 空类型
- * undefined
- * void 空类型
- * never类型
- */
-
-
 
 /**
  * Boolean
@@ -35,8 +17,11 @@ let decLiteral: number = 6;
 
 /**
  * String
+ * 
+ * 单引号或双引号或模板字符串
  */
-let myName: string = 'Tom';
+let myName1: string = 'Tom';
+let myName2: string = `Tom`;
 
 
 
@@ -57,9 +42,6 @@ let unusable: void = undefined;
  * never类型: 是其他类型的子类型，代表从不会出现的值，
  * 意味着声明never类型的变量只能被never类型所赋值。
  */
-// 只能被never类型所赋值。
-let a: undefined;
-a = undefined;
 
 // 代表从不会出现的值，比如赋值一个自执行函数。（一般用不上，可以 any 替代）
 let b: never;

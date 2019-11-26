@@ -5,6 +5,7 @@
 let abc: [string, number, number] = ['guor', 25, 34];
 
 
+
 /**
  * 只能赋值或访问一个已知索引的元素。
  */
@@ -25,10 +26,8 @@ xcatliu = ['Xcat Liu', 25];
 
 
 /**
- * 添加越界的元素时，它的类型会被限制为元组中每个类型的联合类型。
+ * 添加越界的元素时，会被限制为联合类型。
  */
 let yue: [string, number];
 yue = ['guor', 25];
 // 新增的类型只能是 string / number
-yue.push('http://yue.com/');
-// yue.push(true); // 报错

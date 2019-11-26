@@ -97,11 +97,18 @@ function reverse(x: number | string): number | string {
 
 
 /**
- * 类型断言
- * 1.联合类型只能访问共有的属性或方法，所以要强行断言为指定类型。
- * 在变量前加上 <Type>
- * 断言为一个联合类型中不存在的类型是不允许的
+ * 
+ * 类型断言有两种形式：“尖括号”语法、as语法
  */
+
+let someValue: any = "this is a string";
+let strLength: number = (<string>someValue).length;
+
+
+let someValue: any = "this is a string";
+let strLength: number = (someValue as string).length;
+
+
 function getLength(something: string | number): number {
   if ((<string>something).length) {
     return (<string>something).length;
@@ -109,3 +116,6 @@ function getLength(something: string | number): number {
     return something.toString().length;
   }
 }
+
+
+
