@@ -6,9 +6,9 @@
 
 
 /**
- * 定义: interface
+ * interface
  */
-// 定义接口
+// 定义一个FullName接口
 interface FullName {
   firstName: string;
   lastName: string;
