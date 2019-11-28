@@ -27,7 +27,9 @@ let myName2: string = `Tom`;
 
 
 /**
- * void 表示没有任何返回值的函数。 void 只能将它赋值为 undefined 和 null。
+ * void 表示没有任何类型。 void 只能将它赋值为 undefined 和 null。
+ * 
+ * 常用于函数没有返回值。
  */
 function alertName(): void {
   alert('My name is Tom');
@@ -53,8 +55,11 @@ b = (() => {
 
 
 /**
- * null、undefined 是其他数据类型（never类型）的子类型。
- *
+ * null、undefined 是所有数据类型的子类型，也就是赋值给所有的类型都可以。
+ * 
+ * 常用于：比如在vue中初始化变量和常量，只知道类型不知道具体值的时候。
+ * 
+ * 但：
  * undefined 只能被赋值为 undefined
  * null 只能被赋值为 null
  */
@@ -65,7 +70,8 @@ let n: null = null;
 
 /**
  * Any 允许被赋值为任意类型。
- * 在任意值上访问任何属性和方法都是允许的
+ * 
+ * 当你不知道是什么类型的时候就给它赋 any
  */
 let myFavoriteNumber: any = 'seven';
 myFavoriteNumber = 7;
