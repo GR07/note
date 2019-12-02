@@ -27,9 +27,9 @@ let myName2: string = `Tom`;
 
 
 /**
- * void 表示没有任何类型。 void 只能将它赋值为 undefined 和 null。
+ * void 表示没有任何类型。 常用于函数没有返回值。
  * 
- * 常用于函数没有返回值。
+ * void 只能将它赋值为 undefined 和 null。
  */
 function alertName(): void {
   alert('My name is Tom');
@@ -41,11 +41,11 @@ let unusable: void = undefined;
 
 
 /**
- * never类型: 是其他类型的子类型，代表从不会出现的值，
- * 意味着声明never类型的变量只能被never类型所赋值。
+ * never类型: 是其他类型的子类型，可以赋值给任意类型，但是never类型的变量只能被never类型所赋值。
+ * 
  */
 
-// 代表从不会出现的值，比如赋值一个自执行函数。（一般用不上，可以 any 替代）
+// 代表从不会出现的值，比如没有返回值的函数（一般用不上，可以 void 替代）
 let b: never;
 b = (() => {
   throw new Error('错误');

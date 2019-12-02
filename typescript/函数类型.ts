@@ -96,26 +96,6 @@ function reverse(x: number | string): number | string {
 
 
 
-/**
- * 
- * 类型断言有两种形式：“尖括号”语法、as语法
- */
-
-let someValue: any = "this is a string";
-let strLength: number = (<string>someValue).length;
-
-
-let someValue: any = "this is a string";
-let strLength: number = (someValue as string).length;
-
-
-function getLength(something: string | number): number {
-  if ((<string>something).length) {
-    return (<string>something).length;
-  } else {
-    return something.toString().length;
-  }
-}
 
 
 
