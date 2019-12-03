@@ -13,8 +13,8 @@ interface FullName {
   firstName: string;
   lastName: string;
 }
+// 接口规定必须传入一个对象：{firstName: string; lastName: string}
 function printName (name: FullName) {
-  // 必须传入一个对象：firstName: string; lastName: string;
   console.log(`${name.firstName}${name.lastName}`)
 }
 const obj = {
@@ -22,9 +22,10 @@ const obj = {
   lastName: '三',
   age: 18
 }
-// 建议这种写法，但是对象的属性要严格按照接口的定义
-printName(obj) // 这样传参只要对象里包含接口定义的两个属性就可以
-printName({firstName: '张', lastName: '三'}) // 这样传参必须只有接口定义的两个属性
+// 建议这种写法，这种写法只要对象里包含接口定义的两个属性就可以
+printName(obj)
+// 这种写法必须只有接口定义的两个属性
+printName({firstName: '张', lastName: '三'})
 
 
 
@@ -35,11 +36,14 @@ printName({firstName: '张', lastName: '三'}) // 这样传参必须只有接口
 interface SearchFunc {
   (a: string, b: string): string;
 }
-let mySearch: SearchFunc;
-mySearch = function(a: string, b: string) {
+// 使用
+let mySearch: SearchFunc = function(a: string, b: string): string {
   return a + b;
 };
-
+// 上面的简写形式
+let mySearch2: SearchFunc = function(a, b) {
+  return a + b;
+};
 
 
 
@@ -47,14 +51,16 @@ mySearch = function(a: string, b: string) {
  * a 的形状必须和接口 Person 一致。
  * 属性数量也必须一致
  */
-// 对象
+
+// 对象（不常用）
 interface PerObj {
   [index: string]: string;
 }
 let a: PerObj = {
   name: 'Tom'
 };
-// 数组
+
+// 数组（不常用）
 interface PerArr {
   [index: number]: string;
 }
@@ -78,12 +84,12 @@ let b: Optional = {
 
 
 /**
- * 任意属性 接口允许有任意的属性
+ * 任意属性 除了接口定义的属性外，允许增加任意的属性
  * 注意：一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集
  */
 interface AtWill {
   name: string;
-  [propName: string]: any; // name的类型都必须是 any 的子集
+  [propName: string]: any; // name的类型必须是 any 的子集
 }
 let c: AtWill = {
   name: 'Tom',
@@ -91,18 +97,3 @@ let c: AtWill = {
 };
 
 
-
-/**
- * 只读属性 只可以在创建对象的时候给这个属性赋值
- */
-interface Read {
-  readonly id: number;
-  name: string;
-  age?: number;
-  [propName: string]: any;
-}
-let d: Read = {
-  id: 234,
-  name: 'Tom',
-  gender: 'male'
-};
