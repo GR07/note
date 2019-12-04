@@ -17,13 +17,17 @@ console.log(es6.sayHi()); // My name is Jack
 
 /**
  * ES6 中类的继承：必须使用 extends 和 super 关键字
- * super：表示调用父类的 constructor(name)
+ * 
+ * super(name)：表示调用父类的 constructor(name),
+ * 
+ * super(name): name 就是给父类constructor() 传递的参数
  */
 class Cat extends Aes6 {
   constructor(name) {
     super(name); // 表示：调用父类的 constructor(name)
   }
   sayHi() {
+    // super 就是父类
     return 'Meow, ' + super.sayHi() + this.name; // super.sayHi(): 调用父类的 sayHi()  this.name: 父类的name
   }
 }
@@ -71,16 +75,57 @@ class Animal {
 
 
 
+
 /**
- * TypeScript 中类的用法
+ * TypeScript 中类的用法 增加了4种修饰符
  *
  *
  * 在类的基础上增加 三种访问修饰符：
  *
- * public 修饰的属性或方法是公有的，可以在任何地方被访问到
- * private 修饰的属性或方法是私有的，不能在声明它的类的外部访问
- * protected 虽然是私有的但是可以在子类中访问
+ * public 属性或方法是公有的，实例化后可以被实例访问。
+ * 
+ * private 属性或方法是私有的，不能在声明它的类的外部访问，也不能被子类继承。
+ * 
+ * protected 虽然是私有的但是可以在子类中访问。
+ * 
+ * readonly 只读属性，必须在声明时或构造函数里初始化。
  */
+
+// 也增加了简洁写法
+class Person {
+  constructor(public str: string) {}
+}
+// 上面等于下面写法
+class Person {
+  public str: string
+  constructor(str: string) {
+    this.str = str
+  }
+}
+
+// 增加存取器 get set      作用：可以在访问或改变属性时 拦截做一些事情。
+
+// 注意：如果类里面只写了 get 没写 set ，那么这个属性就是只读属性（readonly）。
+// demo
+let password = 'github.com/gr07'
+class Person2 {
+  private _name: string
+  constructor(name) {
+    this._name = name
+  }
+  get name() {
+    return this._name
+  }
+  set name(newName) {
+    if (password && password === 'github.com/gr07') {
+      this._name = newName
+    }
+  }
+}
+let p = new Person2('guor')
+p.name // guor
+p.name = 'sssss'
+p.name // sssss
 
 
 

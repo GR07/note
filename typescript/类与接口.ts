@@ -18,7 +18,7 @@ class Door {
     this.name = name;
   }
 }
-// SecurityDoor 继承 Door类, 最后通过 implements关键字 实现 Alarm接口
+// SecurityDoor继承Door类, 最后使用 Alarm 接口
 class SecurityDoor extends Door implements Alarm {
   constructor (name: string) {
     super(name)
@@ -33,7 +33,7 @@ class Dog implements Alarm {
   constructor (name: string) {
     this.name = name;
   }
-  alert() {// 必须有 接口Alarm里面的 alert()方法
+  alert() {// 必须有 Alarm接口 里面的 alert()方法
     console.log('Car alert');
   }
 }
@@ -41,8 +41,9 @@ class Dog implements Alarm {
 
 
 /**
- * 实现多个接口
+ * 类同时使用多个接口
  */
+
 interface Alarm {
   alert();
 }
@@ -69,6 +70,7 @@ class Car implements Alarm, Light {
 /**
  * 接口继承接口
  */
+
 interface Alarm {
   alert();
 }
@@ -77,7 +79,8 @@ interface LightableAlarm extends Alarm {
   lightOn();
   lightOff();
 }
-// 类实现接口（继承后的接口）
+
+// 类使用继承后的接口
 class Bar implements LightableAlarm {
   name: string;
   constructor (name: string) {
@@ -97,9 +100,11 @@ const people = new Bar('李四')
 
 
 
+
 /**
  * 接口继承类
  */
+
 class Point {
   x: number;
   y: number;
