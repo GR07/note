@@ -55,21 +55,21 @@ console.log(b.name); // Jack
 
 /**
  * 静态属性 / 静态方法
- * 它们不需要实例化，而是直接通过类来调用。
- * 注意：静态方法内 不能访问类中的属性，但是可以访问静态属性
+ * 
+ * 它们只能通过类来调用，不可以通过实例化访问。
+ * 
+ * 注意：静态方法内 不能访问类中的属性，只可以访问静态属性
  */
 class Animal {
   static num = 42;
   str = 'aaaaa';
 
-  constructor() {
-    // ...
+  def() {
+    return Animal.num // 静态属性只能通过类来调用
   }
-  static isAnimal(a) {
-    return a instanceof Animal;
-  }
-  static abc(a) {
-    return this.str; // str undefined
+  // 静态方法内
+  static abc() {
+    return this.str; // str undefined 不能访问类中的属性
   }
 }
 
@@ -128,43 +128,9 @@ p.name = 'sssss'
 p.name // sssss
 
 
-
 /**
  * 多态：父类定义一个方法不实现，让子类去实现，每个子类都有不同的表现
  */
-
-
-
-
-/**
- * 抽象类: 我理解为多态的延伸
- *
- * 1.抽象类是不允许被实例化（它的存在是为了给子类提供基础方法）
- * 2.抽象类中的抽象方法必须被子类实现（可以不写具体实现）
- * （例如：大佬搭好了框架了标注了一个eat方法，说你们这些人在写页面的时候每个页面中都要有这个方法）
- */
-// 使用关键字 abstract
-// 抽象方法必须在抽象类中
-abstract class Abc {
-  name: string;
-  constructor (name: string) {
-    this.name = name;
-  }
-  abstract eat ():any;
-}
-class Def extends Abc {
-  constructor (name: any) {
-    super(name)
-  }
-  eat () { // 子类中必须实现 抽象类中的eat（抽象方法）
-    console.log(this.name);
-  }
-}
-var aaa = new Def('食物')
-aaa.eat();
-
-
-
 
 
 

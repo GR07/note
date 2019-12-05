@@ -37,7 +37,7 @@ function ab (): void {
 
 
 /**
- * 可选参数： 与接口的可选属性类似，但位置必须是最后一个参数
+ * 可选参数： 与接口的可选属性一样，但可选参数位置必须是最后一个参数
  */
 // 参数 b 可传可不传
 function buildName(a: string, b?: string) {
@@ -68,7 +68,7 @@ let jim = defaultName('Jim');
 /**
  * 剩余参数： ...rest 获取函数中的剩余参数
  */
-// 其实 ...item 表示剩余参数的数组
+// ...item 表示剩余参数的数组
 function push(array: any[], ...items: any[]) {
   items.forEach(function(item) {
     array.push(item);
