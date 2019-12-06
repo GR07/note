@@ -66,6 +66,10 @@ b = (() => {
 let u: undefined = undefined;
 let n: null = null;
 
+// 如果不想让 null、undefined 成为所有类型的子类，只要在编译时加上 --strictNullChecks
+
+// tsc demo01.ts --strictNullChecks
+
 
 
 /**
@@ -88,6 +92,13 @@ anyThing.setName('Jerry');
 let myFavorite: string | number;
 myFavorite = 'seven';
 myFavorite = 7;
+
+// 运用到参数中
+function teg(value: number | string): any {
+  if (typeof value === "number") { // do something }
+  if (typeof value === "string") { // do something }
+  // do something
+}
 
 
 

@@ -1,8 +1,10 @@
 /**
- * 泛型：指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型。
+ * 泛型：就是考虑组件的重用性，不止兼容现在的类型，也要考虑到未来的类型。
+ * 
+ * 指在定义的时候，不指定具体的类型，而在使用的时候再指定类型。
+ * 
  * 解决：类、接口、方法的复用性，以及对不特定数据类型的支持。
  */
-
 
 
 
@@ -18,14 +20,23 @@ function f(value: any):any {
 
 
 /**
- * 使用泛型：期望的是   输出的类型 = 传入的类型
+ * 使用泛型：期望的是   输出的类型 = 传入的类型。
+ * 
+ * 调用的时候，最好也要指定出具体类型（更规范一些）。
  */
+
 function d<T>(value: T):T {
   return value;
 }
 d<number>(123);
 d<string>('abs');
 
+
+function c<T>(value: T[]):T[] {
+  console.log(value.length)
+  return value;
+}
+c<number>([1, 2, 3]);
 
 
 
@@ -63,71 +74,34 @@ swap([7, 'seven']); // ['seven', 7]
 
 
 /**
- * 泛型类
+ * 泛型类：使用泛型的类
+ * 
+ * 类有两部分：静态部分、实例部分
+ * 
+ * 泛型只能使用在实例部分
  */
 class MinClass<T> {
-  public list:T[] = [];
-  add(value: T): void {
-    this.list.push(value);
-  }
-  min(): T {
-    let minNum = this.list[0];
-    for (let i = 0; i < this.list.length; i++) {
-      if (minNum > this.list[i]) {
-        minNum = this.list[i];
-      }
-    }
-    return minNum;
+  zeroValue: T
+  add(num: T): T {
+    return num
   }
 }
-const m = new MinClass<number>() // 实例化时指定类的T类型是 number
-m.add(1);
-m.add(2);
-m.add(3);
-
+const m = new MinClass<number>() // 指定类的T类型是 number
+m.add(1) // 只能传入number类型
 
 
 
 /**
- * 类作为参数，约束传入数据类型
- * 缺点：如果传入参数类型不一致时候，就要修改 user: User
+ * 通过泛型继承接口 来约束传值
  */
-class Mysq {
-  add (user: User): boolean {
-    console.log(user);
-    return true;
-  }
+interface Len {
+  length: number
 }
-class User {
-  use: string | undefined;
-  pas: string | undefined;
+function getNum<T extends Len>(num: T): T {
+  console.log(num.length)
+  return num
 }
-const u = new User();
-u.use = 'zhangsan';
-u.pas = '123';
-const db = new Mysq();
-db.add(u);
-
-// class User {
-//   use: string | undefined;
-//   pas: string | undefined;
-// }
-// const u = new User();
-// u.use = 'zhangsan';
-// u.pas = '123';
-
-// 以上也可以写成
-
-// class User {
-//   use: string | undefined;
-//   pas: string | undefined;
-//    constructor (params: {use: string | undefined, pas: string | undefined}) {
-//      this.use = params.use;
-//      this.pas = params.pas;
-//    }
-// }
-// const u = new User({use: 'zhangsan', pas: '123'});
-
+getNum('asd') // 传入的值必须有length属性
 
 
 
