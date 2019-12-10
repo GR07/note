@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>虚拟DOM的实现</title>
+</head>
+<body>
+  <script>
+    /**
+     * 首先DOM是什么：DOM是浏览器中的概念，用JS对象表示页面上的元素，并提供了操作DOM对象的API。
+     * 
+     * 虚拟DOM是什么：写框架的人手动用JS对象模拟页面上的DOM和嵌套。
+     * 
+     * 
+     * 虚拟DOM存在的目的：可以更高效的更新DOM。
+     * 
+    */
+
+
+
+
+    /**
+     * 高效的更新DOM的原理：更新的时候对比浏览器中新旧两颗DOM树，标记需要更新的部分。
+     * 
+     * 又因为我们没有api可以拿到浏览器中的DOM树，所以需要我们手动用JS对象模拟DOM树的嵌套关系（这就是虚拟DOM），大概如下所示。
+    */
+
+   // 用js对象模拟DOM树的嵌套关系（这就是虚拟DOM）虚拟DOM是以对象的形式存在的。
+   // <div title="a">哈哈<p index="b">我是p标签</p></div>
+   const div = {
+      tagName: 'div',
+      attrs: {
+        title: 'a',
+      },
+      childrens: [
+        '哈哈',
+        {
+          tagName: 'p',
+          attrs: {
+            index: 'b'
+          },
+          childrens: [
+            '我是p标签'
+          ]
+        }
+      ]
+   }
+  </script>
+</body>
+</html>
