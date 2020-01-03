@@ -3,60 +3,71 @@
  */
 
 
-// 获取数组中的值
-
-let foo = ["one", "two", "three", "four"];
-// 变量的顺序与数组中对象顺序对应
-let [one, two, three] = foo;
-console.log(one); // "one"
-console.log(two); // "two"
-console.log(three); // "three"
 
 
-//如果你要忽略某些值，你可以按照下面的写法获取你想要的值
-let [first, , , last] = foo;
-console.log(first); // "one"
-console.log(last); // "four"
+// 对象解构
+let obj = {
+  a: 1,
+  b: [1, 2]
+}
+const { a, b } = obj
+console.log(a, b) //1  [1, 2]
 
 
-//你也可以这样写
-let a, b; //先声明变量
-
-[a, b] = [1, 2];
-console.log(a); // 1
-console.log(b); // 2
 
 
-// 也可以为变量设置一个默认值
-let a, b;
+// 函数中使用
+let props = {
+  a: 1,
+  b: 2
+}
+function test(value) {
+  console.log(value)
+}
+test({a=3, b=3} = props) // {a: 1, b: 2}
 
-[a = 5, b = 7] = [1];
-console.log(a); // 1
-console.log(b); // 7
 
 
-// 通过解构赋值可以方便的交换两个变量的值。
-let a = 1;
-let b = 3;
 
+
+// 数组解构
+let arr = [1, 2, 3]
+
+//解构前2个元素
+const [a, b] = arr
+console.log(a,b) //1 2
+
+//解构中间的元素
+const [, b,] = arr
+console.log(b) // 2
+
+
+
+
+
+// 解构赋值，还可以调换2个变量的值
+let a = 1, b = 2;
 [a, b] = [b, a];
-console.log(a); // 3
-console.log(b); // 1
+console.log(a, b); // 2 1 
+
+
+
+
+// 克隆arr数组
+let arr = [1, 2, 3, 4];
+let [...a] = arr;
+console.log(a) //[1,2,3,4] 这种做法就是克隆arr数组。
 
 
 
 
 
-
-
-// 获取对象中的值
-const student = {
-  name:'Ming',
-  age:'18',
-  city:'Shanghai'  
+// 解构参数 常用到
+function Ajax(url, options) {
+  const {timeout = 0, jsonp = true} = options // 给option的参数设置了默认值 防止没有传参导致的报错
+  console.log(url, timeout, jsonp)
 };
-
-const {name, age, city} = student;
-console.log(name); // "Ming"
-console.log(age); // "18"
-console.log(city); // "Shanghai"
+Ajax('baidu.com', {
+  timeout: 1000,
+  jsonp: false
+}) // "baidu.com" 1000 false
