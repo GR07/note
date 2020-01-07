@@ -1,10 +1,35 @@
 /**
  * Promise 是异步编程的一种解决方案，用链式调用替代回调函数（callback）。
+ * 
+ * 点击、激活焦点、失去焦点、ajax请求数据，这些都属于异步编程。
  */
 
   
 
-// Promise的all方法提供了并行执行异步操作的能力，接收一个数组参数，并且在所有异步操作执行完后才执行回调。
+// Promise构造函数只有一个参数，该参数是一个函数，被称作执行器，执行器有2个参数，分别是resolve()和reject()
+// Promise实例只能通过resolve或者reject函数来返回，并且使用then()或者catch()获取，不能在new Promise里面直接return，这样是获取不到Promise返回值的。
+new Promise(function(resolve, reject) {
+  setTimeout(() => resolve(5), 0)
+}).then(v => console.log(v)) // 5
+
+
+
+// Promise链式调用
+// then里面必须return，后面的then才可以接收到。
+new Promise(function(resolve, reject) {
+  try {
+    resolve(5)
+  } catch (error) {
+    reject('It was my wrong!!!')
+  }
+}).then(s => s * s).then(s2 => console.log(s2)).then(() => console.log('end'))
+// 25  "end"
+
+
+
+
+
+// Promise的all方法提供了并行执行异步操作的能力，必须等所有异步操作执行完后才执行回调。
 
 let Promise1 = new Promise(function(resolve, reject){})
 let Promise2 = new Promise(function(resolve, reject){})
@@ -20,28 +45,8 @@ p.then(funciton(){
 
 
 
-// Promise的race用法：只要有一个 promise 成功了 就执行回调。
+// Promise的race用法：只要有一个 promise 成功了 就执行回调，其他的promise停止。
 
- //请求某个图片资源
- function requestImg(){
-  var p = new Promise((resolve, reject) => {
-      var img = new Image();
-      img.onload = function(){
-          resolve(img);
-      }
-      img.src = '图片的路径';
-  });
-  return p;
-}
-//延时函数，用于给请求计时
-function timeout(){
-  var p = new Promise((resolve, reject) => {
-      setTimeout(() => {
-          reject('图片请求超时');
-      }, 5000);
-  });
-  return p;
-}
 // 如果 requestImg()成功了就执行then，timeout()成功了执行catch
 Promise.race([requestImg(), timeout()]).then((data) =>{
   console.log(data);
