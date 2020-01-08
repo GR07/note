@@ -10,18 +10,24 @@
     // 共同点：都是保存在浏览器端本地存储，并且是同源的
 
 
-    // 是否在HTTP请求中携带给服务器并返回
-    // cookie始终在同源的http请求中携带（即使不需要），即cookie在浏览器和服务器间来回传递。
+    // 是否参与服务器端的通信
+    // cookie始终在同源的http请求中携带（即使不需要），cookie在浏览器和服务器间来回传递。
     // sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
     // cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下，存储的大小只有4K左右。
 
 
     // 有效期
-    // sessionStorage：仅在当前浏览器窗口关闭前有效，
-    // localStorage：始终有效，窗口或浏览器关闭也一直保存
-    // cookie设置过期时间之前一直有效，如果不设置关闭浏览器后失效。
+    // sessionStorage：在当前窗口会话下有效，关闭页面或者浏览器时会被清空。
+    // localStorage：永久有效，除非你进行手动删除。
+    // cookie：在设置的有效之前有效，当超过有效期便会失效。如果不设置关闭浏览器后失效。
 
 
+    // 大小
+    // cookie：4K
+    // localStorage：5M
+    // sessionStorage：5M
+
+    
     // 同源窗口中是否共享
     // localStorage、cookie 在所有同源窗口中都是共享的，sessionStorage不共享。（key：同源窗口都会共享，并且不会失效，不管窗口或者浏览器关闭与否都会始终生效）
 
