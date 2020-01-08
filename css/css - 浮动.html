@@ -48,16 +48,19 @@
     引入了zoom以支持IE6/7
     同时加入:before以解决现代浏览器上边距折叠的问题*/
     
-    .box:after {
-      content: "";
+    .clearfix:before,
+    .clearfix:after {
       display: table;
+      content: '';
+    }
+    
+    .clearfix:after {
       clear: both;
     }
-      
-    &:after
-      content: "";
-      display: table;
-      clear: both;
+
+    .clearfix {
+      *zoom: 1;
+    }
 
 
 
