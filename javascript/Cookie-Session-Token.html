@@ -7,6 +7,52 @@
 <body>
   <script>
 
+
+    /**
+     * 常见的前后端鉴权方式：
+     * 
+     * 1.Session-Cookie
+     * 
+     * 2.Token 验证
+    */
+
+
+
+    
+   常见问题：
+
+   使用 cookie 时需要考虑的问题：
+   
+   1.cookie 无法跨域
+
+
+
+
+   使用 session 时需要考虑的问题：
+
+   1.将 session 存储在服务器里面，当用户同时在线量比较多时，这些 session 会占据较多的内存，需要在服务端定期的去清理过期的 session。
+
+   2.sessionId 是存储在 cookie 中的，假如浏览器禁止 cookie 或不支持 cookie 怎么办？ 
+   一般会把 sessionId 跟在 url 参数后面即重写 url，所以 session 不一定非得需要靠 cookie 实现。
+
+   3.移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token。
+
+
+
+   使用 token 时需要考虑的问题：
+
+   1.token 完全由应用管理，所以它可以避开同源策略
+
+   2.token 可以避免 CSRF 攻击(因为不需要 cookie 了)
+
+   3.移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
+
+
+
+
+
+
+
     /**
      * Cookie: 仅仅是浏览器实现的一种数据存储功能。
      * 
@@ -21,10 +67,6 @@
 
     /**
      * Session：是基于 cookie 实现的，session 存储在服务器端，sessionId 会被存储到客户端的cookie 中。
-     * 
-     * 客户端每次向服务器发请求的时候，都带上cookie，sessionId就在cookie中 。
-     * 
-     * 服务器使用session把用户的信息临时保存在了服务器上，用户离开网站后session会被销毁。
      */
 
     // session 认证流程：
@@ -35,9 +77,26 @@
 
     // 浏览器接收到服务器返回的 SessionID 信息后，会将此信息存入到本地 Cookie 中。
 
-    // 当用户第二次访问服务器的时候，自动将 Cookie 信息也发送给服务端，服务端会从 Cookie 中获取 SessionID，再根据 SessionID 查找对应的 Session 信息。
+    // 当用户第二次访问服务器的时候，自动将 Cookie 信息也发送给服务端，服务端会从 Cookie 中获取 SessionID，再根据 SessionID 查找对应的 Session 信息，
+    // 如果没有找到说明用户没有登录或者登录失效，
 
-    // SessionID 是连接 Cookie 和 Session 的一道桥梁，大部分系统也是根据此原理来验证用户登录状态。
+
+    // 所以SessionID 是连接 Cookie 和 Session 的一道桥梁，大部分系统也是根据此原理来验证用户登录状态。
+
+
+
+
+
+    // Cookie 和 Session 的区别
+
+    // 安全性： Session 比 Cookie 安全，Session 是存储在服务器端的，Cookie 是存储在客户端的。
+
+    // 存取值的类型：Cookie 只支持存字符串数据，Session 可以存任意数据类型。
+
+    // 有效期：Cookie 可设置为长时间保持，比如我们经常使用的默认登录功能，Session 客户端关闭（默认情况下）或者 Session 超时都会失效。
+
+    // 存储大小：Cookie 保存的数据不能超过 4K，Session 可存储数据远高于 Cookie，但是当访问量过多，会占用过多的服务器资源。
+
 
 
 
@@ -68,10 +127,15 @@
      * 用解析 token 的计算时间换取 session 的存储空间，
      * 从而减轻服务器的压力，减少频繁的查询数据库，
      * token 完全由应用管理，所以它可以避开同源策略。
+     * 移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token。
      *
      *
      *
      */
+
+     // 如果你的用户数据可能需要和第三方共享，或者允许第三方调用 API 接口，用 Token 。
+
+     // 如果永远只是自己的网站，自己的 App，用什么就无所谓了。
 
 
 
