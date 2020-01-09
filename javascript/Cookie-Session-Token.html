@@ -19,33 +19,33 @@
 
 
     
-   常见问题：
+  //  常见问题：
 
-   使用 cookie 时需要考虑的问题：
+  //  使用 cookie 时需要考虑的问题：
    
-   1.cookie 无法跨域
+  //  1.cookie 无法跨域
 
 
 
 
-   使用 session 时需要考虑的问题：
+  //  使用 session 时需要考虑的问题：
 
-   1.将 session 存储在服务器里面，当用户同时在线量比较多时，这些 session 会占据较多的内存，需要在服务端定期的去清理过期的 session。
+  //  1.将 session 存储在服务器里面，当用户同时在线量比较多时，这些 session 会占据较多的内存，需要在服务端定期的去清理过期的 session。
 
-   2.sessionId 是存储在 cookie 中的，假如浏览器禁止 cookie 或不支持 cookie 怎么办？ 
-   一般会把 sessionId 跟在 url 参数后面即重写 url，所以 session 不一定非得需要靠 cookie 实现。
+  //  2.sessionId 是存储在 cookie 中的，假如浏览器禁止 cookie 或不支持 cookie 怎么办？ 
+  //  一般会把 sessionId 跟在 url 参数后面即重写 url，所以 session 不一定非得需要靠 cookie 实现。
 
-   3.移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token。
+  //  3.移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token。
 
 
 
-   使用 token 时需要考虑的问题：
+  //  使用 token 时需要考虑的问题：
 
-   1.token 完全由应用管理，所以它可以避开同源策略
+  //  1.token 完全由应用管理，所以它可以避开同源策略
 
-   2.token 可以避免 CSRF 攻击(因为不需要 cookie 了)
+  //  2.token 可以避免 CSRF 攻击(因为不需要 cookie 了)
 
-   3.移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
+  //  3.移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token
 
 
 
