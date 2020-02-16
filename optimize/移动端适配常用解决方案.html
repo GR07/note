@@ -5,6 +5,10 @@
   <title>响应式布局常用解决方案</title>
   <style>
 
+
+    共六种方案：
+
+
     /*像素是什么：*/
 
     /*像素是网页布局的基础，一个像素表示了计算机屏幕所能显示的最小区域，像素分为两种类型：css像素和物理像素。*/
@@ -28,6 +32,7 @@
     
 
 
+    一.
     /*viewport*/
 
     /*在移动端的布局中，我们可以通过viewport元标签来控制布局*/
@@ -59,6 +64,7 @@
 
 
 
+    二.
     /*媒体查询实现*/
 
     /*针对不同分辨率的设备设置不同样式*/
@@ -90,6 +96,7 @@
     
 
 
+    三.
     /*百分比实现*/
 
     /*缺点*/
@@ -99,17 +106,36 @@
 
 
 
+    四.
     /*rem解决方案*/
 
-    /*rem单位无论嵌套层级如何，都只相对于浏览器的根元素（HTML元素）的font-size。默认情况下，html元素的font-size为16px，所以1 rem = 16px*/
-
-    /*为了计算方便，通常可以将html的font-size设置成：html{ font-size: 62.5% }，这种情况下：1 rem = 10px*/
+    /*
     
-    /*缺点：在响应式布局中，必须通过js来动态控制根元素font-size的大小。
-    也就是说css样式和js代码有一定的耦合性。
-    且必须将改变font-size的代码放在css样式之前。*/
+      1rem等于浏览器的根元素（HTML元素）的font-size大小。
+
+      移动端一般从iphone5适配(width: 320px) ，默认情况下，html元素的font-size为16px，所以 1rem = 16px。
+
+      原理：通过js动态改变html的font-size。
+
+      实现：三行代码
+
+      let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth; // 获取屏幕宽度（body.适配部分浏览器）
+      let htmlDom = document.getElementsByTagName('html')[0]; // 获取html圆度
+      htmlDom.style.fontSize = `${htmlWidth / 20}px` // 因为iphone5宽度320，要想得到16，所以除以20
+    
+    */
+
+    
+    /*
+
+      缺点：在响应式布局中，必须通过js来动态控制根元素font-size的大小。且必须将改变font-size的代码放在css样式之前。
+    
+    */
 
 
+
+
+    五.
     /*配置 postcss-pxtorem 自动转换px为rem*/
 
     /*使用插件把所有px自动转换为rem*/
@@ -131,6 +157,7 @@
 
 
 
+    六.
     /*vw/vh来实现*/
 
     /*任意层级元素，在使用vw单位的情况下，1vw都等于视图宽度的百分之一。*/
