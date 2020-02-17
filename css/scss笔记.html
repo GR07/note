@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+  <script>
+    /*
+      可以使用变量：
+
+      $nav-color: #F90;
+      nav {
+        $width: 100px;
+        width: $width;
+        color: $nav-color;
+      }
+
+      //编译后
+      nav {
+        width: 100px;
+        color: #F90;
+      }
+    
+    */
+
+
+
+
+    /*
+      变量之间引用：
+
+      $highlight-color: #F90;
+      $highlight-border: 1px solid $highlight-color;
+      .selected {
+        border: $highlight-border;
+      }
+
+      //编译后
+      .selected {
+        border: 1px solid #F90;
+      }
+  
+    */
+
+
+
+
+    /*
+      嵌套CSS规则：
+
+      #content {
+        article {
+          h1 { color: #333 }
+          p { margin-bottom: 1.4em }
+        }
+        aside { background-color: #EEE }
+      }
+
+      编译后
+      #content article h1 { color: #333 }
+      #content article p { margin-bottom: 1.4em }
+      #content aside { background-color: #EEE }
+    
+    */
+
+
+
+    /*
+      父选择器 &：
+
+      举例：
+      article a {
+        color: blue;
+        &:hover { color: red }
+      }
+
+      编译后
+      article a { color: blue }
+      article a:hover { color: red }
+    
+    
+    */
+
+
+
+
+    /*
+      群组选择器的嵌套：
+      
+
+      用css
+      .container h1, .container h2, .container h3 { margin-bottom: .8em }
+
+      用scss
+      .container {
+        h1, h2, h3 {margin-bottom: .8em}
+      }
+    
+    
+    */
+
+
+    /*
+    
+      （>）子元素选择器
+      （+）相邻兄弟选择器
+      （~）后续兄弟选择器
+    
+    */
+
+
+
+
+    /*
+      嵌套属性：
+
+      css
+      border-styleborder-widthborder-color
+
+      scss
+      nav {
+        border: {
+        style: solid;
+        width: 1px;
+        color: #ccc;
+        }
+      }
+    
+    
+    */
+
+
+
+
+    /*
+      导入SASS文件 即@import：
+
+      css的@import规则：读取到@import时才会去下载文件。（慢）
+      sass的@import规则：在生成css文件时就把相关文件导入进来。（快）
+
+
+      导入方式：
+      @import"sidebar" //后缀名可以省略
+
+
+      导入原生css方式：
+      css文件要改名为.scss后缀，即可直接导入了。
+
+
+    
+    */
+
+
+
+    /*
+      混合器@mixin：
+
+
+      如果需要大面积的样式复用：
+
+      创建：@mixin
+      @mixin rounded-corners {
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+      }
+      
+      使用：@include
+      notice {
+        background-color: green;
+        border: 2px solid #00aa00;
+        @include rounded-corners;
+      }
+
+
+      编译后：
+      .notice {
+        background-color: green;
+        border: 2px solid #00aa00;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+      }
+    
+    */
+
+
+
+    /*
+      给混合器传参：这种方式跟 function 很像
+
+      创建：
+      @mixin link-colors($normal, $hover, $visited) {
+        color: $normal;
+        &:hover { color: $hover; }
+        &:visited { color: $visited; }
+      }
+
+      使用：
+      a {
+        @include link-colors(blue, red, green);
+      }
+
+      编译后：
+      a { color: blue; }
+      a:hover { color: red; }
+      a:visited { color: green; }
+
+
+      为了防止参数顺序出错：
+      a {
+          @include link-colors(
+            $normal: blue,
+            $visited: green,
+            $hover: red
+        );
+      }
+
+    */
+
+
+    /*
+      选择器继承：@extend
+
+      创建：
+      .error {
+        border: 1px solid red;
+        background-color: #fdd;
+      }
+
+      使用：
+      .seriousError {
+        @extend .error;
+        border-width: 3px;
+      }
+
+      结果：
+      .seriousError将会继承.error定义的所有样式
+
+
+
+    */
+
+
+  </script>
+
+</head>
+<body>
+</body>
+</html>
