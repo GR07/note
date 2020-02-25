@@ -1,62 +1,32 @@
 /**
  * async 函数：
  * 
- * 定义一个异步函数，它会返回一个隐式的 Promise。
+ * 先说一下async的语法，它作为一个关键字放在函数前面，用于表示函数是一个异步函数。
+ * 异步函数也就是意味着这个函数的执行不会阻塞后面代码的执行。
  * 
- * 如果async函数中是return一个值，这个值就是Promise对象中resolve的值。
- * 
- * 如果async函数中是throw一个值，这个值就是Promise对象中reject的值。
- * 
- * 它总是与 await 一起使用的，并且 await 只能在 async 函数体内。
- * 
- * 存在意义：它的最大价值在于，可以使异步代码，在形式上，更接近于同步代码。
  * 
  */
 
 
-// async函数的写法
-async function imAsync(num) {
-  if (num > 0) {
-    return num // 这里相当于resolve(num)
-  } else {
-    throw num // 这里相当于reject(num)
-  }
+// 简单写一个async函数
+async function hello(){
+  return 'hello world';
 }
-// 执行
-imAsync(1).then(function (v) {
-  console.log(v); // 1
+
+// async异步函数返回的是一个promise对象，如果要获取到promise返回值，我们就应该使用.then方法。
+
+// 使用
+hello().then((v) => {
+  console.log(v); // 'hello world'
 });
-// 注意这里是catch
-imAsync(0).catch(function (v) {
-  console.log(v); // 0
-})
-
-
-// Promise的写法
-function imPromise(num) {
-  return new Promise(function (resolve, reject) {
-    if (num > 0) {
-      resolve(num);
-    } else {
-      reject(num);
-    }
-  })
-}
-
-imPromise(1).then(function (v) {
-  console.log(v); // 1
-})
-
-imPromise(0).then(function (v) {
-  console.log(v); // 0
-})
 
 
 
 /**
  * await：
  * 
- * await 是个运算符，用于组成表达式，它会阻塞后面的代码。
+ * 再来熟悉一下await关键字，await是等待的意思，那么它在等待什么呢？
+ * 其实它后面可以放任何表达式，不过我们更多放的是一个promise对象的表达式。
  * 
  * 会暂停当前async函数的执行，等await后面的Promise计算结果返回后，再继续往下执行async函数。
  * 
@@ -64,6 +34,23 @@ imPromise(0).then(function (v) {
  * 
  * 如果不是Promise，会得到一个表达式的运算结果，也不会阻塞。
  */
+
+// 新建promise
+function awaitMethod(num){
+  return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      resolve(2*num);
+    },2000)
+  })
+}
+// 使用
+async function test (){
+  let result = await awaitMethod(30);
+  console.log(result);
+}
+test() // 2秒钟之后控制台输出60
+
+
 
 
 

@@ -55,3 +55,39 @@ Promise.race([requestImg(), timeout()]).then((data) =>{
 });
 
 
+
+
+// 手写用promise封装ajax
+const ajaxPromise = (type, url, data) => {
+  const promise = new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(type, url, true)
+    xhr.onreadystatechange = () => {
+      if ( xhr.readyState === 4 && xhr.status=== 200) {
+        resolve(JSON.parse(xhr.responseText))
+      } else {
+        reject(xhr.status)
+      }
+    }
+    if (type === 'GET') {
+      xhr.send()
+    } else {
+      xhr.setRequestHeader('xxx-')
+      xhr.send(dataJs(data))
+    }
+  })  
+  function dataJs (data) {
+    const arr = [];
+    for (let key in data) {
+      arr.push(`${key}=${data[key]}`)
+    }
+    return arr.join('&');
+  }
+  return promise;
+}
+
+ajaxPromise('POST', 'github.com', {name: 'guor', age: '18'}).then((res) => {
+  console.log(res)
+}).catch((err) => {
+  console.log(err)
+})
