@@ -15,14 +15,38 @@
 
 
     /**
-     * computed: 当依赖的data中的属性发生改变时会调用，起到一个缓存的作用，所以性能更好。
+     * computed: 当依赖的数据发生改变时会调用，然后会更新view {{ }}, 起到一个缓存的作用，所以性能更好。
      */
+    // fullName不能在data中定义,只能放到view视图中
+    data: {
+      firstName: 'Foo',
+      lastName: 'Bar'
+    },
+    computed: {
+      fullName: function () {
+        return this.firstName + ' ' + this.lastName
+      }
+    }
 
 
     /**
      * watch: 监听data的数据发生变化时可以做一系列事情，可以支持异步操作。
      */
+      // first 如果改变了会打印新的first
+      data(){
+        return{
+          'first':2
+        }
+      },
+      watch:{
+        first(){
+          console.log(this.first)
+        }
+      },
 
+
+
+      
     // 三种方式分别实现：根据input的改变输出不同的数组。
     new Vue({
       el: "#app",
