@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+  <script>
+    // 原理:
+    // 采用数据劫持结合发布订阅的模式, 通过Object.defineProperty()对属性绑定 getter setter 方法,
+    // 当数据发生变化发布给订阅者 触发相应监听回调 更新视图
+  </script>
+</head>
+<body>
+  <input id="inp" />
+  <p id="p"></p>
+  <script>
+    // js实现简单的双向绑定
+    const obj = {};
+    const inp = document.getElementById('inp');
+    const p = document.getElementById('p');
+    Object.defineProperty(obj, 'txt', {
+      get () {
+        return obj.txt;
+      },
+      set (newValue) {
+        inp.value = newValue;
+        p.innerHTML = newValue;
+      }
+    })
+    inp.addEventListener('keyup', (event) => {
+      obj.txt = event.target.value;
+    })
+  </script>
+</body>
+</html>
