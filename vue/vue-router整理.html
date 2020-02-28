@@ -359,6 +359,7 @@
     import('./Foo.vue') // 返回 Promise
     // 结合起来就是定义一个能够被 Webpack 自动代码分割的异步组件：
     const Foo = () => import('./Foo.vue')
+    
     // 在路由配置中什么都不需要改变，只需要像往常一样使用 Foo
     routes: [
       { path: '/foo', component: Foo }
