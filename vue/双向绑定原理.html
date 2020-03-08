@@ -13,24 +13,24 @@
   </script>
 </head>
 <body>
-  <input id="inp" />
-  <p id="p"></p>
+  <input id="input"/>
+  <div id="div"></div>
   <script>
     // js实现简单的双向绑定
     const obj = {};
-    const inp = document.getElementById('inp');
-    const p = document.getElementById('p');
-    Object.defineProperty(obj, 'txt', {
+    const input = document.getElementById('input');
+    const div = document.getElementById('div');
+    Object.defineProperty(obj, 'name', {
       get () {
-        return obj.txt;
+        return obj.name;
       },
       set (newValue) {
-        inp.value = newValue;
-        p.innerHTML = newValue;
+        input.value = newValue;
+        div.innerHTML = newValue;
       }
     })
-    inp.addEventListener('keyup', (event) => {
-      obj.txt = event.target.value;
+    input.addEventListener('keyup', (event) => {
+      obj.name = event.target.value;
     })
   </script>
 </body>
