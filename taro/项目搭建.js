@@ -18,6 +18,9 @@
  * 
  * 
  * 注意: 如果小程序有修改不要直接修改 dist 目录, 一定要修改整个 taro 项目, 这就是 taro 精髓, 一套代码维护多个项目
+ * 
+ * 
+ * 更新到最新版本: taro update self
  */
 
 
@@ -36,3 +39,4 @@
   * project.config类似vue.config
   * 
   */
+
