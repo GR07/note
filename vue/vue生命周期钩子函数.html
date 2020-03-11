@@ -67,6 +67,25 @@
     // 这个时候created钩子就不会被重复调用了，如果我们的子组件需要在每次加载的时候进行某些操作，可以使用activated钩子触发。
 
 
+
+
+    // 父子组件生命周期顺序
+
+    父组件beforeCreated
+
+    父组件created
+
+    父组件beforeMounted
+
+    子组件beforeCreated
+
+    子组件created
+
+    子组件beforeMounted
+
+    子组件mounted
+    
+    父组件mounted
   </script>
 </body>
 </html>
