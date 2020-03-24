@@ -21,7 +21,8 @@
     this.$route // 访问当前路由的信息
     // 类似操作 history 对象
     this.$router.go(-1)
-    this.$router.push('/')
+    this.$router.push('/') // 向 history 添加一条历史记录
+    this.$router.replace() // 不会有记录
     // 对应的路由匹配成功，将自动设置 class 属性值 .router-link-active。
 
 
