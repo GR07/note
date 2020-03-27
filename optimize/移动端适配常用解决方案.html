@@ -38,6 +38,9 @@
     /*在移动端的布局中，我们可以通过viewport元标签来控制布局*/
     <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;">
 
+
+    user-scalable 设置为 no 可以解决移动端点击事件延迟问题
+
     /*
     width 正整数 定义布局视口的宽度，单位为像素。
     在移动端布局时，在meta标签中我们会将width设置称为device-width，device-width一般是表示分辨率的宽，通过width=device-width的设置我们就将布局视口设置成了理想的视口。
@@ -165,6 +168,35 @@
     /*也可以通过postcss的相应插件把px转vw*/
 
     /*缺点：ie9-11不支持vmin和vmax*/
+
+
+
+
+
+    经典1px问题：
+
+    div {
+        height:1px;
+        background:#000;
+        -webkit-transform: scaleY(0.5);
+        -webkit-transform-origin:00;
+        overflow: hidden;
+    }
+
+    /* 2倍屏 */
+    @media only screen and (-webkit-min-device-pixel-ratio: 2.0) {
+        .border-bottom::after {
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+        }
+    }
+    /* 3倍屏 */
+    @media only screen and (-webkit-min-device-pixel-ratio: 3.0) {
+        .border-bottom::after {
+            -webkit-transform: scaleY(0.33);
+            transform: scaleY(0.33);
+        }
+    }
 
   </style>
 </head>
