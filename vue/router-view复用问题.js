@@ -10,10 +10,11 @@
  */
 
 // key
-<router-view :key="key"></router-view>
 
+<router-view :key="key"></router-view>
+ 
 computed: {
-    key() {
-        return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
-    }
- }
+  key() {
+    return this.$route.name !== undefined? this.$route.name +new Date(): this.$route +new Date()
+  }
+}
