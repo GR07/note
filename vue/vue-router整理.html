@@ -72,28 +72,6 @@
 
 
 
-    // 监听路由参数的变化
-
-    // 当路由参数发生改变（/foo/:id 形式），
-    // 组件实例会被复用，
-    // 所以生命周期钩子不会再被调用。
-
-    // 解决方案：
-      // 1. watch监听 $route 对象
-      watch: {
-        '$route' (to, from) {
-          // 对路由变化作出响应...
-        }
-      }
-
-      // 2.beforeRouteUpdate 导航守卫
-      beforeRouteUpdate (to, from, next) {
-        // doSomething
-        // 最后一定要 next()
-        next()
-      }
-
-
     // 匹配任意路径 通配符 *
     {
       // 会匹配以 `/user-` 开头的任意路径

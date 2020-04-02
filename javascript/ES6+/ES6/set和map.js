@@ -6,11 +6,12 @@
 
 
 
-// Set像是数组，Set集合的特点是没有key，没有下标，只有size和原型以及一个可迭代的不重复元素的类数组。
+// Set 是一组 key 的集合，但不存储 value 由于 key 不能重复，所以，在 Set 中，没有重复的 key 
 
+// 初始化 set 需要提供一个 Array 作为输入，或者直接创建一个空 Set：
 let set = new Set();
 set.add('haha');
-console.log(set.size); //1
+console.log(set.size); // 1
 
 Set.prototype.size
 // 返回Set对象的值的个数。
@@ -63,10 +64,14 @@ console.log([...set]) // [1, 'haha', null]
 // Map像是对象，对象中的key只支持字符串，Map更加强大，支持所有数据类型。
 
 
-// Map使用set()添加key value，在Set集合中，使用add()添加value，没有key。
-let map = new Map();
-map.set('name', 'haha');
-map.set('id', 10);
-console.log(map)
-console.log(map.get('id')) // 10
-console.log(map.get('name')) // "haha"
+// Map初始化传入一个二维数组
+let m = new Map([['guor', 28]]); // 空Map
+m.set('Adam', 67); // 添加新的key-value
+m.set('Bob', 59);
+m.has('Adam'); // 是否存在key 'Adam': true
+m.get('Adam'); // 67
+m.delete('Adam'); // 删除key 'Adam'
+m.get('Adam'); // undefined
+console.log(m)
+
+// 多次对一个key放入value，后面的值会把前面的值冲掉
