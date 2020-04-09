@@ -14,11 +14,21 @@ Vue.nextTick(function(){
   console.log(vm.$el.textContent) //可以得到'changed'
 })
 
-// 更优雅的写法
-async fnc() {
-  await this.$nextTick()
-  console.log(`dom更新后执行`)
-}
+
+
+// 箭头函数 or 普通函数
+
+// 全局方法 nextTick 函数接受两个参数：回调函数 / this指向
+
+// 因为 Vue 实例方法 $nextTick 做了进一步封装，把 this 设置为了当前 Vue 实例，所以实例里 箭头函数 普通函数 this 都指向实例。
+
+
+
+// 2.1版本nextTick的实现做了对 promise 的支持 nextTick() 如果没有提供回调且在支持 Promise 的环境中，优先是返回一个 Promise；
+
+
+
+// 所以性能没有极致要求 也可以用 async await 形式要优雅些。
 
 
 // 应用场景：需要在视图更新之后，基于新的视图进行操作。
