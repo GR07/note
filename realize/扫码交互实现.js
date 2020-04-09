@@ -1,6 +1,6 @@
-// 1.打开二维码之前，先构建个对象给后端发请求，等待返回结果是一个 "weixin://wxpay/bizpayurl?pr=5NqK8P3"
+// 1.打开二维码之前，先构建个对象给后端发请求，等待返回结果是一个地址 例如： "weixin://wxpay/bizpayurl?pr=5NqK8P3"
 
-// 2.然后用QRCode.toCanvas( ) 传入 url 和 dom 创建二维码
+// 2.然后用QRCode.toCanvas() 传入 url 和 绑定的dom 创建二维码。
 
 // 3.创建完成后，就会用定时器每隔2秒请求一次后端，后端返回一个标识，目的是根据标识确认用户是否扫码成功
 

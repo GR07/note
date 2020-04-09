@@ -3,18 +3,22 @@
  */
 
 
-//改变数据
+// 改变数据
 vm.message = 'changed'
 
-//想要立即使用更新后的DOM。这样不行，因为设置message后DOM还没有更新
+// 想要立即使用更新后的DOM。这样不行，因为设置message后DOM还没有更新
 console.log(vm.$el.textContent) // 并不会得到'changed'
 
-//这样可以，nextTick里面的代码会在DOM更新后执行
+// 这样可以，nextTick里面的代码会在DOM更新后执行
 Vue.nextTick(function(){
   console.log(vm.$el.textContent) //可以得到'changed'
 })
 
-
+// 更优雅的写法
+async fnc() {
+  await this.$nextTick()
+  console.log(`dom更新后执行`)
+}
 
 
 // 应用场景：需要在视图更新之后，基于新的视图进行操作。
