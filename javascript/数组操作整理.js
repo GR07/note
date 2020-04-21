@@ -24,6 +24,12 @@ let newArr = [1,2,3,4,5].map(item => { if(item > 3) return item })
 
 
 
+for (let item of arr) {}
+
+// 常用于数组，支持解构。
+
+for ()
+
 
 filter()
 
