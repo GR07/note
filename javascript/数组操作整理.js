@@ -135,3 +135,21 @@ includes()
 // 返回布尔值表示某个数组是否包含给定的值
 
 // indexOf()它会返回 -1 和元素的位置来表示包含的意思 不够语义化 也不能判断是否包含NaN元素
+
+
+
+
+常用实战:
+
+// 数组转对象 { CN : "China", US : "USA" }
+const calendarTypeOptions = [
+  { key: 'CN', display_name: 'China' },
+  { key: 'US', display_name: 'USA' },
+  { key: 'JP', display_name: 'Japan' },
+  { key: 'EU', display_name: 'Eurozone' }
+]
+
+const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
+  acc[cur.key] = cur.display_name
+  return acc
+}, {})
