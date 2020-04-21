@@ -31,7 +31,7 @@ filter()
 
 // 每一项 item 是调用函数筛选出来符合条件的结果
 
-let newArr = [1,2,3,4,5].filter(item =>{
+let newArr = [1,2,3,4,5].filter(item => {
   if(item > 3) return item 
 })
 //  => [4,5]
