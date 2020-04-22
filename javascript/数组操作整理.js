@@ -28,7 +28,6 @@ for (let item of arr) {}
 
 // 常用于数组，支持解构。
 
-for ()
 
 
 filter()
