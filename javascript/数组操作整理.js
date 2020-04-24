@@ -140,6 +140,7 @@ includes()
 
 常用实战:
 
+
 // 数组转对象 { CN : "China", US : "USA" }
 const calendarTypeOptions = [
   { key: 'CN', display_name: 'China' },
@@ -152,3 +153,11 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
   acc[cur.key] = cur.display_name
   return acc
 }, {})
+
+
+
+// 数组转数组对象 [ { "value": "value:Alabama", "label": "label:Alabama" }, { "value": "value:Alaska", "label": "label:Alaska" } ]
+const states = ["Alabama", "Alaska"],
+this.list = this.states.map(item => {
+  return { value: `value:${item}`, label: `label:${item}` };
+});
