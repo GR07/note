@@ -25,11 +25,28 @@
     this.$router.replace() // 不会有记录
     // 对应的路由匹配成功，将自动设置 class 属性值 .router-link-active。
 
+    
+    // 语法：实际上它们是效仿 window.history API 
+    
+    this.$router.push('home') // 参数类型字符串
+    
+    this.$router.push({ path: 'home' }) // 参数类型对象
+
+    this.$router.push({ name: 'user', params: { userId: '123' }}) // 命名的路由
+
+    this.$router.push({ path: 'register', query: { plan: 'private' }}) // 带查询参数，变成 /register?plan=private
+
+    this.router.go(1) // 在浏览器记录中前进一步，等同于 history.forward()
+
+    this.router.go(-1) // 后退一步记录，等同于 history.back()
+
+    this.router.go(3) // 前进 3 步记录
+
+    this.router.go(-100) / this.router.go(100) // 如果 history 记录不够用，那就默默地失败呗
+    
 
 
-
-
-    // 基础使用4个步骤：
+    // 路由的基础使用：4个步骤
 
     // 1. 定义组件。
     const Foo = { template: '<div>foo</div>' }
@@ -53,38 +70,7 @@
       router
     }).$mount('#app')
 
-    
-
-
-
-
-    // 动态路由 ( 针对 ID 各不相同的用户传值 )
-    
-    const routes = [
-      { path: '/foo/:id', component: Foo },
-      { path: '/bar/:id', component: Bar }
-    ]
-    this.$route.params.id; // 获取的就是 路由中 :id 部分
-
-    /user/:username/post/:post_id // 规则模式
-    /user/evan/post/123 // 可以匹配的路径
-    this.$route.params  // { username: 'evan', post_id: '123' }
-
-
-
-    // 匹配任意路径 通配符 *
-    {
-      // 会匹配以 `/user-` 开头的任意路径
-      path: '/user-*'
-    }
-    // 使用通配符时，$route.params 内会自动添加一个名为 pathMatch 参数
-
-    // 路由设置中 { path: '/user-*' }
-    this.$router.push('/user-admin')
-    this.$route.params.pathMatch // 'admin'
-
-
-    // 嵌套子路由：
+    // 5. 嵌套子路由
     routes: [
       { 
         path: '/user/:id', 
@@ -99,60 +85,8 @@
         ]
       }
     ]
-
-
-
-
-
-    // 编程式的导航:
-
-    // 声明式 <router-link :to="...">
-    // 编程式 router.push(location, onComplete?, onAbort?) 后2参数导航成功回调、终止时回调
-
-
-    // 例子：以下两种本质和作用完全一样，都会导航到 /user/123 
-    routes: [
-      {
-        path: '/user/:userId',
-        name: 'user',
-        component: User
-      }
-    ]
-    // <router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link>
-    // router.push({ name: 'user', params: { userId: 123 }})
-
-
-    // 语法：实际上它们是效仿 window.history API 
-
-      // 字符串
-      this.$router.push('home')
-
-      // 对象
-      this.$router.push({ path: 'home' })
-
-      // 命名的路由
-      this.$router.push({ name: 'user', params: { userId: '123' }})
-
-      // 带查询参数，变成 /register?plan=private
-      this.$router.push({ path: 'register', query: { plan: 'private' }})
-
-      // 在浏览器记录中前进一步，等同于 history.forward()
-      this.router.go(1)
-
-      // 后退一步记录，等同于 history.back()
-      this.router.go(-1)
-
-      // 前进 3 步记录
-      this.router.go(3)
-
-      // 如果 history 记录不够用，那就默默地失败呗
-      this.router.go(-100)
-      this.router.go(100)
-
-
-
-
-    // 展示多个视图:
+    
+    // 6.展示多个视图:
 
     // <router-view class="view one"></router-view>
     // <router-view class="view two" name="a"></router-view>
@@ -170,9 +104,8 @@
         }
       ]
     })
-
-
-    // 嵌套命名视图
+    
+    // 7.嵌套命名视图
     const Home = { template: `<div>home<router-view></router-view><router-view name="helper"></router-view></div>` };
     const Aa = { template: '<div>a</div>' };
     const Bb = { template: '<div>b</div>' };
@@ -202,6 +135,65 @@
 
 
 
+    // 路由传参
+
+
+    // 动态路由 params 传参 ( 针对 ID 各不相同的用户传值 )
+    // 这样 params 会在 url 里，页面刷新数据也可以持久化存储。
+    const routes = [
+      { path: '/foo/:id', component: Foo },
+      { path: '/bar/:id', component: Bar }
+    ]
+    this.$route.params.id; // 获取的就是 路由中 :id 部分
+
+    /user/:username/post/:post_id // 规则模式
+    /user/evan/post/123 // 可以匹配的路径
+    this.$route.params  // { username: 'evan', post_id: '123' }
+
+    // 匹配任意路径 通配符 *
+    {
+      // 会匹配以 `/user-` 开头的任意路径
+      path: '/user-*'
+    }
+    // 使用通配符时，$route.params 内会自动添加一个名为 pathMatch 参数
+
+    // 路由设置中 { path: '/user-*' }
+    this.$router.push('/user-admin')
+    this.$route.params.pathMatch // 'admin'
+
+
+
+    // 路由props传参：
+    // 概念：用 props 接收替代 params 接收 达到解耦的目的
+    {
+      path: "/test2/:id/:age",
+      component:test2,
+      // props:{id:"fang",age:18}
+      props:true
+    }
+    export default {
+      props: ["id", "age"]
+    }
+    
+
+    // 编程式的导航:
+
+    // 声明式 <router-link :to="...">
+    // 编程式 router.push(location, onComplete?, onAbort?) 后2参数导航成功回调、终止时回调
+    // 例子：以下两种本质和作用完全一样，都会导航到 /user/123 
+    routes: [
+      {
+        path: '/user/:userId',
+        name: 'user',
+        component: User
+      }
+    ]
+    // <router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link>
+    // router.push({ name: 'user', params: { userId: 123 }})
+
+
+
+
     // 路由重定向:
 
     // 概念：当用户访问 /a时，URL 将会被替换成 /b，然后匹配路由为 /b
@@ -215,22 +207,6 @@
     routes: [
       { path: '/a', component: A, alias: '/b' } // 例子：当跳转到b，变成a的ui视图 url 还是b
     ]
-
-
-
-    // 路由props传参：
-
-    // 概念：用 props 接收替代 params 接收 达到解耦的目的
-    {
-      path: "/test2/:id/:age",
-      component:test2,
-      // props:{id:"fang",age:18}
-      props:true
-    }
-    export default {
-      props: ["id", "age"]
-    }
-
 
 
 
@@ -330,6 +306,7 @@
 
 
 
+    
     // 路由懒加载：
 
     // 先把组件的加载变成异步任务（promise）。
