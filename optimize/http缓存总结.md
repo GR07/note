@@ -77,3 +77,30 @@ Cache-Control：public和private的选择
 如果缓存命中率很低，而访问量很大的话，可以看下是不是设置了private，no-cache这类的值。
 
 如果定义了max-age，可以不用再定义public，它们的意义是一样的。
+
+
+no-cache 和 no-store 区别：
+
+no-cache和no-store都是HTTP协议头Cache-Control的值。
+
+no-store
+
+彻底禁用缓冲，所有内容都不会被缓存到缓存或临时文件中。
+
+no-cache
+
+在浏览器使用缓存前，会往返对比ETag，如果ETag没变，返回304，则使用缓存。
+
+除了no-cache和no-store，Cache-Control头的取值还有：
+
+public
+
+所有内容都将被缓存（客户端和代理服务器都可缓存）
+
+private
+
+内容只缓存到私有缓存中（仅客户端可以缓存，代理服务器不可缓存）
+
+max-age=xxx
+
+缓存的内容将在 xxx 秒后失效，这个选项只在HTTP1.1可用，并如果和Last-Modified一起使用时，优先级较高。
