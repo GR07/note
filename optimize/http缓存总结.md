@@ -104,3 +104,8 @@ private
 max-age=xxx
 
 缓存的内容将在 xxx 秒后失效，这个选项只在HTTP1.1可用，并如果和Last-Modified一起使用时，优先级较高。
+
+参考：
+https://segmentfault.com/a/1190000022317235
+https://www.cnblogs.com/chinajava/p/5705169.html
+https://www.cnblogs.com/kevingrace/p/10459429.html
