@@ -141,7 +141,7 @@ includes()
 常用实战:
 
 
-// 数组转对象 { CN : "China", US : "USA" }
+// 数组对象 转 对象 { CN : "China", US : "USA" }
 const calendarTypeOptions = [
   { key: 'CN', display_name: 'China' },
   { key: 'US', display_name: 'USA' },
