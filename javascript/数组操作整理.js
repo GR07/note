@@ -164,6 +164,12 @@ this.list = this.states.map(item => {
 
 
 
+// 合并对象
+this.taskList = this.taskList.map(item => {
+  return Object.assign({}, item, {'isShowAllImg': false})
+})
+
+
 // 过滤出符合条件的项
 const restaurants = [
   { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
