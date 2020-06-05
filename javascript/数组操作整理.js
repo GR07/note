@@ -72,6 +72,8 @@ some()
 
 // 数组只要有一项满足即返回 true，之后的不再执行(所以说对性能很友好！)。
 
+// 注：当内部 return true 时跳出整个循环
+
 const result = [
   {name:'鸣人',age:16},
   {name:'佐助',age:17}
@@ -86,6 +88,7 @@ const result = [
 every()
 
 // 数组中的每一项只有都满足了才会返回 true
+// 注：当内部 return false 时跳出整个循环
 
 const result = [
   {name:'鸣人',age:16},
