@@ -145,3 +145,33 @@ type:entryType的值中一个
 clearResourceTimings();
 该方法无参数无返回值，可以清除目前所有entryType为"resource"的数据，用于写单页应用的统计脚本非常有用
 
+```javascript
+window.onload = () =>{
+    setTimeout(() => {
+        let t = performance.timing
+        console.log('DNS查询耗时 ：' + (t.domainLookupEnd - t.domainLookupStart).toFixed(0))
+        console.log('TCP链接耗时 ：' + (t.connectEnd - t.connectStart).toFixed(0))
+        console.log('request请求耗时 ：' + (t.responseEnd - t.responseStart).toFixed(0))
+        console.log('解析dom树耗时 ：' + (t.domComplete - t.domInteractive).toFixed(0))
+        console.log('白屏时间 ：' + (t.responseStart - t.navigationStart).toFixed(0))
+        console.log('domready时间 ：' + (t.domContentLoadedEventEnd - t.navigationStart).toFixed(0))
+        console.log('onload时间 ：' + (t.loadEventEnd - t.navigationStart).toFixed(0))
+
+        if(t = performance.memory){
+            console.log('js内存使用占比 ：' + (t.usedJSHeapSize / t.totalJSHeapSize * 100).toFixed(2) + '%')
+        }
+
+        let arr = []; // 每个资源请求时间
+        for (let i = 0; i < performance.getEntries().length; i++) {
+            arr.push({
+                '资源名称路径': performance.getEntries()[i].name,
+                '开始时间': performance.getEntries()[i].startTime,
+                '加载时间': performance.getEntries()[i].duration,
+                '资源类型': performance.getEntries()[i].entryType,
+                '方式': performance.getEntries()[i].initiatorType
+            })
+        }
+        console.log(`getEntries`, arr)
+    }, 1000)
+}
+```
