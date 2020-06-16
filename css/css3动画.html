@@ -15,6 +15,52 @@
       transition: all 1.5s ease-in;
     }
 
+    /* 旋转：transform：rotate（30deg）; */
+
+    /* 缩放：transform：scale(0.4); */
+
+    /* 倾斜：transform：skew(30deg); transform: skew(120deg,45deg); */
+
+    /* 移动：transform：translate(50px,12px) */
+
+    可以将一个属性得值平滑的过渡到另一个值
+
+    使用方法：transition：property duration timing-function。也可以拆开单独写
+
+    property表示对哪个属性进行平滑过渡、duration表示在多久内完成过渡、timing-function表示通过什么方法进行平滑过渡。
+
+    另外结合CSS3中的transition-delay(多久之后开始过渡），可以完成更符合心意的动画效果。
+
+    transition-property:background-color;
+    transition-duration:2s;
+    transition-timing-function:linear;
+    // 或
+    transition:background-color 2s linear;
+
+    transtion-delay:2s;
+ 
+    //或
+    transition:background-color 2s linear 2s;
+    /* 完整代码 */
+    .demo2{
+        height:200px;
+        width:200px;
+        text-align: center;
+        vertical-align: middle;
+        background: #D3E393;
+        color:white;
+        margin:300px;
+        transform: rotate(0deg);
+        transition: width 2s,height 2s,transform 2s;
+    }
+    .demo2:hover{
+        transition: width 2s ,height 2s, transform 2s;
+        transition-timing-function: ease;
+        transform: rotate(360deg);
+        width:300px;
+        height:300px;
+    }
+
 
 
     /*复杂动画：keyframes + animation*/

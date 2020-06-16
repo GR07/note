@@ -1,5 +1,6 @@
 <template>
     <!--accept="image/*"-->
+    <!-- 参考：https://zhuanlan.zhihu.com/p/25714998 -->
     <div>
         <el-upload
             ref="upload"

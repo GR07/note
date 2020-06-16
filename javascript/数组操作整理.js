@@ -1,3 +1,15 @@
+
+// 如果你需要将数组按照某种规则映射为另一个数组，就应该用 map。
+
+// 如果你需要进行简单的遍历，用 forEach 或者 for of。
+
+// 如果你需要对迭代器进行遍历，用 for of。
+
+// 如果你需要过滤出符合条件的项，用 filterr。
+
+// 如果你需要先按照规则映射为新数组，再根据条件过滤，那就用一个 map 加一个 filter。
+
+
 forEach()
 
 // 常用于对数组自身的改变和各元素相关统计性的计算
@@ -6,14 +18,20 @@ forEach()
 
 // 注意: 只有 item 是引用类型才可以改变数组, 值类型无效.
 
+// forEach()的返回值是undefined，所以无法链式调用。map可以
+
+// 注意：forEach 与map 是不支持跳出循环体的
+
 
 
 
 map()
 
-// 原数组不会改变 返回一个新数组
+// 如果是值类型，原数组不会改变 返回一个新数组 / 中途不能跳出循环
 
 // 每一项 item 是调用函数返回的结果
+
+// map的思想是 不修改原数组返回一个新数组，所以最好不要用map修改原数组。
 
 let arr = [1,2,3];
 arr = arr.map(item => { return item * 2 })
@@ -72,6 +90,8 @@ some()
 
 // 数组只要有一项满足即返回 true，之后的不再执行(所以说对性能很友好！)。
 
+// 注：当内部 return true 时跳出整个循环
+
 const result = [
   {name:'鸣人',age:16},
   {name:'佐助',age:17}
@@ -86,6 +106,7 @@ const result = [
 every()
 
 // 数组中的每一项只有都满足了才会返回 true
+// 注：当内部 return false 时跳出整个循环
 
 const result = [
   {name:'鸣人',age:16},
@@ -141,7 +162,7 @@ includes()
 常用实战:
 
 
-// 数组转对象 { CN : "China", US : "USA" }
+// 数组对象 转 对象 { CN : "China", US : "USA" }
 const calendarTypeOptions = [
   { key: 'CN', display_name: 'China' },
   { key: 'US', display_name: 'USA' },
@@ -162,6 +183,12 @@ this.list = this.states.map(item => {
   return { value: `value:${item}`, label: `label:${item}` };
 });
 
+
+
+// 合并对象
+this.taskList = this.taskList.map(item => {
+  return Object.assign({}, item, {'isShowAllImg': false})
+})
 
 
 // 过滤出符合条件的项

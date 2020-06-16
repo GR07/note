@@ -8,6 +8,23 @@
 </head>
 <body>
   <script>
+    当点击切换路由时：
+    beforeRouteLeave
+    beforeEach // 全局进入前
+    beforeEnter // 路由独享的 跟beforeEach一样
+    beforeRouteEnter // 组件内的 在beforeCreate之前 所以this不是实例
+    beforeResolve // 跟beforeEach一样 区别它是在beforeRouteEnter之后
+    afterEach // 全局进入后 在beforeCreate之前 没有next参数
+
+    beforeCreate
+    。。
+    。。
+    。。
+    mounted
+    // 这里beforeRouteEnter 里面的 next()
+
+    
+
 
     // API:
 
@@ -218,12 +235,13 @@
 
 
     // beforeEach: 全局前置守卫
+    // 这个钩子作用主要是用于登录验证，也就是路由还没跳转提前告知，以免跳转了再通知就为时已晚。
 
     // to: 即将进入的路由
     // from: 即将离开的路由
     // next(): 做完该做的事情后 进入到目标路由（to）
-    // next(false)：中断跳转回到from
-    // next({ path: '/login', }) 表示重定向
+    // next(false)：中断跳转回到 from
+    // next({ path: '/login', }) 表示重定向, 注意：会再次调用beforeEach()
     // to.matched是一个对象数组，里面有to路由的相关信息
     // 例子 进入任意路由前 判断路由配置里有没有 meta: title 字段 有的话 给页面设置 title
     router.beforeEach((to, from, next) => {//beforeEach是router的钩子函数，在进入路由前执行
@@ -238,8 +256,12 @@
     // next() 和 next('xxx') 是不一样的，区别就是前者不会再次调用router.beforeEach()，后者会。
 
 
+    // beforeResolve: 和beforeEach类似，也是路由跳转前触发。
 
-    // afterEach: 全局后置钩子
+    // 区别：会在所有组件内的守卫和异步路由组件被解析之后才被调用。即在 beforeEach 和 组件内beforeRouteEnter 之后，afterEach之前调用。
+
+
+    // afterEach: 和beforeEach相反，他是在路由跳转完成后触发
 
     // afterEach钩子不接受 next 函数也不会改变导航本身
     router.afterEach((to, from) => {
@@ -248,10 +270,11 @@
 
 
 
-    // beforeEnter: 路由配置里调用
+    // beforeEnter: 路由配置里调用 
+
+    // beforeEnter 和 beforeEach完全相同，如果都设置则在beforeEach之后紧随执行。
 
     // 在路由配置上定义 beforeEnter
-    // 与全局前置守卫的方法参数一样
     {
       path: '/foo',
       component: Foo,
@@ -282,6 +305,7 @@
       next()
     },
     beforeRouteLeave (to, from, next) {
+      // 注意这里尽量不要进行路由跳转
       // 导航离开该组件的对应路由时调用
       // 可以访问组件实例 `this`
       console.log(' beforeRouteLeave !', this)
