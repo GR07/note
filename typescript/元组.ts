@@ -12,7 +12,7 @@ let abc: [string, number, number] = ['guor', 25, 34];
  */
 let guor: [string, number, number];
 guor[0] = 'guor';
-guor[2] = 25;
+guor[2] = 18;
 guor[0].slice(1);
 guor[1].toFixed(2);
 
