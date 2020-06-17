@@ -6,7 +6,7 @@ TypeScript 是 JavaScript 的超集，最终会被编译成 JavaScript
 
 支持：可以运行在node deno 任何支持es3+的js引擎中，在ts中也可以写js向下兼容
 
-作用：TypeScript主要作用是在 js 的基础上增加类型检查，提高代码健壮性，后期维护容易。
+作用：TypeScript主要作用是在 js 的基础上增加类型检查，提高代码健壮性，后期容易维护。
 
 
 使用：
@@ -92,6 +92,20 @@ let unusable: void = undefined;
 // 比如初始化变量，只知道类型不知道具体值的时候。
 let str: string = null
 let str1: string = undefined
+
+
+// never 代表从不会出现的值到达不了终点，比如没有返回值的函数
+function error(msg: string): never {
+    throw new Error(msg);
+}
+
+
+// Object：表示除 number string boolean symbol 之外的类型
+// 可以理解为范围类型的限制
+let obj1: object = {name: 'gg', age: 18} // ok
+let obj2: object = [1, 2, 3] // ok
+let obj3: object = 123 // 报错
+let obj4: object = 'abc' // 报错
 ```
 
 数组：
@@ -173,4 +187,23 @@ const enum Directions {
 let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
 console.log(directions) // [0, 1, 2, 3]
 
+```
+
+
+类型断言：
+类型断言有两种写法：“尖括号”语法、as语法。
+跳过ts的类型检查，告诉程序 我比你清楚 变量或函数 返回的 是什么类型。
+```javascript
+let someValue: any = "这是字符串";
+let strLength: number = (someValue as string).length;
+// let strLength: number = (<string>someValue).length;
+
+// 举个例子
+let abc: any = 'asdzxc'; // ok
+let abc: any = 123; // err
+let str: string = abc.substr(0, 2)
+
+// 如果使用类型断言
+let str: string = (abc as string).substr(0, 2) // ok
+let str: string = (abc as number).substr(0, 2) // err
 ```
