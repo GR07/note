@@ -80,6 +80,16 @@ let myFavoriteNumber: any = 'seven';
 myFavoriteNumber = 7;
 
 
+// unknown 跟 any 一样可以赋为任意类型，但不可以把 unknown 赋值给其他类型
+// unknown 类型只能被赋值给 any 类型和 unknown 类型本身
+let value: unknown = '123' // ok
+let value: unknown = true // ok
+
+// 编译就会报错 test.ts(3,5): error TS2322: Type 'unknown' is not assignable to type 'string'.
+let str: string = value
+// 同样也会禁止任何操作 error TS2339: Property 'trim' does not exist on type 'unknown'.
+value.trim() // err
+
 // void 表示没有任何类型。 常用于函数没有返回值。
 function alertSr(): void {
   alert('hello ts');
@@ -94,10 +104,30 @@ let str: string = null
 let str1: string = undefined
 
 
-// never 代表从不会出现的值到达不了终点，比如没有返回值的函数
+// never 代表从不会出现的值到达不了终点，比如总是会抛出异常或没有返回值的函数
 function error(msg: string): never {
     throw new Error(msg);
 }
+
+// 举个例子
+type Foo = string | number;
+
+function fooType(foo: Foo) {
+  if (typeof foo === "string") {
+      // do
+  } else if (typeof foo === "number") {
+      // do
+  } else {
+    // foo 在这里是 never 
+    const check: never = foo;
+  }
+}
+
+
+// | 联合类型
+let myFavorite: string | number;
+myFavorite = 'seven';
+myFavorite = 7;
 
 
 // Object：表示除 number string boolean symbol 之外的类型
