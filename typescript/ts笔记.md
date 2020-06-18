@@ -109,6 +109,15 @@ function error(msg: string): never {
     throw new Error(msg);
 }
 
+
+// type 类型别名 用来给一个类型起个新名字
+type EventNames = 'click' | 'scroll' | 'mousemove';
+// event 只能取三种字符串中的一种
+function handleEvent(event: EventNames) {
+  // do something
+}
+
+
 // 举个例子
 type Foo = string | number;
 
@@ -236,4 +245,164 @@ let str: string = abc.substr(0, 2)
 // 如果使用类型断言
 let str: string = (abc as string).substr(0, 2) // ok
 let str: string = (abc as number).substr(0, 2) // err
+```
+
+
+函数：
+对函数的输入（传值）和输出（返回值）进行约束
+
+```javascript
+// ts中的 函数声明
+function sum(x: number, y: number): number {
+  return x + y;
+}
+sum(1, 2); // 参数的数量也必须一致
+
+// ts中的 函数表达式
+let mySum: (x: number, y: number) => number = function (x: number, y: number): number {
+  return x + y;
+};
+
+// 箭头函数
+let summ = (x: number, y: number): number => {
+    return x + y;
+}
+
+// 没有返回值：void
+function ab(): void {
+  console.log(123)
+}
+
+// 可选参数： 与接口的可选属性一样，但可选参数位置必须是最后一个参数
+function buildName(a: string, b?: string) {
+  let yy: string = '';
+  yy = `找到了${a}`
+  if (b !== void 0) {
+      yy += b
+  }
+  return `${yy}同学`
+}
+
+// 参数默认值：
+function defaultName(a: string, b: string = 'Cat') {
+  // dos
+}
+
+// 重载：函数接受不同数量或类型的参数时，作出不同的处理。
+// 要优先把精确的定义写在前面。
+function reverse(x: number): number;
+function reverse(x: string): string;
+function reverse(x: number | string): number | string {
+  if (typeof x === 'number') {
+    return Number(x.toString().split('').reverse().join(''));
+  } else if (typeof x === 'string') {
+    return x.split('').reverse().join('');
+  }
+}
+```
+
+
+接口：常用于对对象的形状进行描述。
+```javascript
+// 定义一个接口
+interface Person {
+  name: string;
+  age: number;
+}
+
+let dog: Person = {
+  name: "dog",
+  age: 6,
+};
+
+// 可选属性 该属性可以不存在，和可传参数一样。
+interface Optional {
+  name: string;
+  age?: number;
+}
+let b: Optional = {
+  name: 'jim'
+};
+
+// 任意属性 除了接口定义的属性外，允许增加任意的属性
+interface AtWill {
+  name: string;
+  [propName: string]: any;
+}
+let c: AtWill = {
+  name: 'Tom',
+  gender: 'male'
+};
+
+// 只读属性 只可以给属性赋值一次。
+interface Read {
+  readonly id: number;
+  name: string;
+  age?: number;
+  [propName: string]: any;
+}
+let d: Read = {
+  id: 234,
+  name: 'Tom',
+  gender: 'male'
+};
+
+// 接口 在函数中的应用
+interface SearchFunc {
+  (a: string, b: string): string;
+}
+// 使用
+let mySearch: SearchFunc = function(a: string, b: string): string {
+  return a + b;
+};
+```
+
+
+类的类型：
+```javascript
+class Animal {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+  sayHi(): string {
+    return `My name is ${this.name}`;
+  }
+}
+
+let a: Animal = new Animal('Jack');
+console.log(a.sayHi()); // My name is Jack
+
+// TypeScript 中类的用法 增加了4种修饰符
+
+// public 属性或方法是公有的，实例化后可以被实例访问。
+
+// private 属性或方法是私有的，不能在声明它的类的外部访问，也不能被子类继承。
+
+// protected 虽然是私有的但是可以在子类中访问。
+
+// readonly 只读属性，必须在声明时或构造函数里初始化。
+
+
+// 增加存取器 get set 作用：可以在访问或改变属性时 拦截做一些事情。
+
+let password = 'github.com/gr07'
+class Person2 {
+  private _name: string
+  constructor(name) {
+    this._name = name
+  }
+  get name() {
+    return this._name
+  }
+  set name(newName) {
+    if (password && password === 'github.com/gr07') {
+      this._name = newName
+    }
+  }
+}
+let p = new Person2('guor')
+p.name // guor
+p.name = 'sssss'
+p.name // sssss
 ```

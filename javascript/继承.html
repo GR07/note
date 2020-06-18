@@ -29,7 +29,7 @@
   }
   var b = new Yoo();
 
-  d.work() // 执行失败方法undefined（对象冒充继承没办法继承父类原型链上的属性和方法）
+  b.work() // 执行失败方法undefined（对象冒充继承没办法继承父类原型链上的属性和方法）
 
 
 
@@ -75,7 +75,7 @@
   // 或者 = Moo.prototype; 都可以
   Noo.prototype = new Moo(); // 原型继承：解决对象冒充继承不能继承原型链上的方法和属性
 
-  var f = new Noo('李四', 30) // 这里的传参无效（原型继承不可以给父类传参）
+  var f = new Noo('李四', 30)
 
 </script>
 </body>
