@@ -199,6 +199,29 @@
       The authenticity of host 'github.com (13.250.177.223)' can't be established.
       输入 yes 即可。
 
+
+      多人：
+      1.本地创建分支并切换：git checkout -b dev
+      查看当前分支：git branch 分支前面会标一个*号。
+
+      2.然后就可以在本地dev分支开发
+      开发完提交
+      $ git add readme.txt 
+      $ git commit -m "branch test"
+
+      3.开发完提交完切换到master分支
+      $ git checkout master
+
+      4.把dev分支的工作成果合并到master分支上
+      $ git merge dev
+
+      5.合并完成后，就可以放心地删除dev分支了
+      $ git branch -d dev
+      Deleted branch dev (was b17d20e).
+
+      6.删除后，查看branch，就只剩下master分支了：
+      $ git branch
+      * master
     */
 
 
