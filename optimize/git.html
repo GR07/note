@@ -226,7 +226,18 @@
 
 
 
-
+    1.首先本地找个文件夹，空白处右键git bash here1.
+2.输入$ git clone xx@xxxxxx.git   连接远程仓库，注意这个xx@xxxxxx.git是你gitlab上的project的地址
+3.克隆下远程仓库之后，建你的分支（如果你在master上写的请无视我这一条）
+输入$ git branch <分支名>  从而建立分支
+再输入$ git checkout <分支名>  从而切换到相应的分支
+4.开始上传文件
+首先上传到缓冲区， 输入$ git add <文件名>  文件放在当前仓库的目录下，懒得打文件名可以把文件拖到黑框里，会自动出文件路径
+再输入$ git commit -m <步骤名>  给这个提交文件的步骤起个好听的名字吧，随便起。
+5.可以用$ git status 查看一下当前状态
+6.最后是最重要的步骤啦，将本地仓库推送到远程仓库！
+输入$ git push -u origin <你要推送的分支名>
+比如我的$ git push -u origin suheyin
 
   </style>
 </head>
