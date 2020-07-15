@@ -239,6 +239,32 @@
 输入$ git push -u origin <你要推送的分支名>
 比如我的$ git push -u origin suheyin
 
+
+
+一、问题背景：
+在当前项目中，早先创建并已经push到远程的文件及文件夹，将名称大小写更改后，git无法检测出更改。
+
+二、原因：
+git默认配置为忽略大小写，因此无法正确检测大小写的更改
+
+三、解决方法：
+方案一：配置git
+
+运行git config core.ignorecase false，关闭git忽略大小写配置，即可检测到大小写名称更改
+
+方案二：手动修改
+
+1.git rm xx  删除本地仓库文件（提前做文件备份）
+
+2.修改文件名
+
+3.git add xx 添加
+
+4.git commit -m ""
+
+5.git push 
+
+
   </style>
 </head>
 <body>
