@@ -7,6 +7,60 @@
     
     /*
 
+      常用命令：
+      # 初始化版本库
+      git init
+
+      # 查看当前仓库状态
+      git status
+
+      # 查看提交记录
+      git log
+
+      # 版本回退
+      git reset
+
+      # 添加文件到仓库
+      git add <file> # 添加指定文件   
+      git add . # 添加所有文件
+
+      # 撤销添加文件
+      git checkout -- <file>
+
+      # 提交代码
+      git commit -m ""
+
+      # 克隆代码
+      git clone <url>
+
+      # 添加远程仓库
+      git remote add origin <url>
+
+      # 远程拉取代码、提交代码到远程
+      git pull origin  <name>
+      git push origin  <name>
+
+      # 分支
+
+      git branch # 查看分支
+
+      git branch <name> # 创建分支
+
+      git checkout <name>、git switch <name> # 切换分支
+
+      git checkout -b <name>、git switch -c <name> # 创建+切换分支
+
+      git merge <name> # 合并某分支到当前分支
+
+      git merge --no-ff -m "" <name> # 合并分支保留分支的提交记录，删除分支不受影响
+
+      git branch -d <name> 删除分支
+
+      # 标签
+
+      git tag -a <version> -m "" <commit id> # 创建标签
+
+
       下载安装：
 
       下载：https://git-scm.com/downloads
@@ -18,7 +72,6 @@
 
       git config user.name   查看用户  
       git config user.email   查看邮箱
-
 
 
       设置为Git仓库：
