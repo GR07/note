@@ -95,5 +95,38 @@ m.get('Adam'); // 如果没有 返回undefined
 m.has('Adam'); // true
 // 删除key
 m.delete('Adam');
+// 获取长度 成员总数
+m.size // 23
 
+
+// 遍历
+keys()
+
+values()
+
+entries()
+
+forEach()
+```
+
+结构转换：
+```javascript
+// map转数组，比较快速的方法是使用扩展运算符（...）
+const map = new Map([
+  [1, 'one'],
+  [2, 'two'],
+  [3, 'three'],
+]);
+
+[...map.keys()]
+// [1, 2, 3]
+
+[...map.values()]
+// ['one', 'two', 'three']
+
+[...map.entries()]
+// [[1,'one'], [2, 'two'], [3, 'three']]
+
+[...map]
+// [[1,'one'], [2, 'two'], [3, 'three']]
 ```
