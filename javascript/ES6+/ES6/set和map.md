@@ -61,17 +61,39 @@ console.log([...set]) // [1, 'haha', null]
 
 
 
-// Map像是对象，对象中的key只支持字符串，Map更加强大，支持所有数据类型。
+Map像是对象，对象中的key只支持字符串，Map更加强大，支持所有数据类型。
 
 
-// Map初始化传入一个二维数组
-let m = new Map([['guor', 28]]); // 空Map
-m.set('Adam', 67); // 添加新的key-value
-m.set('Bob', 59);
-m.has('Adam'); // 是否存在key 'Adam': true
-m.get('Adam'); // 67
-m.delete('Adam'); // 删除key 'Adam'
-m.get('Adam'); // undefined
-console.log(m)
+map 和 Object 区别：
 
-// 多次对一个key放入value，后面的值会把前面的值冲掉
+Object：
+
+1.是键值对的集合（Hash 结构）只能用 字符串、Symbol 当作 key。
+
+2.如果不是字符串，则会隐式转换成字符串类型。
+
+3.es6以后如果key是通过隐式转换成字符串，会造成乱序，如没有隐式转换，会按照插入顺序排列。
+
+4.即使是一个空对象 {}，也会存在内部逻辑
+
+
+Map：
+
+1.key 可以是任意类型any。
+
+2.内部排序按照插入的顺序。
+
+3.添加同样的 key 后面的会把前面的覆盖
+
+```javascript
+let m = new Map(); // 空Map
+// 添加
+m.set('Adam', 67);
+// 获取
+m.get('Adam'); // 如果没有 返回undefined
+// 是否存在 key
+m.has('Adam'); // true
+// 删除key
+m.delete('Adam');
+
+```
