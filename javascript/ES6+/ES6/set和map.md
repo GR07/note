@@ -110,6 +110,7 @@ forEach()
 ```
 
 结构转换：
+
 ```javascript
 // map转数组，比较快速的方法是使用扩展运算符（...）
 const map = new Map([
@@ -129,4 +130,16 @@ const map = new Map([
 
 [...map]
 // [[1,'one'], [2, 'two'], [3, 'three']]
+
+const myMap = new Map()
+  .set(true, 7)
+  .set({foo: 3}, ['abc']);
+[...myMap]
+// [ [ true, 7 ], [ { foo: 3 }, [ 'abc' ] ] ]
+```
+
+```javascript
+// 对象转map，通过Object.entries()
+let obj = {"a":1, "b":2};
+let map = new Map(Object.entries(obj));
 ```
