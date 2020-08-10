@@ -17,31 +17,32 @@ function toRawType (value) {
 function isUndefined (obj) {
 	return obj === void 0;
 }
-// 金额转大写
-function digitUppercase(price) {
-  const fraction = ['角', '分'];
-  const digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
-  const unit = [
-    ['元', '万', '亿'],
-    ['', '拾', '佰', '仟'],
-  ];
-  let num = Math.abs(price);
-  let s = '';
-  fraction.forEach((item, index) => {
-    s += (digit[Math.floor(num * 10 * (10 ** index)) % 10] + item).replace(/零./, '');
-  });
-  s = s || '整';
-  num = Math.floor(num);
-  for (let i = 0; i < unit[0].length && num > 0; i += 1) {
-    let p = '';
-    for (let j = 0; j < unit[1].length && num > 0; j += 1) {
-      p = digit[num % 10] + unit[1][j] + p;
-      num = Math.floor(num / 10);
-    }
-    s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+function digitUppercase(n) {
+  if (n == 0) {
+      return "零";
   }
-  return s.replace(/(零.)*零元/, '元').replace(/(零.)+/g, '零').replace(/^整$/, '零元整');
+  if (!/^(\+|-)?(0|[1-9]\d*)(\.\d+)?$/.test(n))
+      return "数据非法";
+  var unit = "仟佰拾亿仟佰拾万仟佰拾元角分", str = "";
+  n += "00";
+  var a = parseFloat(n);
+  if (a < 0) {
+      n = n.substr(1);
+  }
+  var p = n.indexOf('.');
+  if (p >= 0) {
+      n = n.substring(0, p) + n.substr(p + 1, 2);
+  }
+  unit = unit.substr(unit.length - n.length);
+  for (var i = 0; i < n.length; i++)
+      str += '零壹贰叁肆伍陆柒捌玖'.charAt(n.charAt(i)) + unit.charAt(i);
+  if (a > 0) {
+      return str.replace(/零(仟|佰|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
+  } else {
+      return "负" + str.replace(/零(仟|佰|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
+  }
 }
+
 
 module.exports = {
   uppercaseFirst,
