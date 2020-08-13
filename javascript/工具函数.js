@@ -43,10 +43,17 @@ function digitUppercase(n) {
   }
 }
 
-
+const reg = {
+  // 1-30内的正整数
+  integer30: /^([12][0-9]|30|[1-9])$/,
+  // 0-10内的正整数
+  integer10: /^([0-9]|10)$/,
+  // 大于0且不超过二位小数的数字
+  money: /^([1-9]\d*(\.\d{1,2})?|([0](\.([0][1-9]|[1-9]\d{0,1}))))$/
+}
 module.exports = {
   uppercaseFirst,
   toRawType,
   isUndefined,
-  digitUppercase
+  digitUppercase,
 }
