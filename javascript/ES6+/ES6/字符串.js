@@ -29,7 +29,13 @@ if(t.endsWith('fg')) {
 } // true
 
 
+// 如果只是想检测是否包含字符串 用 es6方法
 
+// 如果想确认位置 用 indexOf()
+
+
+// repeat(number) 接收一个Number 返回重复 Number次数的字符串
+console.log('ba'.repeat(3)) // bababa
 
 
 /**

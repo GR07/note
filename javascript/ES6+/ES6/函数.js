@@ -1,23 +1,17 @@
-// 参数默认参数，默认值不能被arguments识别
+// ES5的严格模式下 和 ES6环境下  无论参数怎么改变 arguments 只会是最初的 arguments
+// 参数默认参数，默认值 不能被 arguments 获取到
 
 function a(num = 6, callback = function (data) {console.log('ES6: ', data)}) {
   callback(num * num)
 }
 
-a() //ES6: 36， 不传参输出默认值
-
-a(10, function(data) {
-  console.log(data * 10) // 1000，传参输出新数值
-})
-
-
-// 默认值对arguments对象的影响
-
-function a(num = 1, b = 1){
-  console.log(arguments)
+// 函数参数中使用 ...arr 只是用于可以给函数传 多个参数
+function add(...arr) {
+  console.log(a + b) // 3
+  console.log(arr) // [1, 2]
 }
-a() // {} 默认值不能被arguments识别。
-a(6, 10) // {"0":6,"1":10}
+let a = 1, b = 2
+add(a, b)
 
 
 
