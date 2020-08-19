@@ -52,16 +52,14 @@ console.log(obj['my-5']) // 5
 
 
 
-// 新增了Object.is()来处理2个值的比较 
-// 解决JavaScript中特殊类型 == 或者 === 异常的情况
+// 为了解决历遗留问题，新增了Object.is()来处理2个值的比较。
 
-
-// 出现了异常(错误输出)
+// 不符合预期
 console.log(NaN === NaN) // false
 console.log(+0 === -0) // true
 console.log(5 == "5") //true
 
-// 使用后正常
+// 符合预期
 console.log(Object.is(NaN, NaN)) // true
 console.log(Object.is(+0, -0)) // false
 console.log(Object.is(5, "5")) //false
@@ -70,9 +68,41 @@ console.log(Object.is(5, "5")) //false
 
 
 // Object.assign() 拷贝一个对象给另一个对象，返回一个新对象。（浅拷贝）
+// 只复制源对象中可枚举的属性和对象自身的属性
+// 实现assign 注意是浅拷贝！！！
+function mixin(receiver, supplier) {
+  Object.keys(supplier).forEach((key) => {
+      receiver[key] = supplier[key]
+  })
+  return receiver
+}
+
+// 当有同名属性 后面会覆盖前面的
+let MyComponent = {a: 1}
+let guor = {a: 2, b: 3}
 
 
+// 当源对象某个属性的值是对象 就是拷贝是这个对象的引用
+// 如果不是对象，加上 {} 则是深拷贝。
+let MyComponent = {a: {guor: 1111111}}
+let guor = {a: 2, b: 3}
 
+let obj = Object.assign({}, MyComponent, guor)
+
+console.log(obj) // { c: { guor: 1111111 }, a: 2, b: 3 }
+// 改变属性值
+MyComponent.guor = 444
+// 也变了
+console.log(obj) // { c: { guor: 444 }, a: 2, b: 3 }
+
+// 会被自动排序 数字在前面然后字母
+const state = {
+  id: 1,
+  5: 5,
+  name: "eryue",
+  3: 3
+}
+console.log(Object.assign(state, null)) // { '3': 3, '5': 5, id: 1, name: 'eryue' }
 
 // Object.setPrototypeOf() 改变实例化后的对象原型。
 
