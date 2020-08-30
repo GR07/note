@@ -199,3 +199,29 @@ const restaurants = [
 var results = queryString ? restaurants.filter((restaurant) => {
   return (restaurant.value.toLowerCase().includes(queryString.toLowerCase()))
 }) : restaurants;
+
+
+
+/**
+ * 找出数组中重复的元素
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDuplicates = function(nums) {
+  // 创建map对象，记录map出现的次数，次数等于2则表示重复。
+  let map = new Map()
+  let res = [];
+
+  for( n of nums){
+      //统计每个元素出现的次数
+      map.set(n, map.has(n) ? map.has(n)+1 : 1);
+
+      if(map.get(n) === 2 && !res.includes(n)){
+          res.push(n);
+      }
+  }
+  console.log(map)
+  return res;
+};
+const list = [2, 2, 3, 4, 5, 4, 0, 2, 2, 3, 1, 0, 'asd', 'asd']
+console.log(findDuplicates(list))
