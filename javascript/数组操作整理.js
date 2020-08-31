@@ -161,6 +161,11 @@ includes()
 
 常用实战:
 
+// 找出差异项
+arr1 = [1, 2, 3, 4];
+arr2 = [3, 1];
+let difference = arr1.filter(x => !arr2.includes(x)) // [2, 4]
+
 
 // 数组对象 转 对象 { CN : "China", US : "USA" }
 const calendarTypeOptions = [
