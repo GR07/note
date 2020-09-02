@@ -161,3 +161,17 @@ const myMap = new Map()
 let obj = {"a":1, "b":2};
 let map = new Map(Object.entries(obj));
 ```
+
+var map = new Map();
+var weakmap = new WeakMap();
+
+(function IIFE(){
+    var k1 = {x: 1};
+    var k2 = {y: 2};
+
+    map.set(k1, 'k1');
+    weakmap.set(k2, 'k2');
+})()
+
+map.forEach((val, key) => console.log(key, val))
+// Weakmap. forEach(...) ERROR!
