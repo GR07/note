@@ -1,68 +1,77 @@
-/**
- * Set集合可以用来过滤数组中重复的元素，只能通过has方法检测指定的值是否存在，或者是通过forEach处理每个值。
- * 
- * Map集合通过set()添加键值对，通过get()获取键值，把它看作更强大的对象。
- */
+
+
+Map是存储许多键值对的有序列表，key和value支持所有数据类型。
+
+Set很像数组，特点：没有key，没有下标，有size和原型，是可迭代的不重复元素的类数组
 
 
 
-// Set 是一组 key 的集合，但不存储 value 由于 key 不能重复，所以，在 Set 中，没有重复的 key 
+Set：
 
-// 初始化 set 需要提供一个 Array 作为输入，或者直接创建一个空 Set：
-let set = new Set();
-set.add('haha');
-console.log(set.size); // 1
+两种方式初始化 
+```javascript
+// 1.提供一个 Array
+let set = new Set([1, 3, 5, 'asdasd']); // {1, 3, 5, "asdasd"} 
 
-Set.prototype.size
-// 返回Set对象的值的个数。
+// 2.直接创建一个空 Set
+let set = new Set(); // {}
+```
 
-Set.prototype.add(value)
-// 在Set对象尾部添加一个元素。返回该Set对象。
+Set方法：
+```javascript
+let set = new Set([1, 3, 5])
+// 尾部添加一个元素。返回该Set对象
+set.add('haha'); // {1, 3, 5, "haha"}
 
-Set.prototype.entries()
-// 返回一个新的迭代器对象，该对象包含Set对象中的按插入顺序排列的所有元素的值的[value, value]数组。为了使这个方法和Map对象保持相似， 每个值的键和值相等。
+// Set中是否存在
+set.has('haha') // true
 
-Set.prototype.forEach(callbackFn[, thisArg])
-// 按照插入顺序，为Set对象中的每一个值调用一次callBackFn。如果提供了thisArg参数，回调中的this会是这个参数。
+// 返回Set对象的值的个数 
+set.size // 4
 
-Set.prototype.has(value)
-// 返回一个布尔值，表示该值在Set中存在与否
+// 返回 按插入顺序排序的 所有元素的值的 [value, value] 数组
+set.entries() // [{key: 1, value: 1}, {key: 3, value: 3} {key: "haha", value: "haha"}]
 
+```
 
+迭代：
+```javascript
+// 注意！！！不可以使用 for in 迭代，因为for in 遍历对象的key，Set中元素没有key。
+for(let i in set) {
+  console.log(i); // 不存在
+}
 
-// 可以使用for of 循环
-//如果你需要key，则使用下面这种方法
-for(let [key, value] of sets.entries()) {
+// 可以使用for of 循环 (如果需要key)
+for(let [key, value] of set.entries()) {
   console.log(value, key);
-} 
+}
 
+// 只能使用 forEach 处理每个值，因为set元素没有key， 所以 key === value
+set.forEach((value, key) => {
+  console.log(Object.is(value, key)); // true true
+}); 
 
+```
 
-// 数组转换成Set
+Set与数组交互：
+```javascript
+// 数组转 Set
 const arr = [1, 2, 2, '3', '3']
-let set = new Set(arr);
-console.log(set) // Set(3) {1, 2, "3"}
+let set = new Set(arr); // {1, 2, "3"}
 
 // Set转换成数组
-let set = new Set();
-set.add(1);
-set.add('2');
-console.log(Array.from(set)) // (2) [1, "2"]
+Array.from(set) // [1 ,2, "3"]
+[...set] // [1 ,2, "3"]
 
-// 数组去重
-const arr = [1, 1, 'haha', 'haha', null, null]
-let set = new Set(arr);
-console.log(Array.from(set)) // [1, 'haha', null]
-console.log([...set]) // [1, 'haha', null]
+// 数组去重只能是以下三种类型 srting/number/null
+
+```
 
 
 
 
 
-
-
-Map像是对象，对象中的key只支持字符串，Map更加强大，支持所有数据类型。
-
+Map是存储键值对的有序列表，key和value支持所有数据类型。
 
 map 和 Object 区别：
 
@@ -85,9 +94,19 @@ Map：
 
 3.添加同样的 key 后面的会把前面的覆盖
 
+4.不存在原型链构造函数constructor，更纯粹的键值对结构，少了内部逻辑，性能更好。
+
+
+Map 对比 Set
+
+Set，使用add()添加value，没有key。
+Map，使用set()添加键值对
+
+
+方法
 ```javascript
 let m = new Map(); // 空Map
-// 添加
+// 使用 set 添加 键值对
 m.set('Adam', 67);
 // 获取
 m.get('Adam'); // 如果没有 返回undefined
@@ -99,7 +118,7 @@ m.delete('Adam');
 m.size // 23
 
 
-// 遍历
+// 遍历 同样只能使用 forEach 遍历 key、value
 keys()
 
 values()
@@ -109,8 +128,7 @@ entries()
 forEach()
 ```
 
-结构转换：
-
+Map与数组交互：
 ```javascript
 // map转数组，比较快速的方法是使用扩展运算符（...）
 const map = new Map([

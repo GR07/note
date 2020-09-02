@@ -71,3 +71,16 @@ Ajax('baidu.com', {
   timeout: 1000,
   jsonp: false
 }) // "baidu.com" 1000 false
+
+
+// 重新赋值
+let props = {
+  a: 1,
+  b: 2
+},
+a = 3,
+b = 3;
+//解构赋值
+({ a, b } = props)
+
+console.log(a, b)
