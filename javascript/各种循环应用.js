@@ -56,3 +56,15 @@ Object.keys(restObj).forEach(key => {
 });
 
 
+
+/**
+ * for of
+ * 常用于数组
+ */
+
+const affixTags = this.affixTags = this.filterAffixTags(this.routes) // 得到数组对象 [{}, {}]
+for (const tag of affixTags) {
+  if (tag.name) {
+    // do something
+  }
+}
