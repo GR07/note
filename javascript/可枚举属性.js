@@ -33,3 +33,10 @@ Object.defineProperty(kxy, "sex", {
     value: "female",
     enumerable: false
 });
+
+
+
+
+/**
+ * 可迭代：可以通过for of将value遍历出来就叫可迭代。
+ */
