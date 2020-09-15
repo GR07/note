@@ -1,4 +1,19 @@
 
+打包路径配置：
+
+因为默认打包后文件的路径是 /js/asdasdasd.js
+
+需要把 / 去掉 js/asadasd.js
+```javascript
+// vue.config.js 文件
+module.exports = {
+  publicPath: "./"
+};
+
+```
+
+
+
 ```javascript
 chainWebpack: config => {
         config.entry('main').add('babel-polyfill');
