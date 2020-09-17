@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>vue-router</title>
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-</head>
-<body>
-  <script>
+
     当点击切换路由时：
     beforeRouteLeave
     beforeEach // 全局进入前
@@ -17,9 +8,8 @@
     afterEach // 全局进入后 在beforeCreate之前 没有next参数
 
     beforeCreate
-    。。
-    。。
-    。。
+    ...
+    ...
     mounted
     
     mounted 之后 执行 beforeRouteEnter 里面的 next()
@@ -304,17 +294,30 @@
       // 可以访问组件实例 `this`
       this.name = to.params.name
       next()
-    },
+    }
+    /**
+     * 导航离开该组件的对应路由时调用
+     * 
+     * 注意这里禁止路由跳转
+     * 
+     * 可以访问组件实例 `this`
+     */
     beforeRouteLeave (to, from, next) {
-      // 注意这里尽量不要进行路由跳转
-      // 导航离开该组件的对应路由时调用
-      // 可以访问组件实例 `this`
       console.log(' beforeRouteLeave !', this)
       const answer = window.confirm('确认离开？')
       answer ? next() : next(false)
     }
-
-
+    // 为什么禁止路由跳转，如果执行进入 if 代码块 会陷入死循环
+    beforeRouteLeave(to, from, next) {
+      if (do something...) {
+          // 因为在调用 $router 时，又触发了 beforeRouteLeave 从而又执行了 $router 跳转，
+          // 所以出现了死循环，在 beforeRouteEnter 里面跳转是没有问题的
+          this.$router.replace("/");
+          next()
+      } else {
+          next()
+      }
+    }
 
 
     // 滚动行为: scrollBehavior
@@ -348,6 +351,3 @@
     // 再简化：
     { path: '/foo', component: () => import('./Foo.vue') }
 
-  </script>
-</body>
-</html>

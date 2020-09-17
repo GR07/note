@@ -1,24 +1,27 @@
-注意不是给route的name赋值，是组件的name
 
+注意：include 缓存的参数不是 路由的name，是组件的name
+
+执行顺序：
+
+首次进入：beforeRouteEnter() => created() => activated()
+
+再次进入：beforeRouteEnter() => activated()
 
 ```javascript
 export default {
  name:'a', // include 或 exclude所使用的name
- data () {
- return{
-    }
-  },
+ data () {},
 }
 
 // 缓存 name为a和b的组件
-<keep-alive include="a,b">
+<keep-alive :include="['a', 'b']">
     <router-view/>
 </keep-alive>
 ```
 
 
 
-```html
+```javascript
 <keep-alive include="test-keep-alive">
   <!-- 将缓存name为test-keep-alive的组件 -->
   <component></component>

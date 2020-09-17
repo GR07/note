@@ -86,6 +86,19 @@
     子组件mounted
     
     父组件mounted
+
+
+
+    // 同步引入时生命周期顺序为：
+    // 父组件的beforeCreate、created、beforeMount --> 所有子组件的beforeCreate、created、beforeMount --> 所有子组件的mounted --> 父组件的mounted
+    // 总结：父组件先创建，然后子组件创建；子组件先挂载，然后父组件挂载
+    
+    // 若有孙组件呢？
+    // 父组件先beforeCreate => created => beforeMount , 然后子组件开始beforeCreate => created => beforeMount ，然后孙组件beforeCreate => created => beforeMount => mounted，孙组件挂载完成了，子组件mounted，父组件再mounted
+    
+    // 异步引入时生命周期顺序为：
+    // 父组件的beforeCreate、created、beforeMount、mounted --> 子组件的beforeCreate、created、beforeMount、mounted
+
   </script>
 </body>
 </html>
