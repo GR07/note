@@ -63,6 +63,20 @@ console.log(a.next()); // {value: undefined, done: true}
   }
   const a = createIterator([1, 2, 3]);
   console.log(a.next()); // {value: 1, done: false}
+  
+
+  // yield 只可以在生成器内部使用
+
+
+  // 在对象中添加生成器函数
+  const obj = {
+    a: 1,
+    *createIterator() {
+      yield this.a
+    }
+  }
+  const a = obj.createIterator();
+  console.log(a.next());  // {value: 1, done: false}
 
 
   /**
@@ -76,9 +90,67 @@ console.log(a.next()); // {value: undefined, done: true}
     yield 2;
     yield 3;
   }
-  const a = createIterator();
+  const a = createIterator(); // 这是一个 __proto__: Generator
   for(let value of a) {
     console.log(value)
   }
   // 1 2 3
 
+
+
+  /**
+   * Symbol.iterator
+   * 
+   * 访问迭代器
+   */
+  function *createIterator() {
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+  const a = createIterator(); // a是一个迭代器
+  const s = a[Symbol.iterator]();// 使用Symbol.iterator访问迭代器
+  console.log(s.next()) // {value: 1, done: false}
+
+
+  // Symbol.iterator还可以用来检测一个对象是否可迭代：
+  typeof obj[Symbol.iterator] === "function"
+
+
+
+  /**
+   * 创建可迭代对象
+   * 
+   * 在ES6中，数组、Set、Map、字符串都是可迭代对象。
+   * 
+   * 对象（object）是不可迭代的，但是可以通过Symbol.iterator创建迭代器。
+   */
+
+  const obj = {
+    items: []
+  }
+  obj.items.push(1); // 这样子虽然向数组添加了新元素，但是obj不可迭代
+  for (let x of obj) {
+    console.log(x) // _iterator[Symbol.iterator] is not a function
+  }
+
+  // 给obj添加一个生成器，使obj成为一个可以迭代的对象。
+  const obj = {
+    items: [],
+    *[Symbol.iterator]() {
+        for (let item of this.items) {
+            yield item;
+        }
+    }
+  }
+  obj.items.push(1)
+  //现在可以通过for of迭代obj了。
+  for (let x of obj) {
+      console.log(x)
+  }
+
+
+  // 数组、Set、Map都是可迭代对象，是它们内部实现了迭代器，并且提供了3种迭代器函数调用
+  // entries() values() keys()
+  // 不同集合的类型还有自己默认的迭代器，
+  // 在for of中，数组和Set的默认迭代器是values()，Map的默认迭代器是entries()。​
