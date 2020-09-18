@@ -77,7 +77,7 @@
 
 
 
-    
+
   // 1.传参为对象时，遇到 function / undefined / symbol 会被跳过。
   let a = JSON.stringify({
       func: function () {},
@@ -102,12 +102,14 @@
 
 
   // 4.传参为对象时，如果其中一个属性为toJSON() 函数，该函数返回什么值，序列化结果就是什么值，并且忽略其他属性的值。
-  let obj = JSON.stringify({
-      a: 123,
-      b: "我是bbbb",
-      toJSON: function () { return `我是toJSON返回的数据` }
-  })
-  console.log(obj) // 我是toJSON返回的数据
+    var obj = {
+        foo: 'foo',
+        toJSON: function () {
+            return 'bar';
+        }
+    };
+    JSON.stringify(obj);      // '"bar"'
+    JSON.stringify({x: obj}); // '{"x":"bar"}'
 
 
 
