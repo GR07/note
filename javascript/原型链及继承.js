@@ -141,6 +141,14 @@
     console.log(myPuppy3.say());     // 汪汪汪
 
 
+    function isProto(obj, key) {
+      if (typeof obj !== 'object') return
+      for (let item in obj.__proto__) {
+        if (item === key) return true
+
+      }
+    }
+
 
     /**
      * 实现 instanceof:
