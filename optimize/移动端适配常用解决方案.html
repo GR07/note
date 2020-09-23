@@ -142,21 +142,31 @@
     /*配置 postcss-pxtorem 自动转换px为rem*/
 
     /*使用插件把所有px自动转换为rem*/
-    css: {
-      loaderOptions: {
-        postcss: {
-          plugins: [
-            require('postcss-pxtorem')({
-              rootValue: 16, // 换算的基数
-              // 注意：如果有使用第三方UI如VUX，则需要配置下忽略选择器不转换。
-              // 规则是class中包含的字符串，如vux中所有的class前缀都是weui-。也可以是正则。
-              selectorBlackList: [], // 忽略选择器不转换
-              propList: ['*'],
-            }),
-          ]
+    /* vue.config.js */
+    module.exports = {
+      publicPath: "./",
+      css: {
+        loaderOptions: {
+          postcss: {
+            plugins: [
+              require("postcss-pxtorem")({
+                rootValue: 16, // 换算的基数
+                // 注意：如果有使用第三方UI如VUX，则需要配置下忽略选择器不转换。
+                // 规则是class中包含的字符串，如vux中所有的class前缀都是weui-。也可以是正则。
+                selectorBlackList: [], // 忽略选择器不转换
+                propList: ["*"]
+              })
+            ]
+          }
         }
       }
-    },
+    };
+    /* postcss.config.js */
+    module.exports = {
+      plugins: {
+        autoprefixer: {}
+      }
+    };
 
 
 
@@ -174,6 +184,9 @@
 
 
     经典1px问题：
+
+    两种方案：伪类 / svg
+
 
     div {
         height:1px;
@@ -197,6 +210,52 @@
             transform: scaleY(0.33);
         }
     }
+
+    // index.css
+    .retina-border {
+      position: relative;
+    }
+    .retina-border::before {
+      content: '';  
+      position: absolute;
+        width: 100%;
+        height: 100%; 
+        transform-origin: left top;
+        box-sizing: border-box;
+        pointer-events: none; 
+        border-width: 1px;
+        border-style: solid;
+        border-color: #333;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {  
+      .retina-border::before {   
+        width: 200%; 
+        height: 200%; 
+        transform: scale(0.5); 
+      }
+    }
+    @media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx) {  
+      .retina-border::before {  
+        width: 300%; 
+        height: 300%;   
+        transform: scale(0.33);
+      }
+    }
+    .normal-border { 
+      border: 1px solid #333;
+    }
+
+    border-width: 1px将边框的宽度设为1px。
+    width:200%然后将伪类元素的宽高都设置成父元素的2倍。(但是边框还是1px)
+    transform:scale(0.5)将伪类元素的x，y轴方向都缩放到0.5倍。
+    通过两次尺寸的设置，使这个伪类子元素保持内容的大小还是和父元素一样，但是border:0.5px的效果。
+    pointer-events: none当有元素的层级重叠时，鼠标点击是无法穿透的。即绝对定位的伪类元素的层级更高，它底下的元素（即文字：retina border)无法被事件触发。置为none时，绝对定位的元素不触发事件，底下的那层才能被选中。
+    其他css样式作用
+    伪类元素默认的display:inline。而position：absolute会使元素display:block。只有块级元素的尺寸(宽/高)设置才是有效的。
+    其中伪类选择器中content是必填项，不然无法生效
+    transform-origin的缩放的中心点，默认是元素中心,
+    transform-origin的缩放的中心点，默认是元素中心,和绝对定位的top，right一样，相对的是padding+content部分整个空间的位置
+    绝对定位的元素其top和right值是相对于padding+content的，默认值是从content开始，所以要规定都是0，否则当父元素有padding时，border就移位了
 
   </style>
 </head>
