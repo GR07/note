@@ -18,7 +18,7 @@ console.log(c, d) // [2] ["2"]
 
 
 /**
- * Array.from() 类数组转数组
+ * Array.from() 类数组对象（具有length属性）/可迭代对象（具有Symbol.Interator方法） 转数组
  * 
  * 三个参数： 需要转换的类数组、转换完成后每项执行一个函数、this指向
  */
