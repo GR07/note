@@ -1,7 +1,7 @@
 /**
  * Promise 是异步编程的一种解决方案，用链式调用替代回调函数（callback）。
  * 
- * Promise本身不是异步的，只有他的then()或者catch()方法才是异步，也可以说Promise的返回值是异步的。
+ * Promise本身不是异步的，只有他的then()或者catch()里面的回调才是异步，也可以说Promise的返回值是异步的。
  * 
  * 点击、激活焦点、失去焦点、ajax请求数据，这些都属于异步编程。
  */
@@ -25,7 +25,7 @@ new Promise(function(resolve, reject) {
     reject('It was my wrong!!!')
   }
 }).then(s => s * s).then(s2 => console.log(s2)).then(() => console.log('end'))
-// 25  "end"
+// 25 25 "end"
 
 
 
@@ -33,16 +33,18 @@ new Promise(function(resolve, reject) {
 
 // Promise的all方法提供了并行执行异步操作的能力，必须等所有异步操作执行完后才执行回调。
 
-let Promise1 = new Promise(function(resolve, reject){})
-let Promise2 = new Promise(function(resolve, reject){})
-let Promise3 = new Promise(function(resolve, reject){})
-
-let p = Promise.all([Promise1, Promise2, Promise3])
-
-p.then(funciton(){
-  // 三个都成功则成功  
-}, function(){
-  // 只要有失败，则失败 
+Promise.all([
+  new Promise(function(resolve, reject) {
+    resolve(1)
+  }),
+  new Promise(function(resolve, reject) {
+    resolve(2)
+  }),
+  new Promise(function(resolve, reject) {
+    resolve(3)
+  })
+]).then(arr => {
+  console.log(arr) // [1, 2, 3]
 })
 
 
@@ -56,6 +58,26 @@ Promise.race([requestImg(), timeout()]).then((data) =>{
   console.log(err);
 });
 
+
+
+// Promise派生: 定义一个新的Promise对象，继承Promise方法和属性。
+
+class MyPromise extends Promise {
+
+  //重新封装then()
+  success(resolve, reject) {
+    return this.then(resolve, reject)
+  }
+  //重新封装catch()
+  failer(reject) {
+    return this.catch(reject)
+  }
+}
+// 接着我们来使用一下这个派生类。​
+
+new MyPromise(function(resolve, reject) {
+  resolve(10)
+}).success(v => console.log(v)) // 10
 
 
 
