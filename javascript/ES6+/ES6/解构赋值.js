@@ -63,6 +63,8 @@ console.log(a) //[1,2,3,4] 这种做法就是克隆arr数组。
 
 
 // 解构参数 常用到
+
+// 注意：默认值生效的条件是，对象的属性值严格等于 undefined。
 function Ajax(url, options) {
   const {timeout = 0, jsonp = true} = options // 给option的参数设置了默认值 防止没有传参导致的报错
   console.log(url, timeout, jsonp)
