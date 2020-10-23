@@ -63,6 +63,19 @@ function bMapTransMap(lng, lat) {
   };
 }
 
+import dayjs from "dayjs"
+// 本日
+const today = dayjs().format("YYYY-MM-DD")
+// 本周
+const week = [
+    dayjs().startOf("week").format("YYYY-MM-DD"),
+    today
+]
+// 本月
+const month = [
+    dayjs().date(1).format("YYYY-MM-DD"),
+    today
+]
 
 const reg = {
   // 1-30内的正整数
