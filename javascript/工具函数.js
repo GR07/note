@@ -76,7 +76,8 @@ const month = [
     dayjs().date(1).format("YYYY-MM-DD"),
     today
 ]
-
+// 替换
+this.form.printInfo = this.form.printInfo.replace(/\\n/gm,"\n")
 const reg = {
   // 1-30内的正整数
   integer30: /^([12][0-9]|30|[1-9])$/,
