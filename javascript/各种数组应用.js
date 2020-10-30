@@ -230,3 +230,17 @@ var findDuplicates = function(nums) {
 };
 const list = [2, 2, 3, 4, 5, 4, 0, 2, 2, 3, 1, 0, 'asd', 'asd']
 console.log(findDuplicates(list))
+
+
+// Set结构技巧
+let a = new Set([1, 2, 3])
+let b = new Set([4, 2, 3])
+
+// 合并数组去重
+let union = [...new Set([...a, ...b])] // [1, 2, 3, 4]
+
+// 取交集-----------  a的项也在b中的项
+let inter = [...new Set([...a].filter(item => b.has(item)))] // [2, 3]
+
+// 取差集-----------  a的项不在b中的项
+let differ = Array.from(new Set([...a].filter(item => !b.has(item)))) // [1]
