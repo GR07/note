@@ -1,6 +1,6 @@
 #### redux-thunk 是什么
 
-redux-thunk 理解为 redux 的插件，可以赋予 redux 异步的能力。
+redux-thunk 理解为是基于 redux 的插件，可以赋予 redux 异步的能力。
 
 reducer 中只可以写原函数不能用 axios，那么异步请求只能放到生命周期中，所以提供了 redux-thunk 中间件来写异步请求代码。
 
@@ -19,6 +19,7 @@ npm install --save redux-thunk
 #### 引入
 
 ```js
+// store/index.js
 // 必须使用 applyMiddleware 才能使用插件
 import { applyMiddleware } from 'redux'
 // 是 redux 提供的增强函数，使用后可以支持
