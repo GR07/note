@@ -46,6 +46,11 @@ export default {
         domain: {
             type: Boolean,
             default: true
+        },
+        // 像素限制
+        pxLimit: {
+            type: Number,
+            default: 5000
         }
     },
     data() {
@@ -96,6 +101,16 @@ export default {
             }
             return true
         },
+        // 校验图片像素
+        isPixelLimit(width, height) {
+            let isSL = width > this.pxLimit || height > this.pxLimit;
+            if (isSL) {
+                this.$message.closeAll()
+                this.$message.warning(`请上传宽高不超过${this.pxLimit}像素的图片`)
+                return false
+            }
+            return true
+        },
         // 转blod文件
         dataURItoBlob(dataURI, type) {
             let binary = atob(dataURI.split(',')[1]);
@@ -118,6 +133,8 @@ export default {
                     const context = canvas.getContext('2d');
                     const width = image.width
                     const height = image.height
+                    let isPixelLimit = this.isPixelLimit(width, height)
+                    !isPixelLimit && reject()
                     canvas.width = width;
                     canvas.height = height;
                     // 绘制画布的大小从 fillRect 改为 clearRect 性能更好
