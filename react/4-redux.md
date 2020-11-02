@@ -160,31 +160,3 @@ componentDidMount() {
   })
 }
 ```
-
-
-
-
-
-
-首先使用提供器：Provider
-
-包裹住要使用的组件
-写在入口文件里：
-import { Provider } from 'react-redux'
-import store from './store'
-<Provider store={ store }></ Provider> 标签内都可以访问到store中的数据
-
-
-然后使用连接器：connect
-
-TodoList组件中：
-// 作用把 store 中的 state 映射成 props 属性
-const stateToProps = (state) => {
-return {
-inputValue: state.valueInput
-}
-}
-
-export default connect(stateToProps, null)(TodoList)
-
-然后在jsx语句中 直接 this.props.inputValue 就可以获取到了
