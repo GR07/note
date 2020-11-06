@@ -11,7 +11,7 @@ npm install --save react-redux
 
 
 #### 使用
-
+demo地址：reduxlearn/react-redux
 引入提供器 Provider
 ```js
 // 入口文件 src/index.js 引入 Provider 模块
@@ -43,7 +43,28 @@ const stateToProps = (state) => {
   }
 }
 
+// 参数二 dispatchToProps
+const dispatchToProps = (state) => {
+  return { // state 是 store 中的数据
+    inputChange(e) {
+      console.log(e.target.value)
+      let action = {
+        type: 'change_input',
+        value: e.target.value
+      }
+      dispatch(action)
+    },
+    clickButton() {
+      let action = {
+        type: 'add_item'
+      }
+      dispatch(action)
+    }
+  }
+}
+
 // 参数一 stateToProps：把 store 的数据映射成 TodoList 组件中的 props 属性
+// 参数二 dispatchToProps：把 store 的数据映射成 TodoList 组件中的 props 属性（需要dispatch改变时使用）
 export default connect(stateToProps, dispatchToProps)(TodoList);
 
 
