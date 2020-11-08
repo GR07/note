@@ -92,4 +92,5 @@ render() {
 
 路由嵌套结合动态路由
 
-demo地址：ReactRouterDemo/demo02
+
+demo地址（标准项目的路由配置）：ReactRouterDemo/demo02
