@@ -62,7 +62,6 @@ const b1 = JSON.parse(JSON.stringify(a1)) // b1.b.c === a1.b.c false
 /**
  * Object.assign()
  * 1.把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。
- * 2.浅拷贝的前提第一个参数必须是空对象{}
  */
 
 
