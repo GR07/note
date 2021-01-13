@@ -319,6 +319,24 @@
       }
     }
 
+    // 下面的写法会死循环
+    beforeRouteLeave (to, from, next) {
+        console.log('离开路路由')
+        next('/home')
+    }
+    // 原因是 next('/home') 会重新触发 beforeRouteLeave这个钩子函数，
+    // 这样不会
+    beforeRouteLeave (to, from, next) {
+      console.log('离开路路由')
+      if(to.fullPath==='/home'){
+        next();
+      } else {
+        next('/home')
+      }
+    }
+
+
+
 
     // 滚动行为: scrollBehavior
     // 兼容性: 只支持 history.pushState 的浏览器
