@@ -36,6 +36,7 @@ test() // 实际执行时，上面的代码中的变量a会提升到函数顶部
 
 
 
+
 // let
 
 // let 块级作用域，不会变量提升。
@@ -64,15 +65,20 @@ test() // a is not defined
 const type = {
   a: 1
 }
-type.a = 2 //没有直接修改type的值，而是修改type.a的属性值，这是允许的。
+type.a = 2 // 没有直接修改type的值，而是修改type.a的属性值，这是允许的。
 console.log(type) // {a: 2}
 
-type.b = 3 //拓展Object也是没有问题的
+type.b = 3 // 拓展Object也是没有问题的
 console.log(type) // {a: 2 , b: 3}
 
-delete type.b=3 //删除整个键值对也OK的
+delete type.b = 3 //删除整个键值对也OK的
 console.log(type) // {a: 2}
 
-//如果重新定义数据结构~常量的内存地址值发生改变,这个是不可行的。
+// 如果重新定义数据结构~常量的内存地址值发生改变,这个是不可行的。
 type={}; //Assignment to constant variable.
 type=[]; //Assignment to constant variable.
+
+
+// 关于为什么 const 对于引用类型可以改变属性
+
+// 因为 const 不能改变的是栈中的指针，不是堆中的数据。
