@@ -8,7 +8,7 @@ const a = new Array(2)
 const b = new Array("2")
 console.log(a, b) //[undefined, undefined] ["2"]
 
-// 所以ES6新增了Array.of()
+// 所以ES6新增了Array.of() 弥补数组构造函数Array() 因参数数量不同行为差异的不足
 const c = Array.of(2)
 const d = Array.of("2")
 console.log(c, d) // [2] ["2"]
@@ -20,7 +20,7 @@ console.log(c, d) // [2] ["2"]
 /**
  * Array.from() 类数组对象（具有length属性）/可迭代对象（具有Symbol.Interator方法） 转数组
  * 
- * 三个参数： 需要转换的类数组、转换完成后每项执行一个函数、this指向
+ * 三个参数： 需要转换的类数组、转换后的数组每项执行的函数、函数this指向
  */
 
 // 
