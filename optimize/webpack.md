@@ -140,6 +140,57 @@ module.exports = {
 
 
 
+
+## 对比
+
+grunt和gulp等工具来处理资源，使其从/src文件夹移动到/dist或/build目录中。
+
+webpack 只处理依赖图中的资源
+
+webpack最出色的功能之一就是，除了处理JavaScript，还可以通过loader添加其他任何类型的文件
+
+
+
+## 常用loader
+
+url-loader / file-loader
+
+处理图片 / 音频 / 视频 / 字体
+
+
+结果：url-loader 包含 file-loader，只需要用 url-loader 即可
+
+如果页面图片较多，发很多http请求，会降低页面性能。这个问题可以通过url-loader解决。
+url-loader会将引入的图片编码，生成dataURl并将其打包到文件中，最终只需要引入这个dataURL就能访问图片了。当然，如果图片较大，编码会消耗性能。因此url-loader提供了一个limit参数，小于limit字节的文件会被转为DataURl，大于limit的还会使用file-loader进行copy
+
+
+
+## 常用插件
+
+htmlWebpackPlugin 
+
+创建了一个全新的 html文件，所有的 bundle 会自动添加到 html 中
+
+解决的问题：当改了打包出口文件名后，可以动态把打包后的文件自动添加到 html 中
+
+
+clean-webpack-plugin
+
+清理 /dist 文件夹
+
+解决的问题：反复打包后，dist目录会有很多历史打包文件，在每次构建前清理 /dist 文件夹。
+
+使用注意：
+```js
+// 官方文档是错误的示范，需要解构一下，不需传参直接实例化即可。
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+plugins: [
+    new CleanWebpackPlugin()
+]
+```
+
+
+
 打包路径配置：
 
 因为默认打包后文件的路径是 /js/asdasdasd.js
