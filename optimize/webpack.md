@@ -109,6 +109,91 @@ module.exports = {
 
 
 
+### source-map
+
+webpack中的sourcemap的基本类型包括：eval cheap moudule inline source-map
+
+其他的类型都是根据这5个基本类型组合而来。
+
+#### eval
+
+会将每一个module模块，执行eval，执行后不会生成sourcemap文件，仅仅是在每一个模块后，增加sourceURL来关联模块处理前后的对应关系。因此打包的速度很快。
+
+#### source-map
+
+会为每一个打包后的模块生成独立的soucemap文件，打包速度很慢。
+
+#### inline
+
+与source-map不同，增加inline属性后，不会生成独立的.map文件，而是将.map文件以dataURL的形式插入打包后的文件。
+
+#### cheap
+
+在打包后同样会为每一个模块生成.map文件，但是与source-map的区别在于cheap生成的.map文件会忽略原始代码中的列信息。也不会有loader模块之间对应的sourcemap
+
+loader模块之间对应的sourcemap是什么：比如css是需要loader处理的，如果这个css出问题了，就不会定位到原始代码位置。
+
+#### module
+
+包含了loader模块之间的sourcemap
+
+
+#### 如何选择sourcemap
+
+在开发环境使用：devtool: eval-cheap-module-source-map
+
+在生产环境使用：devtool: cheap-module-source-map 或者 注释掉
+
+##### 原因：
+
+1.首先列信息是没有意义的，只要有行信息就能完整的建立打包前后代码之间的依赖关系。
+
+因此开发环境还是生产环境，都会选择增加cheap基本类型来忽略列信息。
+
+
+2.其次，不管在生产环境还是开发环境，我们都需要定位问题到最最原始的资源，因此，不能忽略module属性
+
+
+3.再次我们希望通过生成.map文件的形式，因此要增加source-map属性
+
+
+eval-source-map组合使用是指将.map以DataURL的形式引入到打包好的模块中，类似于inline属性的效果，
+
+我们在生产中，使用eval-source-map会使打包后的文件太大，因此在生产环境中不会使用eval-source-map。但是因为eval的rebuild速度快，因此我们可以在本地环境中增加eval属性。
+
+
+
+
+### 热更新 webpack-dev-server
+
+
+#### watch
+
+观察依赖图中的所有文件，如果其中一个文件被更新，代码将被自动重新编译打包，所以你不必手动run build
+
+存在问题：虽然会重新打包，但是不会刷新页面
+```js
+"scripts": {
+    "watch": "webpack --watch"
+}
+```
+
+#### webpack-dev-server
+
+webpack-dev-server 为你提供了一个简单的 web 服务器，并且能够实时重新加载
+```js
+devServer: {
+    contentBase: './dist'
+}
+```
+#### 解决webpack5下使用webpack-dev-server报错
+
+因为版本不兼容 webpack是5 server是3.11
+
+解决：使用 npx webpack serve 运行
+
+
+
 
 
 ## 命令
@@ -185,7 +270,7 @@ clean-webpack-plugin
 // 官方文档是错误的示范，需要解构一下，不需传参直接实例化即可。
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 plugins: [
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }) // cleanStaleWebpackAssets: false 告诉插件删除文件的同时不要删除没有改变的文件
 ]
 ```
 
