@@ -109,7 +109,7 @@ module.exports = {
 
 
 
-### source-map
+## source-map
 
 webpack中的sourcemap的基本类型包括：eval cheap moudule inline source-map
 
@@ -164,10 +164,10 @@ eval-source-map组合使用是指将.map以DataURL的形式引入到打包好的
 
 
 
-### 热更新 webpack-dev-server
+## 热更新 webpack-dev-server
 
 
-#### watch
+### watch
 
 观察依赖图中的所有文件，如果其中一个文件被更新，代码将被自动重新编译打包，所以你不必手动run build
 
@@ -178,21 +178,51 @@ eval-source-map组合使用是指将.map以DataURL的形式引入到打包好的
 }
 ```
 
-#### webpack-dev-server
+### webpack-dev-server
 
-webpack-dev-server 为你提供了一个简单的 web 服务器，并且能够实时重新加载
-```js
-devServer: {
-    contentBase: './dist'
-}
-```
-#### 解决webpack5下使用webpack-dev-server报错
+webpack-dev-server 为你提供了一个简单的 web 服务器，并且能够实时刷新页面
+
+webpack-dev-server 是 webpack-dev-middleware + express 的集成
+
+
+### 解决webpack5下使用webpack-dev-server报错
+
+"start": "webpack-dev-server --open"
 
 因为版本不兼容 webpack是5 server是3.11
 
-解决：使用 npx webpack serve 运行
+解决：降级到3版本 "webpack-cli": "^3.3.12",
 
 
+
+## tree shaking 树摇算法
+
+指的是移除 JavaScript 上下文中的未引用代码（import / export）
+
+将文件标记为无副作用 "sideEffects": false 
+
+最后用压缩插件删掉无用代码
+
+package.json 的 "sideEffects" 属性来实现
+```js
+{
+  "name": "your-project",
+  "sideEffects": false
+}
+```
+
+### uglifyjs 压缩插件
+
+从 webpack 4 开始，也可以通过 "mode" 配置选项轻松切换到压缩输出，只需设置为 "production"。
+
+```js
+module.exports = {
+    entry: './src/index.js',
+    mode: "production"
+}
+
+```
+npm run build
 
 
 
