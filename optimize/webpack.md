@@ -211,7 +211,7 @@ package.json 的 "sideEffects" 属性来实现
 }
 ```
 
-### uglifyjs 压缩插件
+### uglifyjs 集成的压缩插件
 
 从 webpack 4 开始，也可以通过 "mode" 配置选项轻松切换到压缩输出，只需设置为 "production"。
 
@@ -224,6 +224,76 @@ module.exports = {
 ```
 npm run build
 
+
+## 环境变量
+
+许多项目插件通过与 process.env.NODE_ENV 环境变量关联，以决定应该引用哪些内容及针对环境进行代码优化。
+
+
+## 代码分离
+
+代码分离可以分到不同的 bundle 中，然后就可以按需加载这些文件
+
+常用的代码分离有三种方式
+
+1.entry入口文件手动分离
+```js
+mudule.exports = {
+    entry: {
+        index: './src/index.js',
+        another: './src/another-module.js'
+    }
+}
+```
+
+2.手动分离后自然会产生重复引入的组件，再用 SplitChunksPlugin 去重和分离
+```js
+mudule.exports = {
+    entry: {
+        index: './src/index.js',
+        another: './src/another-module.js'
+    },
+    optimization: {
+        // 代码分离后把重复引入的模块去重，并分离出来 (vendors~another~app.bundle.js)
+        splitChunks: {
+            chunks: 'all'
+        }
+    }
+}
+```
+
+3.动态导入 import （效果上 = 1 + 2）
+```js
+import _ from 'lodash';
+if (process.env.NODE_ENV !== 'production') {
+    console.log(`这是开1发环境${process.env.NODE_ENV}`);
+}
+async function getComponent() {
+
+    var element = document.createElement('div');
+    // 注意这个注释 /* webpackChunkName */ 是有用的
+    // 这样是为了打包分离后给模块命名为语义化的名称，而不会是 id 的形式。
+    const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
+
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+    return element;
+}
+
+getComponent().then(dom => {
+    document.body.appendChild(dom);
+})
+```
+
+## 打包分析工具
+
+```js
+// 打包分析
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+plugins: [
+    new BundleAnalyzerPlugin()
+  ],
+```
 
 
 ## 命令
