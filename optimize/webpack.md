@@ -20,6 +20,8 @@ module.exports = {
 
 主要输出文件的默认值是 ./dist/main.js，其他生成文件默认放置在 ./dist 文件夹中。
 
+注意：只有异步加载的模块才会单独打出一个文件，同步引入的会混合在父包里
+
 ```js
 // 引入是因为这里需要 node.js 的 path 模块操作文件路径
 const path = require('path');
@@ -289,6 +291,32 @@ getComponent().then(dom => {
     document.body.appendChild(dom);
 })
 ```
+
+## 提取引导模板
+
+引导模板是什么？
+
+webpack中关联模块映射关系的代码
+
+
+为什么要把他提取单独打包？
+
+因为低版本webpack 每次打包都会更改引导模板，所以导致包含引导模板的模块的hash会变。
+
+
+
+## 模块标识
+
+兜底低版本webpack更新文件后不相关文件hash会变
+```javascript
+const webpack = require('webpack');
+plugins: [
+    new webpack.HashedModuleIdsPlugin()
+],
+```
+
+
+
 
 ## runtime 运行时代码
 
