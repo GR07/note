@@ -37,7 +37,7 @@ module.exports = {
 
 ### loader
 
-因为 webpack 自身只能理解 JavaScript 和 JSON 文件。
+因为 webpack 自身只能理解 JavaScript 和 JSON 文件，进行打包。
 
 loader 让 webpack 能够去处理其他类型的文件。
 
@@ -203,7 +203,7 @@ webpack-dev-server 是 webpack-dev-middleware + express 的集成
 
 将文件标记为无副作用 "sideEffects": false 
 
-最后用压缩插件删掉无用代码
+最后用 uglifyjs 压缩插件删掉无用代码
 
 package.json 的 "sideEffects" 属性来实现
 ```js
@@ -230,6 +230,9 @@ npm run build
 ## 环境变量
 
 许多项目插件通过与 process.env.NODE_ENV 环境变量关联，以决定应该引用哪些内容及针对环境进行代码优化。
+```js
+mode: "production"
+```
 
 
 ## 代码分离
@@ -238,10 +241,10 @@ npm run build
 
 1.分离打包到单独文件，然后就可以按需加载这些文件
 
-2.避免他们之间的依赖重复
+2.避免2个模块之间重复打包混入相同的代码
 
 
-常用的代码分离有三种方式
+常用的代码分离有三种方式（推荐3）
 
 1.entry入口文件手动分离
 ```js
@@ -271,9 +274,8 @@ mudule.exports = {
 
 3.动态导入 import （效果上 = 1 + 2）
 ```js
-import _ from 'lodash';
 if (process.env.NODE_ENV !== 'production') {
-    console.log(`这是开1发环境${process.env.NODE_ENV}`);
+    console.log(`这是开发环境${process.env.NODE_ENV}`);
 }
 async function getComponent() {
 
@@ -307,7 +309,7 @@ webpack中关联模块映射关系的代码
 
 ## 模块标识
 
-兜底低版本webpack更新文件后不相关文件hash会变
+兜底低版本webpack更新文件后，不相关文件的hash会变
 ```javascript
 const webpack = require('webpack');
 plugins: [
@@ -356,7 +358,7 @@ plugins: [
 ```
 
 
-## 命令
+## 打包命令
 
 ### npx webpack 
 
