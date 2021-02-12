@@ -187,13 +187,6 @@ webpack-dev-server 为你提供了一个简单的 web 服务器，并且能够�
 webpack-dev-server 是 webpack-dev-middleware + express 的集成
 
 
-### 解决webpack5下使用webpack-dev-server报错
-
-"start": "webpack-dev-server --open"
-
-因为版本不兼容 webpack是5 server是3.11
-
-解决：降级到3版本 "webpack-cli": "^3.3.12",
 
 
 
@@ -265,9 +258,8 @@ mudule.exports = {
     },
     optimization: {
         // 代码分离后把重复引入的模块去重，并分离出来 (vendors~another~app.bundle.js)
-        splitChunks: {
-            chunks: 'all'
-        }
+        // 注意别瞎几把搞它，官方默认配置即可
+        splitChunks: {}
     }
 }
 ```
@@ -346,9 +338,26 @@ import('abc').then(res=>{})这种异步加载的代码，在webpack中即为运�
 
 
 
+## 分离css文件
+
+不分离的时候，打包后css代码会混合在js代码中
+```js
+// 例如
+___CSS_LOADER_EXPORT___.push([module.i, \"body {\\r\\n    color: blue;\\r\\n}\", \"\"]);
+```
+
+如何分离
+
+使用 npm install --save-dev mini-css-extract-plugin
+
+主要是为了抽离css样式，防止将样式打包在js中引起页面样式加载错乱的现象。
+
+
+
+
 ## 打包分析工具
 
-注意：图示里表示的是所有打包的文件，包括懒加载的文件
+注意：图示里表示的是所有打包的文件，包括懒加载的文件（只分析js文件）
 ```js
 // 打包分析
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -356,6 +365,11 @@ plugins: [
     new BundleAnalyzerPlugin()
   ],
 ```
+
+
+## 加载 polyfill
+
+这种方式优先考虑正确性，而不考虑 bundle 体积大小。为了安全和可靠，polyfill/shim 必须运行于所有其他代码之前，而且需要同步加载，或者说，需要在所有 polyfill/shim 加载之后，再去加载所有应用程序代码。 社区中存在许多误解，即现代浏览器“不需要”polyfill，或者 polyfill/shim 仅用于添加缺失功能 - 实际上，它们通常用于修复损坏实现(repair broken implementation)，即使是在最现代的浏览器中，也会出现这种情况。 因此，最佳实践仍然是，不加选择地和同步地加载所有 polyfill/shim，尽管这会导致额外的 bundle 体积成本。
 
 
 ## 打包命令
@@ -435,6 +449,73 @@ plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }) // cleanStaleWebpackAssets: false 告诉插件删除文件的同时不要删除没有改变的文件
 ]
 ```
+
+
+
+## 集成typescript
+
+
+### 安装
+
+安装 typescript 和 tsloader
+
+npm install --save-dev typescript ts-loader
+
+
+### 新增配置文件
+
+根目录下新增配置文件 tsconfig.json
+```js
+// 设置一个基本的配置，来支持 JSX，并将 TypeScript 编译到 ES5
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "noImplicitAny": true,
+        "module": "es6",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true
+    }
+}
+```
+
+### 最后配置 webpack 处理 TypeScript
+
+
+
+
+
+## 性能优化
+
+
+### 拆分css文件
+
+mini-css-extract-plugin
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+plugins: [
+    new MiniCssExtractPlugin({
+      // 这里的配置和webpackOptions.output中的配置相似
+      // 即可以通过在名字前加路径，来决定打包后的文件存在的路径
+      filename: 'css/[name].[contenthash].css',
+      chunkFilename: "css/[id].[contenthash].css"
+    }),
+],
+rules: [
+    {
+        test: /\.css$/,
+        use: [
+            // 用了这个就不可以不用style-loader，且必须在css-loader上面
+            MiniCssExtractPlugin.loader,
+            {
+                loader: "css-loader"
+            }
+        ]
+    }
+]
+```
+
+
 
 
 
