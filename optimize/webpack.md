@@ -235,6 +235,25 @@ new webpack.DefinePlugin({
     'process.env.ASSET_PATH': JSON.stringify('asd')
 })
 ```
+方法3(推荐,只适用于vue-cli):
+配置vuecli的环境变量,在项目根目录新建.env.dev文件,内容为:
+
+NODE_ENV=production
+VUE_APP_ENV=dev
+再新建一个.env.production,内容为:
+
+NODE_ENV=production
+VUE_APP_ENV=production
+package.json中scripts内配置:
+
+"builddev": "vue-cli-service build --mode dev",
+"buildprod": "vue-cli-service build --mode production",
+然后判断环境变量得到对应的baseurl值:    baseurl:process.env.VUE_APP_ENV==='production'?'http://prod.api.com':'http://test.api.com'
+
+推荐原因:这样配置不会使打包文件体积增大,前面的方式打包后的文件都比较大,因为不是生产环境,代码不会压缩,警告和提示语也被打包进去了等等,这些都是不适合生产环境的
+
+注意文件中NODE_ENV=production要加上,不然NODE_ENV就是默认的开发环境,值为delelopment
+
 
 
 ## 代码分离
