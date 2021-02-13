@@ -227,6 +227,15 @@ npm run build
 mode: "production"
 ```
 
+NODE_ENV 是 nodejs在执行时的环境变量，webpack在运行构建期间也可以访问这个变量，所以我们可以在dev和prod下配置相应的环境变量。
+
+环境变量可以通过 DefinePlugin 传入给运行程序（页面可以访问）
+```js
+new webpack.DefinePlugin({
+    'process.env.ASSET_PATH': JSON.stringify('asd')
+})
+```
+
 
 ## 代码分离
 
