@@ -552,6 +552,8 @@ rules: [
 因为默认打包后文件的路径是 /js/asdasdasd.js
 
 需要把 / 去掉 js/asadasd.js
+
+变为相对路径
 ```javascript
 // vue.config.js 文件
 module.exports = {
