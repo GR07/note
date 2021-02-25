@@ -431,3 +431,62 @@ NODE_ENV - 会是 "development"、"production" 或 "test" 中的一个。具体�
 
 待补充 没搞过
 
+```js
+const path = require("path");
+// 打包分析
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        // 引用全局变量
+        prependData: `@import "@/assets/styles/common.scss";`,
+      },
+    },
+    // 禁止css顺序检查（解决有顺序警告问题）https://github.com/vuejs/vue-cli/issues/3771
+    extract: process.env.NODE_ENV === "production" ? { ignoreOrder: true, } : false,
+  },
+  // 关闭SourceMap
+  productionSourceMap: false,
+  // 静态文件路径
+  publicPath: process.env.VUE_APP_API_MODE === "prod" ? "https://qdoss.ininin.com/" : process.env.VUE_APP_API_MODE === "test" ? "https://test-qdoss.ininin.com/" : "/",
+  configureWebpack: {
+    externals: {
+      mathjs: "math",
+      vue: "Vue",
+      "element-ui": "ElementUI"
+    },
+  },
+  chainWebpack(config) {
+    // 代码分割规则
+    config.optimization.splitChunks({
+      chunks: "all",
+      cacheGroups: {
+        libs: {
+          name: "chunk-libs",
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10,
+          chunks: "initial",
+        },
+        elementUI: {
+          name: "chunk-elementUI", // elementUI 独立拆包
+          priority: 20, // 权重优先级需要大于libs / app 否则会被打包进libs或app
+          test: /[\\/]node_modules[\\/]_?element-ui(.*)/, // 目录
+        },
+        commons: {
+          name: "chunk-commons",
+          test: path.join(__dirname, "src/components"), // src/components 里组件独立拆包
+          minChunks: 3,
+          priority: 5,
+          reuseExistingChunk: true,
+        },
+      },
+    });
+    config.optimization.runtimeChunk("single"); // runtime 拆包
+    config
+      .plugin("webpack-bundle-analyzer")
+      .use(BundleAnalyzerPlugin);
+  },
+};
+
+```
