@@ -83,17 +83,14 @@ module.exports = {
 // babel.config.js
 module.exports = {
   presets: [
-    [
-        '@vue/app', 
-        {
-            polyfills: [
-                'es6.promise',
-                'es6.symbol'
-            ]
-        }
-    ]
+    ["@vue/app", {
+      polyfills: [
+        "es.promise",
+        "es.symbol"
+      ]
+    }]
   ]
-}
+};
 ```
 
 三：使用了 ES6+ 特性且没有显式地列出需要的 polyfill

@@ -576,37 +576,6 @@ chainWebpack: config => {
             };
             return args;
         })
-        config.resolve.alias.set("@", path.resolve(__dirname, "src"));
-        config.resolve.alias.set("@public", path.resolve(__dirname, "public"));
-        config.resolve.alias.set(
-            "@config",
-            path.resolve(__dirname, "src/config")
-        );
-        config.resolve.alias.set("@api", path.resolve(__dirname, "src/api"));
-        config.resolve.alias.set(
-            "@com",
-            path.resolve(__dirname, "src/components")
-        );
-        config.resolve.alias.set(
-            "@store-m",
-            path.resolve(__dirname, "src/store/modules")
-        );
-
-        /**** svg图标处理 添加压缩loader "image-webpack-loader" */
-
-        // 修改svg-loader 不包含icons列表
-        config.module
-            .rule("svg")
-            .exclude.add(path.resolve(__dirname, "src/assets/img/icons"))
-            .end()
-            .use("image-webpack")
-            .loader("image-webpack-loader")
-            .tap((options = {}) =>
-                Object.assign(options, {
-                    disable: false
-                })
-            )
-            .end();
         // 兼容 ie ES6语法 使用 babel 处理 vue-awesome-countdown/ element-ui
         config.module
             .rule("plugin")
