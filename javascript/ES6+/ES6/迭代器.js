@@ -98,15 +98,12 @@ for (let value of a) {
 }
 // 1 2 3
 
-// 用来检测一个对象是否可迭代：
-typeof obj[Symbol.iterator] === "function"
-
 
 
 /**
  * Symbol.iterator
  * 
- * 访问迭代器
+ * 可以访问迭代器
  */
 function* createIterator() {
   yield 1;
@@ -370,3 +367,42 @@ run(function* () {
   value = yield value + 20;
   console.log(value) // 21
 })
+
+
+
+// 使对象变为可迭代（es5写法）
+const obj = {
+  a: [1, 2],
+  b: [123,324,345],
+  [Symbol.iterator]: function () {
+      console.log(`Symbol.iterator-------`, this);
+      let index = 0;
+      const arr = [...this.b, ...this.a];
+      return {
+          next: function () {
+              console.log(`next: function-------`, this);
+              let value = arr[index];
+              let done = index++ >= arr.length;
+              return {
+                  value,
+                  done
+              }
+          }
+      }
+  }
+}
+
+// 使对象变为可迭代（es6写法）
+const obj = {
+  a: [1, 2],
+  b: [123,324,345],
+  [Symbol.iterator]: function* () {
+      for (const item of this.b) {
+          yield item;
+      }
+  }
+}
+
+for (const item of obj) {
+  console.log(item);
+}

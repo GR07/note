@@ -24,10 +24,12 @@ const obj = {
     a: 10
 }
 let handler = {
+    
+    // target => 绑定的对象 name => 当前读写的 key
     get: function(target, name){
-        console.log('test: ', target, name)
-        // test:  {"a":10} a
-        // test:  {"a":10} b
+
+        console.log('test: ', target, name) // test:  {"a":10} a // test:  {"a":10} b
+        
         return name in target ? target[name] : 37
     }
 }

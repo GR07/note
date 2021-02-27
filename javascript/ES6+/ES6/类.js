@@ -15,7 +15,7 @@ class Animal {
     this.name = name;
     this.color = color;
   }
-  // toString 是原型对象上的属性
+  // toString 是 prototype 对象上的属性
   toString() {
     console.log(`${this.name} 和 ${this.color}`);
   }
@@ -76,7 +76,7 @@ cat.color; // white
 /**
  * 静态成员继承
  * 
- * 静态成员继承只能通过派生类访问，不能通过派生类的实例访问
+ * 静态成员继承只能通过子类访问，不能通过子类的实例访问
  */
 class Component {
   constructor([a, b] = props) {
@@ -94,17 +94,14 @@ class T extends Component {
 }
 console.log(T.printSum([2, 3])) // 5
 
+
 /**
- * 类方法遮蔽
- *
- * 子类中的方法会覆盖重写重写父类的方法。
+ * 子类中的方法会覆盖重写父类的方法。
  */
 
 
 /**
- * 内建对象的继承
- * 
- * 就是继承 js的内建对象 比如继承数组
+ * 继承js内置对象
  */
 
 class MyArray extends Array { }
