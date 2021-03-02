@@ -59,7 +59,7 @@
   /**
    * 综合以上两种都不完美，就出现了原型链 + 构造函数的组合继承方式。
    * 对象冒充继承： 解决原型继承不能传参问题 
-   * 原型继承：解决对象冒充继承不能继承原型链上的方法和属性 
+   * 原型继承：解决不能继承原型链上的方法和属性 
    */
 
   function Moo (name, age) {
@@ -74,8 +74,10 @@
   function Noo (name, age) {
     Moo.call(this, name, age) // 对象冒充继承： 解决原型继承不能传参问题
   }
-  // 或者 = Moo.prototype; 都可以
+  
   Noo.prototype = new Moo(); // 原型继承：解决对象冒充继承不能继承原型链上的方法和属性
+  // 或者Noo.prototype = Moo.prototype;
+  // 或者Noo.prototype = Object.create(Moo.prototype); Noo.prototype.constructor = Noo
 
   var f = new Noo('李四', 30)
 
@@ -191,9 +193,9 @@
       Child.prototype.__proto__ = Parent.prototype;
 
       const obj = new Child();
-      console.log(myInstanceof(obj, Child) );   // true
-      console.log(myInstanceof(obj, Parent) );   // true
-      console.log(myInstanceof({}, Parent) );   // false
+      console.log(myIns(obj, Child) );   // true
+      console.log(myIns(obj, Parent) );   // true
+      console.log(myIns({}, Parent) );   // false
 
 
 
@@ -207,9 +209,9 @@
        * 
        * 3.实例对象的__proto__指向了类的prototype。
        * 
-       * 4.prototype 是函数的属性，不是对象的。
+       * 4.prototype 是函数的属性，不是对象的。！！！
        * 
-       * 5.对象拥有的是__proto__，是用来查找prototype的。
+       * 5.对象拥有的是__proto__，是用来查找prototype的。！！！
        * 
        * 6.prototype.constructor指向的是构造函数，也就是类函数本身。改变这个指针并不能改变构造函数。
        * 

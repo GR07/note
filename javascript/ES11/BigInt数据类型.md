@@ -1,14 +1,16 @@
-ES2020 引入了一种新的数据类型 BigInt（大整数），来解决这个问题。BigInt 只用来表示整数，没有位数的限制，任何位数的整数都可以精确表示。
+# ES2020 引入了新的数据类型 BigInt，解决大整数计算失精问题。
 
+
+## 精度丢失问题
 ```javascript
-// 超过 53 个二进制位的数值，无法保持精度
+// js超过 53 个二进制位的数值，无法保持精度
 Math.pow(2, 53) === Math.pow(2, 53) + 1 // true
 
 // 超过 2 的 1024 次方的数值，无法表示 返回 Infinity
 Math.pow(2, 1024) // Infinity
 ```
 
-为了与 Number 类型区别，BigInt 类型的数据必须添加后缀n。
+## 为了与 Number 类型区别，BigInt 类型的数据必须添加后缀n。
 
 ```javascript
 1234 // 普通整数
@@ -19,18 +21,23 @@ Math.pow(2, 1024) // Infinity
 ```
 
 
-注意：
+## 数据类型
 
 ```javascript
 // BigInt与普通整数是两种值，它们之间并不相等
 42n === 42 // false
 
-// typeof运算符对于BigInt类型的数据返回bigint
+42n == 42 // true
+
 typeof 123n // 'bigint'
+
+BigInt(10) + 10n;    // → 20n
+// or
+10 + Number(10n);    // → 20
 ```
 
 
-方法：
+## 类型转换
 
 ```javascript
 BigInt() // 转换普通数值为BigInt类型
