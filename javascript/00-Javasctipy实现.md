@@ -114,3 +114,32 @@ console.log(myIns(obj, Child) );   // true
 console.log(myIns(obj, Parent) );   // true
 console.log(myIns({}, Parent) );   // false
 ```
+
+
+
+# 实现 jquery
+
+```js
+// 创建构造函数
+function Base(element) {
+  this.element = document.getElementById(element);
+  // 实例方法
+  this.css = function (type, value) { 
+    this.element.style.type = value;
+  }
+}
+
+// Base 换个名字 $
+function $(element) {
+  return new Base(element);
+}
+
+// 给 $ 添加静态方法
+$.get = function () { }
+
+// 实际就是调用 $ 上面的静态方法
+$.get('url', function () { })
+
+// 等同于上面
+$('#box')
+```
