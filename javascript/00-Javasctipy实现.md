@@ -143,3 +143,42 @@ $.get('url', function () { })
 // 等同于上面
 $('#box')
 ```
+
+
+
+# 封装Ajax
+
+```js
+const options = {
+    type: 'GET',
+    url: 'xxx/xxx',
+    data: {k: "guor", v: 18},
+    success: (response) => {},
+    error: (response) => {},
+}
+
+function myAjax(options) {
+    if (typeof options !== 'object') return
+    const { type = 'GET', url, data, success, error } = options;
+    
+    const xhr = new XMLHttpRequest();
+    if (type === 'GET') {
+        xhr.open('GET', `${url}?${data}`, true)
+        xhr.send(null)
+    }
+    if (type === 'POST') {
+        xhr.open('POST', url, true)
+        xhr.send(data)
+    }
+
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                success && success(xhr.responseText)
+            } else {
+                error && error(xhr.response)
+            }
+        }
+    }
+}
+```
