@@ -81,6 +81,9 @@ git merge name 合并某分支到当前分支
 git merge --no-ff -m "" name 合并分支保留分支的提交记录，删除分支不受影响
 
 
+git branch --set-upstream-to origin/20210319 20210319 （本地建完分支后，把本地分支合并到远程分支）
+
+
 ## 版本管理
 
 回退版本：
