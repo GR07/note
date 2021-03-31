@@ -1,9 +1,19 @@
-// 我的理解 mixin 就是对一部分操作流程进行抽出复用
+# mixin是什么
+
+mixin 就是对一部分操作流程进行抽出复用，本质其实就是一个 js 对象，可以包含组件中任意功能选项，如 data、components、methods 、created、computed 等等。
 
 
-// 例子：
+# 冲突问题
 
-// 功能一模态框
+1. 当组件存在与 mixin 对象相同的选项的时候，递归合并的时候，组件会覆盖 mixin 的选项
+
+2. 如果选项为生命周期钩子的时候，会合并成一个数组，先执行 mixin 的钩子，再执行组件的钩子
+
+
+# 常规例子
+
+```js
+// 组件一
 const Modal = {
     template: '#modal',
     data() {
@@ -21,7 +31,7 @@ const Modal = {
     }
 }
 
-// 功能二提示框
+// 组件二
 const Tooltip = {
     template: '#tooltip',
     data() {
@@ -40,7 +50,7 @@ const Tooltip = {
 }
 
 
-// 以上的逻辑是一样的 我们可以在这里提取逻辑并创建可以被重用的项
+// 以上的逻辑是一样的 可以提取逻辑并创建可以被重用的项
 const toggle = {
     data() {
         return {
@@ -69,14 +79,4 @@ const Tooltip = {
         appChild: Child
     }
 };
-
-
-
-// mixins 中的生命周期函数仍然是可用的
-
-// 默认Mixin上会首先被注册，组件上的接着注册，这样我们就可以在组件中按需要重写Mixin中的语句，组件拥有最终发言权。
-
-// 就是组件的生命周期会覆盖掉 mixin 的生命周期。
-
-// 注意：mixin 的并没有被销毁，它只是被重写了。
-
+```
