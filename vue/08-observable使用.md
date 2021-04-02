@@ -1,8 +1,8 @@
 # 用处
 
-让一个对象变成响应式数据，会在发生变更时触发相应的更新。也可以作为最小化的跨组件状态存储器。
+就是把一个对象变成响应式数据，也可以作为最小化的跨组件状态存储器。
 
-Vue.observable({ count : 1}) 作用等于 new vue({ count : 1})
+Vue.observable({ count : 1}) 作用等同于 new vue({ count : 1})
 
 
 
