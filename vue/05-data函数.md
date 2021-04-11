@@ -24,6 +24,25 @@ Component.prototype.data = function (){
 }
 ```
 
+例子二
+```js
+function F() {}
+
+F.prototype.data = {
+    a: 1
+}
+
+const obj1 = new F();
+const obj2 = new F();
+console.log(`obj1`, obj1.data.a); // 1
+console.log(`obj2`, obj2.data.a); // 1
+
+obj1.data.a = 2
+
+console.log(`obj1`, obj1.data.a); // 2
+console.log(`obj2`, obj2.data.a); // 2
+```
+
 
 
 # 实例定义 data

@@ -135,7 +135,7 @@ function flushCallbacks () {
 
 都可以正确的找到 vue 实例。
 
-因为实例方法 this.$nextTick 是做了进一步封装，把 this 设置为了当前 Vue 实例，所以实例里 箭头函数 普通函数 this 都指向实例。
+因为实例方法 this.$nextTick 为方便起见只是做了进一步封装，把 this 设置为了当前 Vue 实例，所以实例里 箭头函数 普通函数 this 都指向实例。
 
 
 
