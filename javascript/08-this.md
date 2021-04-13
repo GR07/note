@@ -172,3 +172,57 @@ Cat.prototype.sayName = () => {
 const cat = new Cat('mm');
 cat.sayName()
 ```
+
+
+# vue 
+
+在Vue所有的生命周期钩子方法（如created，mounted， updated以及destroyed）里使用this，this指向调用它的Vue实例
+
+如果箭头函数被非箭头函数包含，则this绑定的是最近一层非箭头函数的this;否则，this的值会被设置为全局对象。
+
+```js
+<script type="text/javascript">
+    var message = "Hello!";
+    var app = new Vue({
+        el:"#app",
+        data:{
+            message: "你好！"
+        },
+        created: function() {
+          this.showMessage1();  
+          this.showMessage2();  
+        },
+        methods:{
+            showMessage1:function(){
+                // 对于普通函数（包括匿名函数），this指的是直接的调用者
+                setTimeout(function() {
+                   document.getElementById("id1").innerText = this.message;  // Hello!
+                }, 10)
+            },
+            showMessage2:function() {
+                // 箭头函数是没有自己的this，在它内部使用的this是由它定义的宿主对象决定，这里就是指向 （showMessage2 function）又指向 实例
+                setTimeout(() => {
+                   document.getElementById("id2").innerText = this.message;  // 你好！
+                }, 10)
+            }
+        }
+    });
+</script>
+```
+```js
+// 绑定vue实例到this的方法
+// 使用bind
+showMessage1:function(){
+    setTimeout(function() {
+       document.getElementById("id1").innerText = this.message;  //this 3
+    }.bind(this), 10)
+}
+
+// this 赋值
+showMessage1:function(){
+    var self = this;
+    setTimeout(function() {
+       document.getElementById("id1").innerText = self.message;  //改为self
+    }.bind(this), 10
+}
+```
