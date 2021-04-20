@@ -43,6 +43,8 @@ loader 让 webpack 能够去处理其他类型的文件。
 
 并将它们转换为有效 模块，以供应用程序使用，以及被添加到依赖图中。
 
+配置里的 module.rules 数组配置了一组规则，告诉 Webpack 在遇到哪些文件时使用哪些 Loader 去加载和转换。
+
 
 #### loader 有两个属性：
 
@@ -53,17 +55,35 @@ loader 让 webpack 能够去处理其他类型的文件。
 ##### 注意：在 webpack 配置中定义 rules 时，要定义在 module.rules 而不是 rules 中。
 
 ```js
+// npm i -D style-loader css-loader
+
+// 告诉 Webpack 在遇到以 .css 结尾的文件时先使用 css-loader 读取 CSS 文件，再交给 style-loader 把 CSS 内容注入到 JavaScript 里
 module.exports = {
   module: {
     rules: [
         // 两个必须属性：test 和 use
-        // 嘿，webpack 编译器，当你碰到「在 require()/import 语句中被解析为 '.txt' 的路径」时，在你对它打包之前，先 使用 raw-loader 转换一下。”
-        // 使用正则表达式匹配文件时，你不要为它添加引号。
-        { test: /\.txt$/, use: 'raw-loader' }
+        {
+            // 用正则去匹配要用该 loader 转换的 CSS 文件
+            test: /\.css$/,
+            // use 属性的值需要是一个由 Loader 名称组成的数组，Loader 的执行顺序是由后到前的；
+            // 每一个 Loader 都可以通过 URL querystring 的方式传入参数，例如 css-loader?minimize 中的 minimize 告诉 css-loader 要开启 CSS 压缩。具体支持去看 相应的 loader 介绍
+            use: ['style-loader', 'css-loader?minimize'],
+        }
     ]
   }
 };
 
+
+// 还可以通过 Object 传入，等同于上面
+use: [
+  'style-loader', 
+  {
+    loader:'css-loader',
+    options:{
+      minimize:true,
+    }
+  }
+]
 ```
 
 
