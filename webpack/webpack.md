@@ -231,6 +231,13 @@ package.json 的 "sideEffects" 属性来实现
 
 从 webpack 4 开始，也可以通过 "mode" 配置选项轻松切换到压缩输出，只需设置为 "production"。
 
+2021.4.23补充：（未验证）
+
+使用uglifyjs-webpack-plugin插件代替webpack自带UglifyJsPlugin插件来压缩JS文件；
+生产环境关闭源码映射，一方面能减少代码包的大小，另一方面也有利于系统代码安全；
+清除打印日志和debugger信息；配置SplitChunks 抽取公有代码，提升你的应用的性能
+
+
 ```js
 module.exports = {
     entry: './src/index.js',
@@ -400,6 +407,10 @@ ___CSS_LOADER_EXPORT___.push([module.i, \"body {\\r\\n    color: blue;\\r\\n}\",
 使用 npm install --save-dev mini-css-extract-plugin
 
 主要是为了抽离css样式，防止将样式打包在js中引起页面样式加载错乱的现象。
+
+2021.4.23补充（未验证）
+
+并使用optimize-css-assets-webpack-plugin来压缩CSS文件 
 
 
 

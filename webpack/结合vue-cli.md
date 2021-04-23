@@ -490,3 +490,12 @@ module.exports = {
 };
 
 ```
+
+# zip 压缩
+
+问题：Cannot read property ‘tapPromise‘ of undefined
+
+卸载高版本 npm uninstall compression-webpack-plugin
+
+安装低版本 npm i compression-webpack-plugin@5.0.1
+ 
