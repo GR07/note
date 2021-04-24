@@ -116,6 +116,40 @@ console.log(myIns({}, Parent) );   // false
 ```
 
 
+# 实现 bind
+
++ 思路：
+
+1. bind() 方法会创建一个新函数不执行。
+
+2. 当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。
+
++ 由此可想，一定是返回一个函数，并且可以接收参数作为函数的 this
+
+```js
+// 实现-初步
+Function.prototype.myBind = function (context) {
+  // 这里 this 指向 Function.prototype，因为 myBind 被 Function.prototype 调用
+  // 目的是为了借用 Function 原型上的 apply() 方法
+  const self = this; 
+  return function () {
+    self.apply(context)
+  }
+}
+
+
+// 实现-支持传参
+Function.prototype.myBind = function (context) {
+  const self = this;
+  const arg = [...arguments].slice(1);
+  return function () {
+    self.apply(context, [...arg, ...arguments])
+  }
+}
+```
+
+
+
 
 # 实现 jquery
 
