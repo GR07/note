@@ -222,7 +222,7 @@ var groupedPeople = groupBy(people, 'age');
 // 数组去重
 let myArray = ['a', 'b', 'a', 'b', 'c', 'e', 'e', 'c', 'd', 'd', 'd', 'd']
 let myOrderedArray = myArray.reduce(function (accumulator, currentValue) {
-  if (accumulator.indexOf(currentValue) === -1) {
+  if (!accumulator.includes(currentValue)) {
     accumulator.push(currentValue)
   }
   return accumulator

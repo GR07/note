@@ -1,11 +1,20 @@
 # NextTick 是什么
 
+vue 的数据响应过程包含：数据更改 -> 通知 Watcher -> 更新 DOM。
+
+当我们自己调用 nextTick 的时候，它就在更新 DOM 的那个 microtask 后追加了我们自己的回调函数，从而确保我们的代码在DOM更新后执行。
+
 nextTick 是 vue 一种更新机制，异步更新dom，当数据改变时不会立即更新 dom，会等同一事件循环内的所有数据都操作完成后，再统一更新 dom。
 
 如果同一个 watcher 被多次触发，只会被推入到队列中一次。
 
+更新数据，立即获取更新后的 dom 是获取不到的，所以得把获取 dom 加到事件队列的栈，异步获取更新后的 dom。
+
 Vue 在内部对异步队列会尝试使用原生的 Promise.then、MutationObserver 和 setImmediate，如果执行环境不支持，则会采用 setTimeout(fn, 0) 代替。
 
+所以 nextTick 优先放入微任务执行，而 setTimeout 是宏任务，因此 nextTick 一般情况下总是先于 setTimeout 执行。
+
+微任务的响应速度相比setTimeout（下一个宏任务）会更快，因为无需等待UI渲染。
 
 等待同一事件循环中的所有数据变化完成之后，会将队列中的事件拿来进行处理，进行DOM的更新
 
