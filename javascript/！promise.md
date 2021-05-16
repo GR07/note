@@ -96,3 +96,80 @@ function co() {
     h(back1)
 }
 ```
+
+
+# 手写 promise
+
+```js
+
+const PENDING = 'pending'
+const FULFILLED = 'fulfilled'
+const REJECTED = 'rejected'
+
+class MyPromise {
+    constructor(executor) {
+        
+        executor(this.resolve, this.reject)
+        // 初始状态
+        this.status = PENDING;
+
+        // 成功的数据
+        this.value = undefined;
+        // 失败的数据
+        this.reason = undefined;
+
+        // 缓存then传入的方法，待后续异步结果返回后使用
+        this.sucfn = undefined;
+        this.faifn = undefined;
+    }
+    
+
+
+    
+    
+    resolve = (data) => {
+        if (this.status !== PENDING) return
+        this.status = FULFILLED;
+        this.succData = data;
+        this.sucfn(data)
+    }
+
+    reject = (data) => {
+        if (this.status !== PENDING) return
+        this.status = REJECTED;
+        this.errorData = data;
+        this.faifn(data)
+    }
+
+    
+
+    then = (successCB, failCB) => {
+        if (this.status === FULFILLED) {
+            successCB(this.value)
+        } else if (this.status === REJECTED) {
+            failCB(this.reason)
+        } else {
+            this.sucfn = successCB;
+            this.faifn = failCB;
+        }
+        
+    }
+
+}
+
+// 使用
+const fs = require('fs');
+
+const myPromise = new MyPromise((resolve, reject) => {
+    fs.readFile('./aa.txt', 'utf8', function (err, data) {
+        if (data) {
+            resolve(data)
+        }
+         else {
+            reject(err.errno)
+        }
+    })
+})
+
+myPromise.then((data) => { console.log(data); }, (err) => { console.log(err); })
+```
