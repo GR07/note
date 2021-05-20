@@ -189,6 +189,7 @@ eval-source-map组合使用是指将.map以DataURL的形式引入到打包好的
 
 ## 热更新 webpack-dev-server
 
+基于 webSocket 实现
 
 ### watch
 
