@@ -1,3 +1,11 @@
+# 如何配置 http 缓存
+
+可以是 ng 设置的，也可以后端代码写的。
+
+比如 静态资源 图片之类的 就可以 ng 设置比较合适，动态资源就是后端代码写的比较合适。
+
+
+
 http 缓存：
 
 
@@ -13,9 +21,9 @@ http 缓存：
 
 1.Pragma
 
-2.Expires
+2.Expires http1.0 new Date(2020.5.10) 绝对时间，会导致服务器时间与浏览器时间不一致的问题
 
-3.Cache-Control
+3.Cache-Control http1.1 max-age 一定时间内
 
 
 协商缓存：
@@ -89,7 +97,7 @@ no-store
 
 no-cache
 
-在浏览器使用缓存前，会往返对比ETag，如果ETag没变，返回304，则使用缓存。
+只是不使用强缓存 而去使用协商缓存，在浏览器使用缓存前，会往返对比ETag，如果ETag没变，返回304，则使用缓存。
 
 除了no-cache和no-store，Cache-Control头的取值还有：
 
