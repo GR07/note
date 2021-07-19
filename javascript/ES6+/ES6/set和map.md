@@ -165,13 +165,10 @@ let map = new Map(Object.entries(obj));
 var map = new Map();
 var weakmap = new WeakMap();
 
-(function IIFE(){
-    var k1 = {x: 1};
-    var k2 = {y: 2};
+# WeakMap
 
-    map.set(k1, 'k1');
-    weakmap.set(k2, 'k2');
-})()
+只接受对象作为键名（null除外），不接受其他类型的值作为键名
 
-map.forEach((val, key) => console.log(key, val))
-// Weakmap. forEach(...) ERROR!
+键名是弱引用，键值可以是任意的，键名所指向的对象可以被垃圾回收，此时键名是无效的
+
+不能遍历
