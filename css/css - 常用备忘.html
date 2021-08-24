@@ -1,30 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>css常用备忘</title>
   <style>
     /* 应用字符编码 */
-    <div v-text="remark" style="white-space: pre-wrap;"></div>
-
+    <div v-text="remark"style="white-space: pre-wrap;"></div>
     /* 1、:nth-child() 选择器 */
     选择器匹配属于其父元素的第 N 个子元素，不论元素的类型，n 可以是数字、关键词或公式。
-
     /* 2、:nth-of-type(n) */
     选择器匹配属于父元素的特定类型的第 N 个子元素的每个元素，n 可以是数字、关键词或公式。
-
     /* :nth-child(2) */
     div下main的第二个子元素，不区分类型
-
-
     /* :last-child */
-    注意：:last-child 这里父元素的子元素一定是css指定元素才生效
-    表示其父元素的最后一个子元素，且这个元素是css指定的元素，才可以生效。
-
-
+    注意：:last-child 这里父元素的子元素一定是css指定元素才生效 表示其父元素的最后一个子元素，且这个元素是css指定的元素，才可以生效。
     /* :last-of-type */
     :last-of-type表示其父元素下的最后一个指定类型的元素，不必要求父元素最后一个子元素与css指定元素一样！！！！
-    
+
     /* 最后一个.guor */
     .a {
       .guor:last-of-type {
@@ -32,36 +25,41 @@
       }
     }
 
+    /* 除了最后一个元素 */
 
+    .desc-li:not(:last-child) {
+      color: aquamarine;
+    }
+
+
+    /* 只选择一代子元素 */
+    >.item
 
     /*改变 placeholder 样式*/
-    ::-webkit-input-placeholder { color:#f00; }
-    input:-moz-placeholder { color:#f00; }
+    ::-webkit-input-placeholder {
+      color: #f00;
+    }
+
+    input:-moz-placeholder {
+      color: #f00;
+    }
 
 
 
     /*伪类画斜线*/
-    .item
-        display: inline-block
-        margin-right: 30px
-        a
-          color: #fff
-          position:relative
-          font-size: 14px
-        a::before
-          content:"";
-          position:absolute;
-          left:16px;
-          top: 5px;
-          width:100%;
-          height:10px;
-          box-sizing:border-box;
-          border-right:1px solid #fff;
-          transform-origin:right center;
-          transform:rotateZ(25deg) scale(1.414);
-          animation:slash 5s infinite ease;
+    .item display: inline-block margin-right: 30px a color: #fff position:relative font-size: 14px a::before content:"";
+    position:absolute;
+    left:16px;
+    top: 5px;
+    width:100%;
+    height:10px;
+    box-sizing:border-box;
+    border-right:1px solid #fff;
+    transform-origin:right center;
+    transform:rotateZ(25deg) scale(1.414);
+    animation:slash 5s infinite ease;
 
-    
+
     /*首行缩进：
     text-indent: 5em; 无法将该属性应用于行内元素，属性可以继承*/
 
@@ -92,7 +90,7 @@
     /*剪裁图片：
     img {position:absolute;clip:rect(0px 50px 200px 0px)}*/
 
-    
+
 
     /*单行元素的文本省略号*/
     p {
@@ -113,9 +111,9 @@
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
-      overflow:hidden;
+      overflow: hidden;
     }
-    
+
     /* 禁用点击 */
     cursor: default;
     pointer-events: none;
@@ -139,19 +137,7 @@
 
 
     /*设定一个宽高相等的容器*/
-    .image-header
-      position: relative
-      width: 100%
-      height: 0
-      padding-top: 100%
-      img
-        position: absolute
-        top: 0
-        left: 0
-        width: 100%
-        height: 100%
-
-    
+    .image-header position: relative width: 100% height: 0 padding-top: 100% img position: absolute top: 0 left: 0 width: 100% height: 100%
     /*最大高度滚动
     max-height: 217px;
     overflow: hidden;*/
@@ -165,15 +151,8 @@
 
 
 
-    引入fastClick解决300ms延迟
-    import fastClick from 'fastclick'
+    引入fastClick解决300ms延迟 import fastClick from 'fastclick'
     fastClick.attach(document.body)
-
-
-
-
-
-
     /*命名规范
 
     外层容器：content-wrapper
@@ -198,13 +177,12 @@
 
     售价：price
 
-    历时售价：oldPrice*/ 
-
-
-
+    历时售价：oldPrice*/
   </style>
 </head>
+
 <body>
-  
+
 </body>
+
 </html>
