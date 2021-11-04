@@ -13,6 +13,13 @@ npm install --registry=https://registry.npm.taobao.org
 npm install @vue/cli -g
 
 
+## yarn 安装vue-cli后 vue --version 提示不是内部命令解决方案
+https://blog.csdn.net/ddx2019/article/details/104487161
+
+
+## 先清yarn 的缓存 yarn cache clean, 然后再重新 yarn即可
+
+问题描述：报错 yarn ：Fetching packages... error An unexpected error occurred: "C:\\Users\\***\\AppData\\Local\\Y..
 
 ## 创建项目
 vue create my-project

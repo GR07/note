@@ -177,7 +177,7 @@ git commit 把暂存区的东西一次性提交到分支
 
 + git branch --set-upstream-to origin/20210319 20210319 （本地建完分支后，把本地分支合并到远程分支）
 
-
++ cd .\shared\  进入文件夹 
 
 # 模块管理
 
