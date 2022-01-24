@@ -131,11 +131,11 @@ TRACE: 回显服务器收到的请求，主要用于测试或诊断
 
 # 拿到数据渲染页面
 
-1. 解析 HTML 文件构建 DOM 树
+1. 解析 HTML 文件构建 DOM 树 
 
-2. 解析 CSS 文件构建渲染树
+2. 解析 CSS 文件构建渲染树 (重新计算元素的几何属性，并重新构建渲染树，这个过程称为 "重排")
 
-3. 渲染树构建完成后，浏览器把渲染树绘制到屏幕
+3. 渲染树构建完成后，浏览器把渲染树绘制到屏幕 (完成重排后，要将重新构建的渲染树渲染到屏幕上，这个过程就是 "重绘")
 
 4. JS 解析是由浏览器中的 v8 引擎完成
 
@@ -145,3 +145,107 @@ TRACE: 回显服务器收到的请求，主要用于测试或诊断
 
 7. JS 执行机制就可以看做是 一个主线程（同步任务）+ 一个任务队列（异步任务）
 
+
+# 重绘和重排
+
+
+## 会触发重排的情况
+
+重排发生的根本原理就是元素的几何属性发生了改变
+
+- 添加或删除可见的DOM元素
+
+- 元素位置改变
+
+- 元素本身的尺寸发生改变
+
+- 内容改变
+
+- 页面渲染器初始化
+
+- 浏览器窗口大小发生改变
+
+
+## 如何进行性能优化
+
+
+- 合并所有的改变一次处理。这样就只会修改DOM节点一次，比如改为使用cssText属性实现
+
+```js
+// 下面会重排三次
+var el = document.querySelector('.el');
+el.style.borderLeft = '1px';
+el.style.borderRight = '2px';
+el.style.padding = '5px';
+```
+
+```js
+var el = document.querySelector('.el');
+el.style.cssText = 'border-left: 1px; border-right: 2px; padding: 5px';
+```
+
+
+- 还有一种减少重排的方法就是切换类名，而不是使用内联样式的cssText方法
+
+```js
+// css 
+.active {
+  padding: 5px;
+  border-left: 1px;
+  border-right: 2px;
+}
+// javascript
+var el = document.querySelector('.el');
+el.className = 'active';
+```
+
+
+- 批量修改DOM方法
+
+以上2种方式 改变样式最小化仅适用于单个存在的节点。
+
+但是我们需要对DOM元素进行多次修改，比如增加10个dom元素，那么必然会有dom操作，可以用批量修改DOM方法。
+
+批量修改DOM元素的核心思想是三步：
+
+1. 让元素脱离文档流
+
+2. 对元素进行多重改变
+
+3. 将元素带回文档流
+
+display:none隐藏后不占据额外空间，它会产生回流和重绘，而visibility:hidden和opacity:0元素虽然隐藏了，但它们仍然占据着空间，它们俩只会引起页面重绘。
+
+上述三个过程引发2次重排，第一步和第三步，如果没有这两步，可以想象一下，第二步每次对DOM的增删都会引发一次重排。
+
+所以核心思想就是脱离文档流，下面说下三种可以使元素可以脱离文档流的方法，注意，这里不使用css中的浮动&绝对定位，这是风马牛不相及的概念。
+
+- 隐藏元素，进行修改后，然后再显示该元素
+
+```js
+// 这种方法造成2次重排，分别是控制元素的显示与隐藏。
+let ul = document.querySelector('#mylist');
+ul.style.display = 'none';
+appendNode(ul, data);
+ul.style.display = 'block';
+```
+
+- 使用文档片段创建一个子树，然后再拷贝到文档中
+
+```js
+// 只在添加文档片段的时候涉及到了一次重排。
+// 它设计的目的就是用于更新，移动节点之类的任务，而且文档片段还有一个好处就是，当向一个节点添加文档片段时，添加的是文档片段的子节点群，自身不会被添加进去。不同于第一种方法，这个方法并不会使元素短暂消失造成逻辑问题
+let fragment = document.createDocumentFragment();
+appendNode(fragment, data);
+ul.appendChild(fragment);
+```
+
+- 将原始元素拷贝到一个独立的节点中，操作这个节点，然后覆盖原始元素
+
+```js
+// 可以看到这种方法也是只有一次重排。总的来说，使用文档片段，可以操作更少的DOM（对比使用克隆节点），最小化重排重绘次数。
+let old = document.querySelector('#mylist');
+let clone = old.cloneNode(true);
+appendNode(clone, data);
+old.parentNode.replaceChild(clone, old);
+```

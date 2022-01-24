@@ -172,6 +172,8 @@ git commit 把暂存区的东西一次性提交到分支
 
 + git merge name 合并某分支到当前分支
 
++ git checkout -b dev 5f8fe57 恢复本地删除的分支
+
 
 + git merge --no-ff -m "" name 合并分支保留分支的提交记录，删除分支不受影响
 
