@@ -91,6 +91,8 @@ Vue.component("test", config)
 
 # template 与 render 写法
 
+- Vue 的 template 模板实际上通过 Vue.compile() 被编译成了渲染函数，这是一个实现细节。
+
 ```js
 // template
 <template>
@@ -146,6 +148,26 @@ export default {
   }
 }
 ```
+
+- 函数式组件
+
+如果不需要生命周期、状态管理，我们可以将组件标记为 functional，这意味它无状态 (没有响应式数据)，也没有实例 (没有 this 上下文)。一个函数式组件就像这样：
+
+```js
+Vue.component('my-component', {
+  functional: true,
+  // Props 是可选的
+  props: {
+    // ...
+  },
+  // 为了弥补缺少的实例
+  // 提供第二个参数作为上下文
+  render: function (createElement, context) {
+    // ...
+  }
+})
+```
+
 
 # JSX 和 Render 函数的区别
 
@@ -214,3 +236,7 @@ export default {
       ]
     }
     ```
+
+
+
+
