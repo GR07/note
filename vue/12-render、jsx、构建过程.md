@@ -1,45 +1,35 @@
+# Vue 构建页面过程：
 
-高效地更新所有这些 html DOM 节点会是比较困难的，不过所幸你不必手动完成这个工作。
+1. 先看new Vue()里面有没有el (挂载点)，如果没有就等后面的.$mount("#app")触发
 
-在以下这两种情况下，Vue 都会自动保持页面的更新，即便 blogTitle 发生了改变。
+2. 找到挂载点后，再判断有没有 render 函数选项，render 函数得到 createElement() 创建返回的 VNode 之后，把 VNode 返回给 new Vue() 的 .$mount("#app")
 
-```js
-// template 模板
-<h1>{{ blogTitle }}</h1>
-```
+3. 没有 render 函数选项，再判断有没有 template 模板，
 
-```js
-// render 渲染函数
-render: function (createElement) {
-  return createElement('h1', this.blogTitle)
-}
-```
+4. 有 template 模板，通过 Vue.compile() 把 template 模板 编译成 render 函数生成 VNode，如果没有，
 
+5. 没有 template 模板，只好用 el 挂载的 外部 HTML 结构，去生成 template 模板 => Vue.compile() => render 函数 => .$mount("#app")。
+
+- 优先级
+
+render > template > el
 
 
-# render函数是什么
 
-Vue 推荐在绝大多数情况下使用模板来创建你的 HTML。
+# render 作用
 
-“虚拟 DOM”是我们对由 Vue 组件树建立起来的整个 VNode 树的称呼。
+render 函数 和 template 模板 都是用来返回 VNode 最终创建 html真实dom，（VNode是为了达到高效更新dom）
 
-render 和 template模板 都是用来返回虚拟dom 最终创建 html
+render函数是组件渲染的重要核心，它跟template模板开发一样，只不过是另一种形式开发，但 render 比 template 模板更接近编译器，这样能让Vue编译时少转换一次。
 
-render函数是组件渲染的重要核心，它跟template模板开发一样，只不过是另一种形式开发，但render比template模板更接近编译器，这样能让Vue编译时少转换一次。
+但是有些场景中用 template 实现起来代码冗长繁琐而且有大量重复，这时候就可以用 render 函数。
+
+render 函数得到 createElement() 创建返回的 VNode 之后，返回给 new Vue() 的 mount 函数，
+
+渲染成真实 DOM 节点，并挂载到根节点上。
 
 
-# main.js 中的 render
-
-我们都知道Vue项目入口文件main.js里面有个render函数长下面这样，是将项目的App根组件，挂载到根实例上通过render渲染。
-
-```js
-// main.js
-new Vue({
-  render: h => h(App)
-}).$mount('#app')
-```
-
-# render函数的使用
+# render 使用
 
 - 函数返回值是一个 VNode 虚拟dom
 
@@ -62,6 +52,7 @@ new Vue({
         - 子级虚拟节点 (VNodes)，由 `createElement()` 构建而成，也可以使用字符串来生成 “文本虚拟节点” 。可选。
 
 ```js
+// 示例一
 // index.js
 export default {
   data() {
@@ -88,10 +79,48 @@ import config from "./index.js"
 Vue.component("test", config)
 ```
 
+```js
+// 示例二
+ render: function (createElement) {
+   let _this = this['$options'].parent	// 我这个是在 .vue 文件的 components 中写的，这样写才能访问this
+   let _header = _this.$slots.header   	// $slots: vue中所有分发插槽，不具名的都在default里
+ 
+   /**
+    * createElement 本身也是一个函数，它有三个参数
+    * 返回值: VNode，即虚拟节点
+    */
+   return createElement(       
+     // 1. 要渲染的标签名称：第一个参数【必需】      
+     'div',   
+     // 2. 1中渲染的标签的属性，详情查看文档：第二个参数【可选】
+     {
+       style: {
+         color: '#333',
+         border: '1px solid #ccc'
+       }
+     },
+     // 3. 1中渲染的标签的子元素数组：第三个参数【可选】
+     [
+       'text',   // 文本节点直接写就可以
+       _this.$slots.default,  // 所有不具名插槽，是个数组
+       createElement('div', _header)   // createElement()创建的VNodes
+     ]
+   )
+ }
+```
 
-# template 与 render 写法
+
+# template 与 render 
 
 - Vue 的 template 模板实际上通过 Vue.compile() 被编译成了渲染函数，这是一个实现细节。
+
+- 作用 都是用来返回 VNode 最终创建 html 真实 dom
+
+- 性能 render 比 template 模板更接近编译器，这样能让Vue编译时少转换一次。
+
+- 优先级 new Vue({}) 选项中 render（高） template（低） 
+
+- 都会挂载到 el，并替换整个 el: '#app' dom
 
 ```js
 // template
@@ -124,12 +153,15 @@ export default {
 ```
 
 
-
 # 什么是 JSX
 
 - jsx 是 js 和 XML 结合的一种格式，是 js 的扩展语法。js 在解析 jsx 时会先创建虚拟 DOM，jsx 最后会被编译为 js 代码执行。
 
-- jsx 的出现是为了解决 render 函数（createElement函数）层级嵌套可读性较差，jsx 相当于是 createElement 的语法糖，可以直接使用 template 模板那种格式在 render 函数里写。
+- jsx 的出现是为了解决 render 函数（createElement函数）层级嵌套可读性较差
+
+- jsx 相当于是 createElement 的语法糖，可以直接使用 template 模板那种格式在 render 函数里写。
+
+- JSX 和 Render 函数，除了写法不一样外，没什么不同，属性都是遵循 Vue 文档。
 
 ```js
 // jsx 写法
@@ -148,6 +180,7 @@ export default {
   }
 }
 ```
+
 
 - 函数式组件
 
@@ -168,16 +201,7 @@ Vue.component('my-component', {
 })
 ```
 
-
-# JSX 和 Render 函数的区别
-
-除了写法不一样外，没什么不同，属性都是遵循 Vue 文档。
-
-
-
-
-
-# 兼容性配置
+# JSX兼容性 工程配置
 
 - 如果你的项目是Webpack搭建，babel@6的情况
 
@@ -239,4 +263,47 @@ Vue.component('my-component', {
 
 
 
+# $el 和 el 区别
 
+el 是 html页面里面的最初挂载点的 dom 结构
+
+$el 是通过 vue 实例创建的 dom
+
+最终 $el 会 替换掉 el 也就是完成了实例的挂载
+
+
+
+# $mount 和 $el 的区别：
+
+两者在使用效果上没有任何区别，都是为了将实例化后的vue挂载到指定的dom元素中。
+
+注：当 new Vue({...}) 中没有 el 属性时，生命周期暂停，等待vm.$mount(el)调用时才继续
+
+```js
+// 两者作用相同
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount("#app");
+
+new Vue({
+  el: '#app',
+  router,
+  store,
+  render: h => h(App)
+});
+```
+
+
+
+
+
+
+
+# innerHTML outerHTML 区别
+
+innerHTML 不包括 Html 标签
+
+outerHTML 包含 Html 标签本身
