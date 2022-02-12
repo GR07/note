@@ -10,6 +10,126 @@
 </style>
 ```
 
+# 选择器
+
+```html
+<style>
+/* 匹配属于其父元素的第 N 个子元素，n 可以是数字、关键词或公式 :nth-child(n) */
+
+
+/* 匹配属于父元素的特定类型的第 N 个子元素，n 可以是数字、关键词或公式 :nth-of-type(n) */
+
+
+/* 匹配其父元素的最后一个子元素，且是特定的类型，才可以生效 :last-child */
+
+
+/* 匹配其父元素的最后一个指定 class 的元素 :last-of-type */
+.xxx {
+  .guor:last-of-type {
+    opacity: 0.75;
+  }
+}
+
+
+/* 除了最后一个元素 :not(:last-child) */
+.tag {
+  padding: 3px 8px;
+  background: #f4f7fc;
+  border-radius: 2px;
+  margin-right: 8px;
+  color: #03050d;
+  font-size: 12px;
+}
+.tag:not(:last-child) {
+  color: aquamarine;
+}
+
+
+/* 只选择直接子元素 */
+>.item
+
+</style>
+```
+
+# 改变 placeholder 样式
+
+```html
+<style>
+::-webkit-input-placeholder {
+  color: #f00;
+}
+
+input:-moz-placeholder {
+  color: #f00;
+}
+</style>
+```
+
+# 首行缩进
+
+text-indent: 5em; 无法将该属性应用于行内元素，属性可以继承
+
+
+# 文字间隔
+
+word-spacing 属性接受一个正长度值或负长度值
+
+
+# 字母间隔
+
+letter-spacing 属性与 word-spacing 的区别在于，字母间隔修改的是字符或字母之间的间隔。*/
+
+
+# 文本大小写
+
+text-transform: uppercase
+
+
+# 文本装饰线
+
+text-decoration: none;
+
+
+# 文档空白符处理
+
+- 合并空格忽略回车：white-space: normal;
+
+- 保留原始回车和空格：white-space: pre-wrap;
+
+- 只保留回车：white-space: pre-line;
+
+
+# 剪裁图片
+
+```html
+<style>
+img {
+  position: absolute;
+  clip: rect(0px 50px 200px 0px)
+}
+</style>
+```
+
+
+# 最大高度滚动
+
+```html
+<style>
+.wrap {
+  max-height: 217px;
+  overflow: hidden;
+}
+</style>
+```
+
+
+
+# 应用字符编码
+
+```html
+<div v-text="remark"style="white-space: pre-wrap;"></div>
+```
+
 
 # 设定一个宽高相等的容器
 
@@ -174,7 +294,10 @@
 
 # 给图片同时设置高宽
 
-- 同时，给 <img> 标签同时写上高宽，可以在图片未加载之前提前占住位置，避免图片从未加载状态到渲染完成状态高宽变化引起的重排问题。
+- 用到图片时，用 span 标签，并设置为背景图片，设置固定宽高width/height，设置background-size（图片大小），设置background-repeat
+
+
+- 给 <img> 标签同时写上高宽，可以在图片未加载之前提前占住位置，避免图片从未加载状态到渲染完成状态高宽变化引起的重排问题。
 
 - object-fit 如何适应它的父容器的高宽，避免图片被拉伸
 
