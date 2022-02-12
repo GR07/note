@@ -1,14 +1,4 @@
-# 文本超出容器不会折行
 
-```html
-<div class="wrap"></div>
-<style>
-  .wrap {
-    overflow: hidden;
-    white-space: nowrap;
-  }
-</style>
-```
 
 # 选择器
 
@@ -267,6 +257,19 @@ img {
 }
 </style>
 ```
+
+# 文本超出容器不折行
+
+```html
+<div class="wrap"></div>
+<style>
+  .wrap {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+</style>
+```
+
 
 # 最小宽度 min-width
 
