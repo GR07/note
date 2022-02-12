@@ -46,6 +46,8 @@ render 函数得到 createElement() 创建返回的 VNode 之后，返回给 new
       2. {Object}
 
         - 一个与模板中 attribute 对应的数据对象。可选。
+        
+        - 如果没有，那么通常可以将 children 作为第二个参数传入。如果会产生歧义，可以将 null 作为第二个参数传入，将 children 作为第三个参数传入。
 
       3. {String | Array}
       

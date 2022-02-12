@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flex</title>
 
-    <style>
         /* 6个容器属性 */
 
         /* 分为 主轴（x轴），交叉轴（y轴） */
@@ -108,15 +101,29 @@
         /* baseline: 项目的第一行文字的基线对齐。 */
 
 
-        
 
 
 
 
+# 场景
 
-    </style>
-</head>
-<body>
-    
-</body>
-</html>
+- 左固定 右自适应
+```html
+<div class="g-app-wrapper">
+    <div class="g-sidebar"></div>
+    <div class="g-main"></div>
+</div>
+<style>
+.g-app-wrapper {
+    display: flex;
+    min-width: 1200px;
+}
+.g-sidebar {
+    flex-basis: 250px;
+    margin-right: 10px;
+}
+.g-main {
+    flex-grow: 1;
+}
+</style>
+```
