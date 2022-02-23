@@ -202,10 +202,14 @@ function patchVnode(oldVnode: VNode, vnode: VNode, insertedVnodeQueue: VNodeQueu
 
 4. 末个旧节点 与 首个新节点，调用sameVnode(key和sel相同)比对是否相同节点
 
-5. 以上4种都查不到的话就执行第5种情况，旧节点的每一项去遍历新节点，直到找到相同节点，然后位移到旧节点，若没有找到在就旧节点创建一个
+5. 以上4种都查不到的话就执行第5种情况，去旧节点的每一项找跟新节点一点的节点，直到找到相同节点，然后位移到旧节点的首个，若没有找到在就旧节点首个创建一个新节点
 
+- 整个过程
 
-上述5种是一次循环的执行过程，在每次循环里，只要执行了上述的情况的5种之一就会结束这一次循环，然后执行 patchVnode 找出两者之间的差异，更新视图。
+1. 上述5种是一次循环的执行过程，在每次循环里，只要执行满足了上述的情况的5种之一情况，就会结束这一次循环。
 
+然后执行 patchVnode 找出两者之间的差异，更新视图。
 
-- 循环结束的条件 直到 oldStartIdx>oldEndIdx || newStartIdx>newEndIdx(代表旧节点或者新节点已经遍历完）
+2. 然后 oldEndIdx递增或递减 / newEndIdx递增或递减
+
+3. 直到 oldStartIdx > oldEndIdx || newStartIdx > newEndIdx (代表旧节点或者新节点已经遍历完）循环结束。
