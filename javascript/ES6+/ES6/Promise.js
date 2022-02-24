@@ -6,11 +6,11 @@
  * 点击、激活焦点、失去焦点、ajax请求数据，这些都属于异步编程。
  */
 
-  
+
 
 // Promise构造函数只有一个参数，该参数是一个函数，被称作执行器，执行器有2个参数，分别是resolve()和reject()
 // Promise实例只能通过resolve或者reject函数来返回，并且使用then()或者catch()获取，不能在new Promise里面直接return，这样是获取不到Promise返回值的。
-new Promise(function(resolve, reject) {
+new Promise(function (resolve, reject) {
   setTimeout(() => resolve(5), 0)
 }).then(v => console.log(v)) // 5
 
@@ -18,7 +18,7 @@ new Promise(function(resolve, reject) {
 
 // Promise链式调用
 // then里面必须return，后面的then才可以接收到。
-new Promise(function(resolve, reject) {
+new Promise(function (resolve, reject) {
   try {
     resolve(5)
   } catch (error) {
@@ -31,16 +31,18 @@ new Promise(function(resolve, reject) {
 
 
 
-// Promise的all方法提供了并行执行异步操作的能力，必须等所有异步操作执行完后才执行回调。
+// 只有所有的状态都变成fulfilled，状态才会变成 fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给then的回调函数
+
+// 只要之中有一个被rejected，状态就变成 rejected，此时第一个被reject的实例的返回值，传递给then的回调函数。
 
 Promise.all([
-  new Promise(function(resolve, reject) {
+  new Promise(function (resolve, reject) {
     resolve(1)
   }),
-  new Promise(function(resolve, reject) {
+  new Promise(function (resolve, reject) {
     resolve(2)
   }),
-  new Promise(function(resolve, reject) {
+  new Promise(function (resolve, reject) {
     resolve(3)
   })
 ]).then(arr => {
@@ -49,10 +51,10 @@ Promise.all([
 
 
 
-// Promise的race用法：只要有一个 promise 成功了 就执行回调，其他的promise停止。
+// 只要之中有一个实例率先改变状态，状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给then、catch回调函数。其他的promise停止。
 
 // 如果 requestImg()成功了就执行then，timeout()成功了执行catch
-Promise.race([requestImg(), timeout()]).then((data) =>{
+Promise.race([requestImg(), timeout()]).then((data) => {
   console.log(data);
 }).catch((err) => {
   console.log(err);
@@ -65,17 +67,17 @@ Promise.race([requestImg(), timeout()]).then((data) =>{
 class MyPromise extends Promise {
 
   //重新封装then()
-  success(resolve, reject) {
+  success (resolve, reject) {
     return this.then(resolve, reject)
   }
   //重新封装catch()
-  failer(reject) {
+  failer (reject) {
     return this.catch(reject)
   }
 }
 // 接着我们来使用一下这个派生类。​
 
-new MyPromise(function(resolve, reject) {
+new MyPromise(function (resolve, reject) {
   resolve(10)
 }).success(v => console.log(v)) // 10
 
@@ -87,7 +89,7 @@ const ajaxPromise = (type, url, data) => {
     const xhr = new XMLHttpRequest();
     xhr.open(type, url, true)
     xhr.onreadystatechange = () => {
-      if ( xhr.readyState === 4 && xhr.status=== 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         resolve(JSON.parse(xhr.responseText))
       } else {
         reject(xhr.status)
@@ -99,7 +101,7 @@ const ajaxPromise = (type, url, data) => {
       xhr.setRequestHeader('xxx-')
       xhr.send(dataJs(data))
     }
-  })  
+  })
   function dataJs (data) {
     const arr = [];
     for (let key in data) {
@@ -110,7 +112,7 @@ const ajaxPromise = (type, url, data) => {
   return promise;
 }
 
-ajaxPromise('POST', 'github.com', {name: 'guor', age: '18'}).then((res) => {
+ajaxPromise('POST', 'github.com', { name: 'guor', age: '18' }).then((res) => {
   console.log(res)
 }).catch((err) => {
   console.log(err)
