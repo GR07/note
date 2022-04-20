@@ -78,6 +78,14 @@ const month = [
   dayjs().date(1).format("YYYY-MM-DD"),
   today
 ]
+
+// 时间格式化 年月日
+moment(val).format('YYYY-MM-DD')
+
+// 时间差 几天
+moment(end).diff(moment(start), 'day')
+
+
 // 替换
 this.form.printInfo = this.form.printInfo.replace(/\\n/gm, "\n")
 const reg = {
