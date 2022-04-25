@@ -393,6 +393,42 @@ VUE_APP_API_MODE = prod
 // 变量将会对 vue-cli-service 的所有命令、插件和依赖可用。
 ```
 
+- 在项目根目录新建.env.dev文件
+
+```js
+// 内容为:
+NODE_ENV=production
+VUE_APP_ENV=dev
+// 注意文件中NODE_ENV=production要加上
+```
+
+- 再新建一个.env.production
+
+```js
+// 内容为:
+NODE_ENV=production
+VUE_APP_ENV=production
+// 注意文件中NODE_ENV=production要加上
+```
+
+- package.json 中 scripts 配置:
+
+```js
+// vue-cli-servive有3种模式，serve 默认为 development，build 为 production
+// 在vue-cli3.0中，不能直接 SET NODE_ENV=production 或者 EXPORT NODE_ENV=production。
+// 若想修改 vue-cli-service 包中的 NODE_ENV，需要通过下面 vue-cli-service serve --mode production 进行切换。
+"dev": "vue-cli-service serve", // mode 默认为 development 
+"builddev": "vue-cli-service build --mode dev",
+"buildprod": "vue-cli-service build --mode production",
+```
+
+- 最后判断环境变量: baseurl: process.env.VUE_APP_ENV === 'production' ? 'http://prod.api.com' : 'http://test.api.com'
+
+
+
+
+
+
 ### 环境文件加载优先级：
 
 一个特定模式准备的环境文件 (例如 .env.production) 将会比一般的环境文件 (例如 .env) 拥有更高的优先级。
