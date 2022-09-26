@@ -507,4 +507,45 @@ Github[18]：font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Ar
 
 
 
+
+
+# flex 最后一行左对齐
+
+```html
+<div class="tag-list">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</div>
+<!-- 方案一 grid -->
+<style>
+  .tag-list {
+    margin-top: 12px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill, 31%);
+    grid-gap: 12px 8px;
+    .item {
+      box-sizing: border-box;
+      width: 100%;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      font-size: 12px;
+      color: #333333;
+      background-color: #f7f8fa;
+      border-radius: 6px;
+      &.check {
+        border: 0.5px solid #7972fe;
+        color: #7972fe;
+        background-color: rgba(121, 114, 254, 0.1);
+      }
+    }
+  }
+</style>
+```
+
+
 参考：https://mp.weixin.qq.com/s/xpcZlmtmVab461cvbsDx5Q
