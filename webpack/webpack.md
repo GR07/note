@@ -252,63 +252,10 @@ new webpack.DefinePlugin({
 ```
 
 
-## 代码分离
+# 代码分离
 
-### 原因
+具体说明查看 note\webpack\代码分割.md
 
-1.分离打包到单独文件，然后就可以按需加载这些文件
-
-2.避免2个模块之间重复打包混入相同的代码
-
-
-常用的代码分离有三种方式（推荐3）
-
-1.entry入口文件手动分离
-```js
-mudule.exports = {
-    entry: {
-        index: './src/index.js',
-        another: './src/another-module.js'
-    }
-}
-```
-
-2.手动分离后自然会产生重复引入的组件，再用 SplitChunksPlugin 去重和分离
-```js
-mudule.exports = {
-    entry: {
-        index: './src/index.js',
-        another: './src/another-module.js'
-    },
-    optimization: {
-        // 代码分离后把重复引入的模块去重，并分离出来 (vendors~another~app.bundle.js)
-        // 注意别瞎几把搞它，官方默认配置即可
-        splitChunks: {}
-    }
-}
-```
-
-3.动态导入 import （效果上 = 1 + 2）
-```js
-if (process.env.NODE_ENV !== 'production') {
-    console.log(`这是开发环境${process.env.NODE_ENV}`);
-}
-async function getComponent() {
-
-    var element = document.createElement('div');
-    // 注意这个注释 /* webpackChunkName */ 是有用的
-    // 这样是为了打包分离后给模块命名为语义化的名称，而不会是 id 的形式。
-    const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
-
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-    return element;
-}
-
-getComponent().then(dom => {
-    document.body.appendChild(dom);
-})
-```
 
 ## 提取引导模板
 
