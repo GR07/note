@@ -373,3 +373,5 @@ module.exports = {
 
 如何编写 Typescript 声明文件
 https://juejin.cn/post/6844903693226082318#heading-8
+
+https://segmentfault.com/a/1190000011853167?utm_source=tag-newest
