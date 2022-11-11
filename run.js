@@ -1,50 +1,55 @@
-let obj = {
-  a: 'a',
-  b: 'b',
-  guor: {
-    g: 'g',
-    u: {
-      r: 'r'
-    }
-  }
+// 将状态封装成不同类
+const weakLight = function(light) {
+  this.light = light
 }
 
-function defineReactive (data, key, val) {
-  Object.defineProperty(data, key, {
-    get () {
-      return val
-    },
-    set (newVal) {
-      if (newVal === val) {
-        return
-      }
-      val = newVal
-    }
+weakLight.prototype.press = function() {
+  console.log('打开强光')
+  this.light.setState(this.light.strongLight)
+}
+
+const strongLight = function(light) {
+  this.light = light
+}
+
+strongLight.prototype.press = function() {
+  console.log('关灯')
+  this.light.setState(this.light.offLight)
+}
+
+const offLight = function(light) {
+  this.light = light
+}
+
+offLight.prototype.press = function() {
+  console.log('打开弱光')
+  this.light.setState(this.light.weakLight)
+}
+
+const Light = function() {
+  this.weakLight = new weakLight(this)
+  this.strongLight = new strongLight(this)
+  this.offLight = new offLight(this)
+  this.currentState = this.offLight          // 初始状态
+}
+
+Light.prototype.init = function() {
+  const btn = document.createElement('button')
+  btn.innerHTML = '按钮'
+  document.body.append(btn)
+  const self = this
+  btn.addEventListener('click', function() {
+    self.currentState.press()
   })
 }
 
-function toRawType (val) {
-  return Object.prototype.toString.call(val).slice(8, -1)
+Light.prototype.setState = function(state) { // 改变当前状态
+  this.currentState = state
 }
 
-function recursion (data) {
-  Object.keys(data).forEach((key) => {
-    if (toRawType(data[key]) === 'Object') {
-      recursion(data[key])
-    } else {
-      defineReactive(data, key, data[key])
-    }
-  })
-}
+const light = new Light()
+light.init()
 
-recursion(obj)
-
-console.log(obj.a);
-console.log(obj.b);
-console.log(obj.guor.g);
-console.log(obj.guor.u.r);
-console.log(obj);
-
-obj.guor.u.r = 888
-
-console.log(obj.guor.u.r);
+// 打开弱光
+// 打开强光
+// 关灯

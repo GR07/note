@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 将状态封装成不同类
+    class A {
+      constructor (state) {
+        this.state = state
+      }
+      change () {
+        console.log(`B`);
+        this.state.setState(this.state.b)
+      }
+    }
+
+    class B {
+      constructor (state) {
+        this.state = state
+      }
+      change () {
+        console.log(`C`);
+        this.state.setState(this.state.c)
+      }
+    }
+    
+    class C {
+      constructor (state) {
+        this.state = state
+      }
+      change () {
+        console.log(`A`);
+        this.state.setState(this.state.a)
+      }
+    }
+
+    class Use {
+      constructor () {
+        this.a = new A(this)
+        this.b = new B(this)
+        this.c = new C(this)
+        this.cur = this.a
+      }
+      init () {
+        const btn = document.createElement('button')
+        btn.innerHTML = '按钮'
+        document.body.append(btn)
+        let self = this
+        btn.addEventListener('click', function () {
+          self.cur.change()
+        })
+      }
+      setState (cur) {
+        this.cur = cur
+      }
+    }
+
+    const use = new Use()
+    use.init()
+
+  </script>
+</body>
+</html>
