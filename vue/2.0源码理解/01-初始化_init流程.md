@@ -46,7 +46,9 @@ initMixin 内的 Vue.prototype._init 函数
 
 # initState(vm)
 
-数据响应式的重点，处理 props、methods、data、computed、watch
+数据响应式的重点，初始化 props、methods、data、computed、watch
+
+注：以上 5 个选项具体过程：2.0源码理解/初始化initState流程.md
     
 
 # initProvide(vm)
