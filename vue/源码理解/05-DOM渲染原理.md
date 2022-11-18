@@ -2,7 +2,7 @@
 
 1. 将 template 模板编译为 render 函数
 
-2. render 函数执行后 return 虚拟 dom （vue 是借鉴了 snabbdom 库去实现虚拟 dom）
+2. render 函数执行后 return 虚拟 dom （vue 是基于了 snabbdom 库去实现虚拟 dom）
 
 3. 利用patch函数把虚拟dom渲染到页面 patch(dom, vnode)
 
