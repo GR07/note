@@ -19,6 +19,16 @@ function isUndefined (obj) {
 }
 
 /**
+ * 合并对象，重名会覆盖。
+ */
+ function extend (to, _from) {
+  for (const key in _from) {
+    to[key] = _from[key]
+  }
+  return to
+}
+
+/**
  * 保留几位小数
  * @param {String} value 当前输入
  * @param {Number} how 保留几位
