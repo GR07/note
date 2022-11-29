@@ -32,6 +32,6 @@ patch(box, vnode)
 
 3. setter 通知 Watcher 重新渲染
 
-4. 渲染之前又会将 template 模板编译为一个新的 render 函数 => 返回 vnode => 利用 patch 渲染到指定 dom
+4. 渲染之前又会将 template 模板编译为 AST => AST优化 => 生成一个新的 render 函数 => 返回 vnode => 利用 patch 渲染到指定 dom
 
 5. 注意更新时，会对比新老 patch(vnode, newVnode)
