@@ -153,7 +153,6 @@ function initData (vm: Component) {
 }
 // 如果是函数则 返回 函数中的对象
 export function getData (data: Function, vm: Component): any {
-  // #7573 disable dep collection when invoking data getters
   pushTarget()
   try {
     return data.call(vm, vm)
