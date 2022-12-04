@@ -1,6 +1,6 @@
 # Vue 构建页面过程：
 
-1. 先看new Vue()里面有没有el (挂载点)，如果没有就等后面的.$mount("#app")触发
+1. 先看 new Vue() 里面有没有 el ，如果没有就等后面的 .$mount("#app") 挂载
 
 2. 找到挂载点后，再判断有没有 render 函数选项，render 函数得到 createElement() 创建返回的 VNode 之后，把 VNode 返回给 new Vue() 的 .$mount("#app")
 
@@ -265,21 +265,11 @@ Vue.component('my-component', {
 
 
 
-# $el 和 el 区别
+# new Vue() 时 $mount("#app") 和 el: '#app' 的区别
 
-el 是 html页面里面的最初挂载点的 dom 结构
+两者作用相同，都是为了将实例化后的 vue 挂载到指定的 dom 元素中。
 
-$el 是通过 vue 实例创建的 dom
-
-最终 $el 会 替换掉 el 也就是完成了实例的挂载
-
-
-
-# $mount 和 $el 的区别：
-
-两者在使用效果上没有任何区别，都是为了将实例化后的vue挂载到指定的dom元素中。
-
-注：当 new Vue({...}) 中没有 el 属性时，生命周期暂停，等待vm.$mount(el)调用时才继续
+注：当 new Vue({...}) 中没有 el 属性时，就等后面的.$mount("#app") 挂载
 
 ```js
 // 两者作用相同
