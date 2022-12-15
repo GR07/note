@@ -186,19 +186,20 @@ function patch(oldVnode, vnode, hydrating, removeOnly) {
 
 # updateChildren
 
-- diff 过程，核心 patchVnode
+- 核心执行 patchVnode（把相应旧VNode节点移动到相应新VNode节点的位置）
 
 - 一定要知道，对比的是什么，对比新 VNode 的 children 数组，和旧 VNode 的 children 数组
 
 - diff 思路：
+    const old = [n1, n2, n3, n4]
+    const new = [n1, n2, n3, n4, n5]
+  - 对新旧两个VNode节点数组，做了4种假设是否一致，一旦命中假设，就跳过这一次的while循环，降低时间复杂度以提高执行效率
+    1. 旧首 新首对比
+    2. 旧尾 新尾对比
+    4. 旧首 新尾对比
+    3. 旧尾 新首对比
 
-  - 对新旧两个VNode节点数组，做了4种假设是否一致，一旦命中假设，就避免了一次循环，以提高执行效率
-    1. 新首旧首对比
-    2. 新尾旧尾对比
-    3. 新首旧尾对比
-    4. 新尾旧首对比
-
-    - 如果不幸没有命中假设，则执行遍历，从老节点中找到新开始节点
+    - 如果不幸没有命中假设，则只能挨个遍历，从老节点中找到新开始节点
     - 如果找到相同节点，则执行 patchVnode，然后将老节点移动到正确的位置
 
   - 如果老节点先于新节点遍历结束，则剩余的新节点执行新增节点操作
@@ -233,71 +234,104 @@ function updateChildren(parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly)
     checkDuplicateKeys(newCh)
   }
 
-  // 遍历新老两组节点，只要有一组遍历完（开始索引超过结束索引）则跳出循环
+  // 遍历新老两组节点
+  // 停止条件：新老数组 其中一个遍历完则跳出循环（即开始索引超过结束索引）
   while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
 
     // 如果老开始节点 不存在
     if (isUndef(oldStartVnode)) {
 
-      // 则老开始节点 下标前进一个
+      // 则老开始节点 下标前进一个（逐渐缩小范围）
       oldStartVnode = oldCh[++oldStartIdx]
 
       // 如果老结束节点 不存在
     } else if (isUndef(oldEndVnode)) {
 
-      // 则老结束节点 下标前进一个
+      // 则老结束节点 下标前进一个（逐渐缩小范围）
       oldEndVnode = oldCh[--oldEndIdx]
       
     } else if (sameVnode(oldStartVnode, newStartVnode)) {
-      // 老开始节点和新开始节点是同一个节点，执行 patch
+
+      // 如果 老开始节点 和 新开始节点是同一个节点，执行 patch
       patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
-      // patch 结束后老开始和新开始的索引分别加 1
+
+      // patch 结束后 老开始和新开始的索引分别加 1 （逐渐缩小范围）
       oldStartVnode = oldCh[++oldStartIdx]
       newStartVnode = newCh[++newStartIdx]
+
     } else if (sameVnode(oldEndVnode, newEndVnode)) {
-      // 老结束和新结束是同一个节点，执行 patch
+
+      // 如果 老结束节点 和 新结束节点是同一个节点，执行 patch
       patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue, newCh, newEndIdx)
-      // patch 结束后老结束和新结束的索引分别减 1
+
+      // patch 结束后 老结束和新结束的索引分别减 1 （逐渐缩小范围）
       oldEndVnode = oldCh[--oldEndIdx]
       newEndVnode = newCh[--newEndIdx]
-    } else if (sameVnode(oldStartVnode, newEndVnode)) { // Vnode moved right
-      // 老开始和新结束是同一个节点，执行 patch
+
+    } else if (sameVnode(oldStartVnode, newEndVnode)) {
+
+      // 如果 老开始节点 和 新结束节点是同一个节点，执行 patch
       patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue, newCh, newEndIdx)
-      // 处理被 transtion-group 包裹的组件时使用
+
+      // 移动节点（把老开始节点移动到新结束的位置上） 处理被 transtion-group 包裹的组件时使用
       canMove && nodeOps.insertBefore(parentElm, oldStartVnode.elm, nodeOps.nextSibling(oldEndVnode.elm))
+
       // patch 结束后老开始索引加 1，新结束索引减 1
       oldStartVnode = oldCh[++oldStartIdx]
       newEndVnode = newCh[--newEndIdx]
-    } else if (sameVnode(oldEndVnode, newStartVnode)) { // Vnode moved left
-      // 老结束和新开始是同一个节点，执行 patch
+
+    } else if (sameVnode(oldEndVnode, newStartVnode)) {
+
+      // 如果 老结束节点 和 新开始节点是同一个节点，执行 patch
       patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
+
+      // 移动节点（把老结束节点移动到新开始的位置上）
       canMove && nodeOps.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm)
+
       // patch 结束后，老结束的索引减 1，新开始的索引加 1
       oldEndVnode = oldCh[--oldEndIdx]
       newStartVnode = newCh[++newStartIdx]
-    } else {
-      // 如果上面的四种假设都不成立，则通过遍历找到新开始节点在老节点中的位置索引
 
-      // 找到老节点中每个节点 key 和 索引之间的关系映射 => oldKeyToIdx = { key1: idx1, ... }
+    } else {
+
+      // ！！如果上面的四种假设都不成立，则通过遍历找到 新开始节点 在 老节点中的位置索引
+
+      // createKeyToOldIdx 去构建一个老节点数组的每个节点 key 和 索引之间的关系映射
+      // oldKeyToIdx = { key1: idx1, ... }
+
       if (isUndef(oldKeyToIdx)) oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
-      // 在映射中找到新开始节点在老节点中的位置索引
+
+      // 然后就可以直接在上面构建的 map映射中找到新开始节点 在 老节点中的位置索引
       idxInOld = isDef(newStartVnode.key)
         ? oldKeyToIdx[newStartVnode.key]
         : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
-      if (isUndef(idxInOld)) { // New element
-        // 在老节点中没找到新开始节点，则说明是新创建的元素，执行创建
+
+      // 如果上面的 map映射查找 和 遍历查找都没有找到 新开始节点在老节点的位置
+      if (isUndef(idxInOld)) {
+
+        // 则说明是新创建的元素，执行创建
         createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
+      
       } else {
-        // 在老节点中找到新开始节点了
+
+        
         vnodeToMove = oldCh[idxInOld]
+        // 如果在老节点中找到了新开始节点，并且两个节点是同一个节点
         if (sameVnode(vnodeToMove, newStartVnode)) {
-          // 如果这两个节点是同一个，则执行 patch
+
+          // 则执行 patch更新节点
           patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
+          
           // patch 结束后将该老节点置为 undefined
+          // 因为这里的重置，所以下次 while 的一开始才会移动老节点的首尾坐标
           oldCh[idxInOld] = undefined
+
+          // 然后移动老节点到新节点
           canMove && nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm)
         } else {
-          // 最后这种情况是，找到节点了，但是发现两个节点不是同一个节点，则视为新元素，执行创建
+
+          // 最后这种情况 比较少见
+          // 找到节点了，但是发现两个节点不是同一个节点，则视为新元素，执行创建
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
         }
       }
@@ -305,6 +339,7 @@ function updateChildren(parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly)
       newStartVnode = newCh[++newStartIdx]
     }
   }
+  
   // 走到这里，说明老姐节点或者新节点被遍历完了
   if (oldStartIdx > oldEndIdx) {
     // 说明老节点被遍历完了，新节点有剩余，则说明这部分剩余的节点是新增的节点，然后添加这些节点
