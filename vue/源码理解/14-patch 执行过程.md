@@ -143,7 +143,7 @@ function patch(oldVnode, vnode, hydrating, removeOnly) {
     // oldVnode 不是真实元素 && 老节点和新节点是同一个节点
     if (!isRealElement && sameVnode(oldVnode, vnode)) {
 
-      // 直接进入 patch 对比阶段，然后更新
+      // 则表示更新阶段，执行 patchVnode
       patchVnode(oldVnode, vnode, insertedVnodeQueue, null, null, removeOnly)
     } else {
 
@@ -184,16 +184,126 @@ function patch(oldVnode, vnode, hydrating, removeOnly) {
 ```
 
 
+# patchVnode
+
+- 更新节点
+
+- 核心：如果新老节点都有孩子，则递归执行 diff updateChildren
+
+```js
+/**
+ *   全量的属性更新
+ *   如果新老节点都有孩子，则递归执行 diff
+ *   如果新节点有孩子，老节点没孩子，则新增新节点的这些孩子节点
+ *   如果老节点有孩子，新节点没孩子，则删除老节点的这些孩子
+ *   更新文本节点
+ */
+function patchVnode(
+  oldVnode,
+  vnode,
+  insertedVnodeQueue,
+  ownerArray,
+  index,
+  removeOnly
+) {
+  // 老节点和新节点相同，直接返回
+  if (oldVnode === vnode) {
+    return
+  }
+
+  if (isDef(vnode.elm) && isDef(ownerArray)) {
+    // clone reused vnode
+    vnode = ownerArray[index] = cloneVNode(vnode)
+  }
+
+  const elm = vnode.elm = oldVnode.elm
+
+  // 异步占位符节点
+  if (isTrue(oldVnode.isAsyncPlaceholder)) {
+    if (isDef(vnode.asyncFactory.resolved)) {
+      hydrate(oldVnode.elm, vnode, insertedVnodeQueue)
+    } else {
+      vnode.isAsyncPlaceholder = true
+    }
+    return
+  }
+
+  // 跳过静态节点的更新
+  // reuse element for static trees.
+  // note we only do this if the vnode is cloned -
+  // if the new node is not cloned it means the render functions have been
+  // reset by the hot-reload-api and we need to do a proper re-render.
+  if (isTrue(vnode.isStatic) &&
+    isTrue(oldVnode.isStatic) &&
+    vnode.key === oldVnode.key &&
+    (isTrue(vnode.isCloned) || isTrue(vnode.isOnce))
+  ) {
+    // 新旧节点都是静态的而且两个节点的 key 一样，并且新节点被 clone 了 或者 新节点有 v-once指令，则重用这部分节点
+    vnode.componentInstance = oldVnode.componentInstance
+    return
+  }
+
+  // 执行组件的 prepatch 钩子
+  let i
+  const data = vnode.data
+  if (isDef(data) && isDef(i = data.hook) && isDef(i = i.prepatch)) {
+    i(oldVnode, vnode)
+  }
+
+  // 老节点的孩子
+  const oldCh = oldVnode.children
+  // 新节点的孩子
+  const ch = vnode.children
+  // 全量更新新节点的属性，Vue 3.0 在这里做了很多的优化
+  if (isDef(data) && isPatchable(vnode)) {
+    // 执行新节点所有的属性更新
+    for (i = 0; i < cbs.update.length; ++i) cbs.update[i](oldVnode, vnode)
+    if (isDef(i = data.hook) && isDef(i = i.update)) i(oldVnode, vnode)
+  }
+  if (isUndef(vnode.text)) {
+    // 新节点不是文本节点
+    if (isDef(oldCh) && isDef(ch)) {
+      // 如果新老节点都有孩子，则递归执行 diff 过程
+      if (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)
+    } else if (isDef(ch)) {
+      // 老孩子不存在，新孩子存在，则创建这些新孩子节点
+      if (process.env.NODE_ENV !== 'production') {
+        checkDuplicateKeys(ch)
+      }
+      if (isDef(oldVnode.text)) nodeOps.setTextContent(elm, '')
+      addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue)
+    } else if (isDef(oldCh)) {
+      // 老孩子存在，新孩子不存在，则移除这些老孩子节点
+      removeVnodes(oldCh, 0, oldCh.length - 1)
+    } else if (isDef(oldVnode.text)) {
+      // 老节点是文本节点，则将文本内容置空
+      nodeOps.setTextContent(elm, '')
+    }
+  } else if (oldVnode.text !== vnode.text) {
+    // 新节点是文本节点，则更新文本节点
+    nodeOps.setTextContent(elm, vnode.text)
+  }
+  if (isDef(data)) {
+    if (isDef(i = data.hook) && isDef(i = i.postpatch)) i(oldVnode, vnode)
+  }
+}
+
+```
+
+
+
 # updateChildren
 
-- 核心执行 patchVnode（把相应旧VNode节点移动到相应新VNode节点的位置）
+- 核心思想：sameVnode(old, new) 判断新旧两个VNode节点是否相同，相同则执行 patchVnode(old, new) 把旧VNode节点移动到一个全新数组里（下标是新VNode节点的位置），也就是所谓的更新新节点。（深度优先）
 
-- 一定要知道，对比的是什么，对比新 VNode 的 children 数组，和旧 VNode 的 children 数组
+- sameVnode 对比的是 新 VNode 的 children 数组，和旧 VNode 的 children 数组
 
 - diff 思路：
     const old = [n1, n2, n3, n4]
     const new = [n1, n2, n3, n4, n5]
+
   - 对新旧两个VNode节点数组，做了4种假设是否一致，一旦命中假设，就跳过这一次的while循环，降低时间复杂度以提高执行效率
+  - 假设是针对前端操作 DOM 的习惯制定的
     1. 旧首 新首对比
     2. 旧尾 新尾对比
     4. 旧首 新尾对比
@@ -206,6 +316,7 @@ function patch(oldVnode, vnode, hydrating, removeOnly) {
   - 如果新节点先于老节点遍历结束，则剩余的老节点执行删除操作，移除这些老节点
 
 ```js
+// 里面就是整个 diff 的所有过程
 function updateChildren(parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
   // 老节点的开始索引
   let oldStartIdx = 0
@@ -339,16 +450,52 @@ function updateChildren(parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly)
       newStartVnode = newCh[++newStartIdx]
     }
   }
-  
-  // 走到这里，说明老姐节点或者新节点被遍历完了
+
+  // 收尾工作
+  // 如果 老开始 大于 老结束，说明老节点先被遍历完了，所以剩下的新节点都是新增节点，执行创建插入即可
   if (oldStartIdx > oldEndIdx) {
-    // 说明老节点被遍历完了，新节点有剩余，则说明这部分剩余的节点是新增的节点，然后添加这些节点
+    // 创建
     refElm = isUndef(newCh[newEndIdx + 1]) ? null : newCh[newEndIdx + 1].elm
+    // 插入
     addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue)
+    
   } else if (newStartIdx > newEndIdx) {
-    // 说明新节点被遍历完了，老节点有剩余，说明这部分的节点被删掉了，则移除这些节点
+    // 如果 新开始 大于 新结束，说明新节点先被遍历完了，所以剩下的老节点都是被删掉的，执行删除即可
     removeVnodes(oldCh, oldStartIdx, oldEndIdx)
   }
+}
+
+```
+
+# sameVnode
+
+- 判读两个节点是否相同
+
+```js
+
+function sameVnode (a, b) {
+  return (
+    // key 必须相同，需要注意的是 undefined === undefined => true
+
+    // 如果 没有设置key，那么会一直判断相等，然后就会去执行 patchVnode 做没意义的更新
+    a.key === b.key && (
+      (
+        // 标签相同
+        a.tag === b.tag &&
+        // 都是注释节点
+        a.isComment === b.isComment &&
+        // 都有 data 属性
+        isDef(a.data) === isDef(b.data) &&
+        // input 标签的情况
+        sameInputType(a, b)
+      ) || (
+        // 异步占位符节点
+        isTrue(a.isAsyncPlaceholder) &&
+        a.asyncFactory === b.asyncFactory &&
+        isUndef(b.asyncFactory.error)
+      )
+    )
+  )
 }
 
 ```
