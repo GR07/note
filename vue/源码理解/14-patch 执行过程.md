@@ -190,6 +190,10 @@ function patch(oldVnode, vnode, hydrating, removeOnly) {
 
 - 核心：如果新老节点都有孩子，则递归执行 diff updateChildren
 
+- patchVnode 方法会被递归调用，oldVnode === vnode 是递归的终止条件
+
+- vnode = { tag: 'span', children: 'text content' } 终止后再去判断children
+
 ```js
 /**
  *   全量的属性更新
@@ -446,7 +450,7 @@ function updateChildren(parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly)
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
         }
       }
-      // 老节点向后移动一个
+      // 新节点向后移动一个
       newStartVnode = newCh[++newStartIdx]
     }
   }
