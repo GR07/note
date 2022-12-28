@@ -14,10 +14,15 @@
 
 
 /* 匹配其父元素的最后一个指定 class 的元素 :last-of-type */
-.xxx {
-  .guor:last-of-type {
-    opacity: 0.75;
-  }
+
+
+<p>这是第一个段落。</p>
+<p class='c'>这是第二个段落。</p>
+<p class='c'>这是第三个段落。</p>/* 红色 */
+<div>这是第四个段落。</div>
+
+.c:last-of-type{
+	background: red;
 }
 
 
