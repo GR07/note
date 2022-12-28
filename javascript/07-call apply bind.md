@@ -1,77 +1,54 @@
+# 是什么
+
+三个都是 Function 原型对象上的方法，只可以作为函数调用。
+
+
+# 作用
+
+把函数执行一遍，并且改变函数内部 this 的指向（前提是函数内部有使用this）
+
 # 语法
 
 ```js
+// call / apply 马上执行该函数
 fun.call(thisArg, param1, param2, ...)
-
+// call / apply 马上执行该函数
 fun.apply(thisArg, [param1,param2,...])
-
+// bind 则是返回改变了上下文后的函数，不执行该函数
 fun.bind(thisArg, param1, param2, ...)
 ```
 
 # 返回值
 
-- call / apply
+- call / apply：返回 fun 执行的结果
 
-返回 fun 执行的结果
-
-- bind
-
-返回 fun 的拷贝，并拥有指定的 this 值和初始参数
+- bind：返回 fun 的拷贝，并拥有指定的 this 值和初始参数
 
 
 # 参数
 
-- thisArg (可选)
+- 第一个参数 (可选)
 
-1. fun 的 this 指向 thisArg 对象
-
-2. 非严格模式 fun 中的 this 指向 window 对象
+1. fun 内部的 this 指向（如果传入是基础类型，会转换为包装对象，例如字符串的new String()）
 
 
-- param1, param2(可选)
+
+- 第二三四个参数（可选）
 
 传给fun的参数。
 
-1. 如果 param 不传或为 null/undefined，则表示不需要传入任何参数
+1. 如果不传或为 null / undefined，则表示不需要传入任何参数
 
-2. apply第二个参数为数组，数组内的值为传给fun的参数
-
-
-# 调用 call/apply/bind 的必须是个函数
-
-call、apply和bind是挂在 Function 对象上的三个方法，只有函数才有这些方法，只要是函数就可以。
+2. apply 第二个参数为数组，数组内的值为传给fun的参数
 
 
-# 作用
 
-改变函数执行时的 this 指向，目前所有关于它们的运用，都是基于这一点来进行的。
+# 使用场景
 
-
-# 区别：
-
-- call 与 apply 的唯一区别
-
-传给函数的参数写法不同，apply 第二个参数是数组，call 是独立的n个参数逗号隔开
-
-
-- call / apply 与 bind 的区别
-
-1. call / apply 马上执行该函数
-
-2. bind 则是返回改变了上下文后的函数，不执行该函数
-
-
-- 返回值
-
-1. call / apply 返回 fun 的执行结果
-
-2. bind 返回 fun 的拷贝，并拥有初始指定的 this 值和初始指定的传参
-
-
-# call / apply / bind 的核心理念 - 借用方法
+- 借用方法
 
 ```js
-// 类数组借用数组的方法
+// 类数组 借用
 var arrayLike = {
   0: 'OB',
   1: 'Koro1',
@@ -79,16 +56,27 @@ var arrayLike = {
 }
 Array.prototype.push.call(arrayLike, '添加元素1', '添加元素2');
 console.log(arrayLike) // {"0":"OB","1":"Koro1","2":"添加元素1","3":"添加元素2","length":4}
-```
-```js
-// apply 获取数组最大值最小值
+
+
+// 最大值 最小值
 const arr = [15, 6, 12, 13, 16];
 const max = Math.max.apply(Math, arr); // 16
 const min = Math.min.apply(Math, arr); // 6
+
+
+// 字符串 借用
+let str = 'abc'
+str.split('').join(',') // 'a,b,c'
+[].join.call(',') // 'a,b,c'
+
+
+// 字符串 借用循环
+let str = 'abc'
+[].forEach.call(str, (item) => {console.log(item)})
 ```
 
 
-# 继承
+- 继承
 
 ES5 的继承也都是通过借用父类的构造方法来实现父类方法 / 属性的继承
 ```js

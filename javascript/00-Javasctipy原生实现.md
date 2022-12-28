@@ -1,12 +1,15 @@
 # 实现 new
 
-## 思路：
+## 思路：摘录自 mdn （new的过程）
 
-1. 首先是创建一个对象
+1. 创建一个空的简单JS对象（即 {} ）（返回的实例对象就是这个）
 
-2. 改变 this 指针
+2. 为步骤1新创建的对象添加 __proto__ 属性，指向 构造函数的 prototype
 
-3. 改变对象的 __proto__ 指向 => 构造函数的 prototype
+3. 将构造函数用call执行，绑定this到创建的对象上。
+
+4. 如果该函数没有返回对象，则返回this。（this就是上面的对象）
+
 
 ```js
 function myNew(func, ...argument) {
