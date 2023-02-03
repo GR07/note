@@ -149,8 +149,6 @@ git commit 把暂存区的东西一次性提交到分支
 
 + 撤销添加文件 git checkout -- <file>
 
-+ git commit --amend 修改上一次 commit 直接键入：i，此时进入了输入模式，修改完成后，按下 Esc键退出编辑模式，在键入 :wq 回车退出并保存修改，完成提交。
-
 
 # 分支管理 （name - 分支名称）
 
@@ -349,26 +347,128 @@ git push --set-upstream origin feature-guorui04-2021-6-1 是默认的远程版�
 
 
 
-# 多人协作
+# Git管理疑难场景解决
 
-1. 本地创建分支并切换：git checkout -b dev
-查看当前分支：git branch 分支前面会标一个*号。
+Git 在工作中是很重要的一部分，如果操作不熟练或者使用不规范，很容易造成很多麻烦。
+在本文中，将介绍几种疑难场景的应对方式，希望能帮助到大家。
 
-2. 然后就可以在本地dev分支开发
-开发完提交
-git add readme.txt 
-git commit -m "branch test"
+## 场景一
 
-3. 开发完提交完切换到 master 分支
-git checkout master
+有的时候想修改最新的一次提交的 commit 信息
 
-4. 把 dev 分支的工作成果合并到 master 分支上
-git merge dev
+1. git commit --amend
+2. 键入 i 进入输入模式。
+3. 修改完成按下 Esc 键退出编辑模式。
+4. 键入 :wq 回车退出并保存修改。
+5. git push 提交即可。
 
-5. 合并完成后，就可以放心地删除dev分支了
-git branch -d dev
-Deleted branch dev (was b17d20e).
 
-6. 删除后，查看branch，就只剩下master分支了
-git branch
-* master
+## 场景二
+
+当一个功能点已经开发完了，已经提交，突然发现有个小问题，修改完了以后，我又不想为这个小错误添加一个新的 commit，那样显得提交历史特别傻？那么该怎么办呢？
+
+1. git add . 添加这个对应的小修改。
+2. git commit --amend --no-edit 将修改直接合并到最新的一次的 commit，并且使用上次的提交信息。
+
+
+## 场景三
+
+拉完分支后，一顿操作提交修改，但是又后悔了，想回到某个 git 操作时刻。
+
+- git reset HEAD@{index} 操作后就会回到之前的某个状态了（index 是对应的操作记录，下图红色圈选部分）。
+- git reset HEAD@{index} --hard 就是啥都不要了，当前已经修改没有提交的文件也不要了，我就想回到那个操作对应的状态。一下就清净了。
+- git reset HEAD@{index} --soft 保留当前的修改回到对应的状态。
+- hard 是把改动全部都丢弃，而 soft 则柔软一些，仅仅是把所做的 commit 丢掉，而改动都保留在本地。
+- git reset --hard xxxx 回退到指定的 commit hash
+
+- 注：git reflog 和 git log 区别
+reflog 不仅仅是提交的记录，还有其他 git 的操作记录，因为有时候 git log 都不正常，所以使用 reflog。
+
+
+
+## 场景四
+
+在提测修改 bug 阶段，可能之前修复了一个 bug，因为修复这个bug的那次提交才导致了后面一系列的问题，所以希望只删除这个 commit
+
+1. git log 先看提交（ 加参数 --graph 展示图表形式）
+2. git revert xxxxx 指的是 commit 提交记录对应的 hash
+
+
+
+## 场景五-合并 commit
+
+这是一个延伸的需求，如何整理自己的 commit，保持 commit 清晰？
+这是我经过多次解决处理冲突合并后引发的思考。
+
+
+- 背景
+
+当我们开发一个功能时，可能会存在多次的 commit，如果直接合并到公共分支，就会在公共分支有着多次提交记录，我的理解其实对于公共分支来说，一个功能点只需要一个提交记录即可，会让公共分支变得清爽些，降低团队代码冲突的风险。
+
+
+- 解决
+
+可以在本地把多个相似的 commit 合并为一个 commit 记录
+
+
+- 合并时的两种情况
+
+    这些 commit 还没有提交到远程
+    这些 commit 已经提交到了远程
+
+
+
+- 没有提交到远程
+
+
+    - 使用 git reset
+
+        1. git log 查看要合并的最早的 commit hash
+        2. git reset hash 回退到此 commit。因为没有使用 --hard 所以修改内容都保存在工作区
+        3. git add . 将回退的的内容再次添加到暂存区。
+        4. git commit -m "提交描述" 再次提交。
+        5. git log 使用命令查看，发现合并完成。
+
+
+
+    - 使用 git rebase
+
+        1. git log 查看要合并的最早的 commit hash
+        2. git rebase -i [startpoint] [endpoint] 进入交互界面
+            - 其中 -i 的意思是 –interact，即弹出交互式的界面让用户编辑完成合并操作。
+            - [startpoint] [endpoint] 是开始结束的区间。
+            - [startpoint] 是指需要合并的commit的前一个commit。
+            - [endpoint] 一般是省略不写，默认从起始的 commit 一直到最后一个 commit。
+            - 如果写了 [endpoint]，那么 [endpoint] 后面的 commit 就全不要了，所以慎用
+
+        3. 使用 s 命令，合并 commit
+            - pick 保留该 commit
+            - squash 将该 commit 合并到前一个 commit
+
+        4. 先按键盘 i 键，进入操作模式，把 commit hash 前面的 pick 都改成 s
+            - 注意第一个默认是 pick 不许改。
+            - 如果不小心改了报错，执行 git rebase --abort
+            - 重新再执行 git rebase -i xxxxx
+
+        5. 改完之后，按 esc 键退出操作模式，然后键盘 :wq 保存操作并退出
+
+        6. 成功后，会弹出展示这几个 commit 的提交信息，把需要合并的 commit 注释即可
+            - 按i 键，在二三个 commit 信息前面加 # 号，然后按 esc，最后 :wq 保存即可
+
+        7. git log 最后查看最新合并情况
+
+
+
+
+- 已经提交到了远程
+
+    1. 先使用上面提到的任意一种进行 commit 的本地合并
+    2. git push --force-with-lease origin feature-gr 然后强制推送覆盖
+
+
+
+# 总结
+
+对于 git 工作流，我认为 commit 以及 branch 都要有意义，也就是，一个小功能最好就要开一个分支，每个分支里要有一些有意义的 commit。 
+
+好处就是 commit 在主干上变得清爽不混乱，冲突也会很少，review 代码速度加快，commit 都是有意义的，而且利于回退。
