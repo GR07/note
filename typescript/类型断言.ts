@@ -14,3 +14,8 @@ let strLength: number = (<string>someValue).length;
 let someValue: any = "this is a string";
 let strLength: number = (someValue as string).length;
 
+
+// 让程序去判断是什么类型
+let n1 = 200
+n1 = 'asd' // 会报错 提示只能式 number 类型
+
