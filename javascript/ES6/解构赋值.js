@@ -2,7 +2,11 @@
  * 解构是从对象中提取出更小元素的过程。赋值是对解构出来的元素进行重新赋值。
  */
 
-
+// 数组对象解构赋值
+// [{name: 'asd'}, {name: 'fdg'}]
+const [{ name: provinceName = '' }, { name: cityName = '' }] = data
+console.log(provinceName);
+console.log(cityName);
 
 
 // 对象解构
@@ -21,10 +25,10 @@ let props = {
   a: 1,
   b: 2
 }
-function test(value) {
+function test (value) {
   console.log(value)
 }
-test({a=3, b=3} = props) // {a: 1, b: 2}
+test({ a=3, b=3 } = props) // {a: 1, b: 2}
 
 
 
@@ -35,7 +39,7 @@ let arr = [1, 2, 3]
 
 //解构前2个元素
 const [a, b] = arr
-console.log(a,b) //1 2
+console.log(a, b) //1 2
 
 //解构中间的元素
 const [, b,] = arr
@@ -65,8 +69,8 @@ console.log(a) //[1,2,3,4] 这种做法就是克隆arr数组。
 // 解构参数 常用到
 
 // 注意：默认值生效的条件是，对象的属性值严格等于 undefined。
-function Ajax(url, options) {
-  const {timeout = 0, jsonp = true} = options // 给option的参数设置了默认值 防止没有传参导致的报错
+function Ajax (url, options) {
+  const { timeout = 0, jsonp = true } = options // 给option的参数设置了默认值 防止没有传参导致的报错
   console.log(url, timeout, jsonp)
 };
 Ajax('baidu.com', {
@@ -80,8 +84,8 @@ let props = {
   a: 1,
   b: 2
 },
-a = 3,
-b = 3;
+  a = 3,
+  b = 3;
 //解构赋值
 ({ a, b } = props)
 
