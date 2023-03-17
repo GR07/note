@@ -35,6 +35,7 @@ const baseURL = {
 ```js
 devServer: {
     proxy: {
+      // /proxyApi 开头的请求都会被代理到 http://dev.xxx.com
         '/proxyApi': {
             target: 'http://dev.xxx.com',
             changeOrigin: true,
