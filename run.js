@@ -30,4 +30,4 @@ const createEnumNewJob = (down, up) => {
 
 let arr = createEnumNewJob('M2.2', 'M2.3')
 
-console.log(arr);
+console.log(arr);1
