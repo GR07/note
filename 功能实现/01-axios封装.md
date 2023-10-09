@@ -17,173 +17,118 @@
 
 
 
-## 统一处理 baseUrl
+## 前端本地代理
 
 利用node环境变量来作判断，用来区分开发、测试、生产环境
 
-```js
-const baseURL = {
-    development: "https://zxzs.ininin.com/api/", // 本地运行
-
-    test: "https://zxzs.ininin.com/api/", // 测试环境
-
-    prod: "https://prozxzs.ininin.com/api/", // 正式环境
-}[process.env.VUE_APP_API_MODE];
-```
-
 仅限在本地调试的时候，可以在 vue.config.js 文件中配置devServer实现代理转发，从而实现跨域
 ```js
-devServer: {
+// process.env.VUE_APP_API_MODE
+const { defineConfig } = require("@vue/cli-service");
+
+const PROXY_ENV = process.env.PROXY_ENV || 'one'
+const targets = {
+  one: 'https://xxx.com',
+  two: 'https://xxx.com',
+  three: 'https://xxx.com',
+  four: 'https://www.xxx.com'
+}
+console.log(`代理到${PROXY_ENV}环境：${targets[PROXY_ENV]}`)
+module.exports = defineConfig({
+  // transpileDependencies: true,
+  publicPath: './',
+  devServer: {
+    host: '0.0.0.0',
     proxy: {
-      // /proxyApi 开头的请求都会被代理到 http://dev.xxx.com
-        '/proxyApi': {
-            target: 'http://dev.xxx.com',
-            changeOrigin: true,
-            pathRewrite: {
-                '/proxyApi': ''
-            }
-        }
+      '/router': {
+        target: targets[PROXY_ENV],
+        changeOrigin: true
+      }
     }
-}
+  }
+});
+// 执行
+"scripts": {
+    "serve": "vue-cli-service serve",
+    "one": "cross-env PROXY_ENV=one yarn serve",
+    "two": "cross-env PROXY_ENV=two yarn serve",
+    "three": "cross-env PROXY_ENV=three yarn serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
 ```
 
 
-## 设置请求头与超时时间
-
-一般请求头都是固定的，只有少部分情况下，会需要一些特殊的请求头。
-
-将通用性的请求头作为基础配置。当需要特殊请求头时，将特殊请求头作为参数传入，覆盖基础配置。
-
 ```js
+import axios from 'axios'
+import { Toast } from 'vant'
+import store from '@/store'
+
+const TIMEOUT = 40000
+
 const service = axios.create({
-    ...
-    timeout: 30000,  // 请求 30s 超时
-    headers: {
-        get: {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-          // 在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
-        },
-        post: {
-          'Content-Type': 'application/json;charset=utf-8'
-          // 在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
-        }
-    },
+  timeout: TIMEOUT,
+  headers: { 'format': 'JSON' }
 })
-```
 
-
-## 封装请求方法
-
-```js
-/**
- * 封装get请求
- * @param {String} url 请求地址
- * @param {Object} params 参数
- * @param {Object} that 请求参数
- * @param {Boolean} isReturnUrl 是否直接返回URL地址
- * @returns {String|Promise} url地址或者请求promise
- */
-export function get(url, params = {}) {
-    return service({
-        url,
-        method: "get",
-        params,
-    });
-}
-
-/**
- * 封装post请求
- * @param {String} url 请求地址
- * @param {Object} data 请求参数
- * @param {Object} headers 请求headers
- * @returns {Promise} 请求
- */
-export function post(url, data = {}, headers) {
-    return service({
-        url,
-        method: "post",
-        data,
-        // multipart/form-data
-        headers: {
-            "Content-Type": headers ? headers : "application/json;charset=UTF-8",
-        },
-    });
-}
-
-/**
- * 封装put方法
- * @param {String} url 请求地址
- * @param {Object} data 请求参数
- * @returns {Promise} 请求
- */
-export function put(url, data = {}) {
-    return service({
-        url,
-        method: "put",
-        data,
-    });
-}
-/**
- * delete请求
- * @param {String} url
- * @param {Object} params
- * @returns {Promise} 请求Promise
- */
-export function deletes(url, params = {}) {
-    return service({
-        url,
-        method: "delete",
-        params,
-    });
-}
-```
-
-
-## 请求拦截器
-
-```js
 // 请求拦截器
-axios.interceptors.request.use(
+service.interceptors.request.use(
   config => {
-    // 每次发送请求之前判断是否存在token
-    // 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况，此处token一般是用户完成登录后储存到localstorage里的
-    token && (config.headers.Authorization = token)
+    store.commit('SHOW_LOADING')
     return config
   },
   error => {
-    return Promise.error(error)
-  })
-```
+    store.commit('HIDE_LOADING')
+    console.log(error)
+    return Promise.reject(error)
+  }
+)
 
-
-## 响应拦截器
-
-```js
 // 响应拦截器
-axios.interceptors.response.use(response => {
-  // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
-  // 否则的话抛出错误
-  if (response.status === 200) {
-    if (response.data.code === 511) {
-      // 未授权调取授权接口
-    } else if (response.data.code === 510) {
-      // 未登录跳转登录页
-    } else {
-      return Promise.resolve(response)
-    }
-  } else {
-    return Promise.reject(response)
-  }
-}, error => {
-  // 我们可以在这里对异常状态作统一处理
-  if (error.response.status) {
-    // 处理请求失败的情况
-    // 对不同返回码对相应处理
-    return Promise.reject(error.response)
-  }
-})
-```
+service.interceptors.response.use(
+  response => {
+    store.commit('HIDE_LOADING')
+    const res = response.data
 
+    // 业务失败时处理
+    if (res.code !== 0) {
+      Toast(res.msg)
+      return Promise.reject(new Error(res.msg || "Error"))
+    } else {
+      return res
+    }
+  },
+  error => {
+    store.commit('HIDE_LOADING')
+    Toast("网络正在开小差，请检查网络连接或稍后重试")
+    return Promise.reject(error)
+  }
+)
+
+/**
+ * 封装 post 请求
+ * @param {String} url 请求地址
+ * @param {Object} data 请求参数
+ * @param {Object} appkey appkey
+ * @returns {Promise} 请求
+ */
+export function http (url, data = {}, appkey) {
+  const config = {
+    // 请求的服务器 URL
+    url: `/router/rest?${url}`,
+    // post
+    method: 'post',
+    data,
+    // 后端要的头部自定义参数
+    // 'content-type': contentType
+    headers: { method: url, appkey }
+  }
+  return service(config)
+}
+
+export default service
+
+```
 
 
 ## 取消重复请求
