@@ -1,36 +1,13 @@
-# 钩子执行顺序
-
-首次进入：beforeRouteEnter() => created() => mounted => activated() => beforeRouteLeave() => deactivated()
-
-再次进入：beforeRouteEnter() => activated() => beforeRouteLeave() => deactivated()
-
-当两个组件切换的时候执行的钩子就是
-
-page1 mounted
-page1 deactivated
-
-page2 mounted
-page2 deactivated
-
-page1 activated
-page1 deactivated
-
-page2 activated
-page2 deactivated
+# 十步内轻松看懂 keep-alive
 
 
 
-# 标题
-
-十步内轻松看懂 keep-alive
-
-
-# 前言
+## 前言
 
 某天产品提了一个需求，A B C 三个页面之间相互跳转，要求 B 页面有时候需要缓存，有时候要删除缓存，我立马就想到之前有看过关于 keep-alive 的一个骚操作，于是周末抽空又好好看了下 keep-alive 源码深究下，顺便充个电，看了以下内容，相信今后对于这种场景也可以多一种实现方案了。
 
 
-# 可以得到什么
+## 可以得到什么
 
 轻松理解 keep-alive 实现
 
@@ -39,7 +16,7 @@ page2 deactivated
 Vue 中灵活清除缓存的方式
 
 
-# keep-alive 是什么
+## keep-alive 是什么
 
 vue 中的内置组件，vue 缓存机制的实现。
 
@@ -57,7 +34,7 @@ vue 中的内置组件，vue 缓存机制的实现。
 截图。。
 
 
-# created
+## created
 
 created 钩子只做了两件事
 ```js
@@ -75,7 +52,7 @@ keys：是一个数组，用来放这些组件的标识集合
 
 
 
-# destroyed
+## destroyed
 
 destroyed 把 cache 里的缓存全部清掉
 ```js
@@ -87,7 +64,7 @@ destroyed () {
 ```
 
 
-# mounted
+## mounted
 
 include / exclude 这两个属性文档里都有，大家应该不陌生，监听有变更自然要重新整理 cache 配置
 ```js
@@ -102,21 +79,27 @@ mounted () {
 ```
 
 
-# render
+## render
 
-因为组件内部手写了render 所以不会模板编译，直接执行 $mount 走 new Watcher 流程内部执行 render path 
+因为组件内部手写了render 所以不会模板编译，实现都在这里，是主要内容。
 
-## 第一步：获取默认插槽，拿到第一个组件节点的 componentOptions 组件选项，不存在直接 return 出去
 
-## 第二步：拿到组件的 name，用于和 include / exclude 匹配，没匹配到就 return 出去
+### 第一步：
+获取默认插槽，拿到第一个组件节点的 componentOptions 组件选项，不存在直接 return 出去
 
-## 第三步：根据优先级取组件的key，用于cache缓存的key。
+### 第二步：
+拿到组件的 name，用于和 include / exclude 匹配，没匹配到就 return 出去
 
-## 第四步：这里开始就是实现缓存的核心了。如果缓存存在，直接把缓存的实例赋值到新的 vnode 的实例。（从这里可以看出，缓存的其实是组件的实例）
+### 第三步：
+根据优先级取组件的key，用于cache缓存的key。
 
-## 第五步：取了缓存后，该干嘛了？，就到了 keep alive 用的 LRU 更新策略，简单说更新缓存队列，LRU 我简单介绍下，都说了要人人看得懂，再简单我也要介绍，就不用出门百度了。
+### 第四步：
+这里开始就是实现缓存的核心了。如果缓存存在，直接把缓存的实例赋值到新的 vnode 的实例。（从这里可以看出，缓存的其实是组件的实例）
 
-## LRU 算法
+### 第五步：
+取了缓存后，该干嘛了？，就到了 keep alive 用的 LRU 更新策略，简单说更新缓存队列，LRU 我简单介绍下，说了要轻松看懂，再简单也要介绍下。
+
+### LRU 算法
 
 算法常用于缓存，越近访问的模块，保持的越久。
 
@@ -164,13 +147,17 @@ arr.push(...arr.splice(arr.findIndex((item) => item === '模块3'), 1))
 好了，介绍完，我们接着往下走。
 
 
-## 第六步：前面是缓存存在直接取，那么不存在，我们直接存起来就好了，并且更新下队列。
+### 第六步：
+前面是缓存存在直接取，那么不存在，我们直接存起来就好了，并且更新下队列。
 
-## 第七步：还记得 keep alive 官网有个 max 属性不，这里超过缓存数量时，同理也是采用 LRU 策略。
+### 第七步：
+还记得 keep alive 官网有个 max 属性不，这里超过缓存数量时，同理也是采用 LRU 策略。
 
-## 第八步：给组件打个标识，比如走常规卸载挂载流程的时候通过标识跳过，走 deactivated / activated （这里没有深究，但做的是这些事情）
+### 第八步：
+给组件打个标识，比如走常规卸载挂载流程的时候通过标识跳过，走 deactivated / activated （这里没有深究，但做的是这些事情）
 
-## 第九步：返回 vnode
+### 第九步：
+返回 vnode
 
 
 ```js
@@ -238,7 +225,7 @@ render () {
 ```
 
 
-# Vue 中如何灵活清除缓存
+## Vue 中如何灵活清除缓存
 
 有的时候会存在一些场景：
 
@@ -295,5 +282,9 @@ pruneCacheEntry(
   this._vnode
 )
 ```
+
+## 总结
+
+我们总能从源码中取得收获，保持对知识探索的心态。
 
 上面的这种方式也是阅读源码的好处之一，可以给你提供更多的方案思路和可能性。
