@@ -81,7 +81,70 @@ mounted () {
 
 ## render
 
-因为组件内部手写了render 所以不会模板编译，实现都在这里，是主要内容。
+因为组件内部手写了render 所以不会模板编译，主要实现都在部分，是主要内容。
+```js
+render () {
+
+  // 第一步开始
+  const slot = this.$slots.default
+  const vnode: VNode = getFirstComponentChild(slot)
+  const componentOptions: ?VNodeComponentOptions = vnode && vnode.componentOptions
+  // 第一步结束
+
+  if (componentOptions) {
+
+    // 第二步开始
+    const name: ?string = getComponentName(componentOptions)
+    const { include, exclude } = this
+    if (
+      // not included
+      (include && (!name || !matches(include, name))) ||
+      // excluded
+      (exclude && name && matches(exclude, name))
+    ) {
+      return vnode
+    }
+    // 第二步结束
+
+    // 第三步开始
+    const { cache, keys } = this
+    const key: ?string = vnode.key == null
+      // same constructor may get registered as different local components
+      // so cid alone is not enough (#3269)
+      ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
+      : vnode.key
+    // 第三步结束
+    
+    // 第四步开始
+    if (cache[key]) {
+      vnode.componentInstance = cache[key].componentInstance
+      // 第四步结束
+
+      // 第五步开始
+      remove(keys, key)
+      keys.push(key)
+      // 第五步结束
+    } else {
+
+      // 第六步开始
+      cache[key] = vnode
+      keys.push(key)
+      // 第六步结束
+
+      // 第七步开始
+      if (this.max && keys.length > parseInt(this.max)) {
+        pruneCacheEntry(cache, keys[0], keys, this._vnode)
+      }
+      // 第七步结束
+    }
+    // 第八步开始
+    vnode.data.keepAlive = true
+    // 第八步结束
+  }
+  // 第九步
+  return vnode || (slot && slot[0])
+}
+```
 
 
 ### 第一步：
@@ -159,70 +222,6 @@ arr.push(...arr.splice(arr.findIndex((item) => item === '模块3'), 1))
 ### 第九步：
 返回 vnode
 
-
-```js
-render () {
-
-  // 第一步开始
-  const slot = this.$slots.default
-  const vnode: VNode = getFirstComponentChild(slot)
-  const componentOptions: ?VNodeComponentOptions = vnode && vnode.componentOptions
-  // 第一步结束
-
-  if (componentOptions) {
-
-    // 第二步开始
-    const name: ?string = getComponentName(componentOptions)
-    const { include, exclude } = this
-    if (
-      // not included
-      (include && (!name || !matches(include, name))) ||
-      // excluded
-      (exclude && name && matches(exclude, name))
-    ) {
-      return vnode
-    }
-    // 第二步结束
-
-    // 第三步开始
-    const { cache, keys } = this
-    const key: ?string = vnode.key == null
-      // same constructor may get registered as different local components
-      // so cid alone is not enough (#3269)
-      ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
-      : vnode.key
-    // 第三步结束
-    
-    // 第四步开始
-    if (cache[key]) {
-      vnode.componentInstance = cache[key].componentInstance
-      // 第四步结束
-
-      // 第五步开始
-      remove(keys, key)
-      keys.push(key)
-      // 第五步结束
-    } else {
-
-      // 第六步开始
-      cache[key] = vnode
-      keys.push(key)
-      // 第六步结束
-
-      // 第七步开始
-      if (this.max && keys.length > parseInt(this.max)) {
-        pruneCacheEntry(cache, keys[0], keys, this._vnode)
-      }
-      // 第七步结束
-    }
-    // 第八步开始
-    vnode.data.keepAlive = true
-    // 第八步结束
-  }
-  // 第九步
-  return vnode || (slot && slot[0])
-}
-```
 
 
 ## Vue 中如何灵活清除缓存
