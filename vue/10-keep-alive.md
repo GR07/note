@@ -21,7 +21,7 @@ Vue 中灵活清除缓存的方式
 vue 中的内置组件，vue 缓存机制的实现。
 
 别提到源码就害怕，不要慌，看他的源码就 100 行的样子，相对较为简单。
-
+![avatar](../img/keep-1.png)
 
 
 通过控制台可以发现：
@@ -30,8 +30,8 @@ vue 中的内置组件，vue 缓存机制的实现。
 沿着 dom tree 是找不到的
 
 证明了：这个组件不会渲染出 dom 节点，但是会渲染出 vnode 虚拟节点。
+![avatar](../img/keep-2.png)
 
-截图。。
 
 
 ## created
@@ -152,6 +152,7 @@ render () {
 
 ### 第二步：
 拿到组件的 name，用于和 include / exclude 匹配，没匹配到就 return 出去
+![avatar](../img/keep-3.png)
 
 ### 第三步：
 根据优先级取组件的key，用于cache缓存的key。
@@ -217,7 +218,7 @@ arr.push(...arr.splice(arr.findIndex((item) => item === '模块3'), 1))
 还记得 keep alive 官网有个 max 属性不，这里超过缓存数量时，同理也是采用 LRU 策略。
 
 ### 第八步：
-给组件打个标识，比如走常规卸载挂载流程的时候通过标识跳过，走 deactivated / activated （这里没有深究，但做的是这些事情）
+给组件打个标识，比如走常规卸载挂载流程的时候通过标识跳过，走 deactivated / activated （这里没有过多深究，但做的是这些事情）
 
 ### 第九步：
 返回 vnode
@@ -235,7 +236,7 @@ A B C 三个页面之间相互跳转，业务要求 B 页面有时候需要缓�
 如果上面的解读你看懂了，这个方法你也能猜到。
 
 原理：拿到 keep-alive 组件内部的 cache / keys 缓存配置存到全局，根据业务场景手动维护。
-
+![avatar](../img/keep-4.png)
 基本用法
 ```js
 // 获取
