@@ -1,68 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <script>
-    // 将状态封装成不同类
-    class A {
-      constructor (state) {
-        this.state = state
-      }
-      change () {
-        console.log(`B`);
-        this.state.setState(this.state.b)
-      }
-    }
+    // const sleep = () => {
+    //   return new Promise(resolve => {
+    //     setTimeout(resolve, 1000);
+    //   });
+    // }
+    // const start = async () => {
+    //   performance.measure()
+    //   let i = 0;
+    //   while (i < 5) {
+    //     await sleep();
+    //     console.log(`第 ${++i} 次执行`);
+    //   }
+    //   performance.mark()
+    // }
 
-    class B {
-      constructor (state) {
-        this.state = state
-      }
-      change () {
-        console.log(`C`);
-        this.state.setState(this.state.c)
-      }
+    // start();
+    let index = 1
+    const delay = () => {
+      const now = Date.now()
+      while (Date.now() - now < 200);
     }
-    
-    class C {
-      constructor (state) {
-        this.state = state
-      }
-      change () {
-        console.log(`A`);
-        this.state.setState(this.state.a)
-      }
-    }
+    const start = () => {
+      const ticker = setTimeout(() => {
+        delay()
 
-    class Use {
-      constructor () {
-        this.a = new A(this)
-        this.b = new B(this)
-        this.c = new C(this)
-        this.cur = this.a
-      }
-      init () {
-        const btn = document.createElement('button')
-        btn.innerHTML = '按钮'
-        document.body.append(btn)
-        let self = this
-        btn.addEventListener('click', function () {
-          self.cur.change()
-        })
-      }
-      setState (cur) {
-        this.cur = cur
-      }
-    }
+        if (index++ >= 5) {
+          clearTimeout(ticker)
+          return
+        }
 
-    const use = new Use()
-    use.init()
+      }, 100)
+    }
+    start()
 
   </script>
 </body>
+
 </html>
