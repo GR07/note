@@ -183,7 +183,7 @@ git commit 把暂存区的东西一次性提交到分支
 
 1. 先克隆主项目
 
-git clone -b dev git@gitlab.ky-tech.com.cn:erp-frontend/base.git --recursive
+git clone -b dev xxx.com.cn:xxx/base.git --recursive
 
 + 参数解释
 
@@ -194,7 +194,7 @@ git clone -b dev git@gitlab.ky-tech.com.cn:erp-frontend/base.git --recursive
 
 2. 在主项目下 添加子模块
 
-git submodule add -b dev git@gitlab.ky-tech.com.cn:erp-frontend/你的子项目仓库名.git src/你的子项目仓库名
+git submodule add -b dev xxx.com.cn:xxx/你的子项目仓库名.git src/你的子项目仓库名
 
 
 3. 更新所有子模块
