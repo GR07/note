@@ -1,49 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <style>
+    #container {
+      width: 200px;
+      height: 200px;
+      background-color: lightblue;
+      position: relative;
+      top: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
 </head>
 
 <body>
+  <div id="container"></div>
   <script>
-    // const sleep = () => {
-    //   return new Promise(resolve => {
-    //     setTimeout(resolve, 1000);
-    //   });
-    // }
-    // const start = async () => {
-    //   performance.measure()
-    //   let i = 0;
-    //   while (i < 5) {
-    //     await sleep();
-    //     console.log(`第 ${++i} 次执行`);
-    //   }
-    //   performance.mark()
-    // }
+    /**
+ * 获取元素的 transform 属性值
+ * @param {HTMLElement} element - 需要获取 transform 的元素
+ * @param {*} element
+ * @returns
+ */
+function getMatrixTransform (element) {
+  const computedStyle = window.getComputedStyle(element)
+  const transformValue = computedStyle.transform
 
-    // start();
-    let index = 1
-    const delay = () => {
-      const now = Date.now()
-      while (Date.now() - now < 200);
-    }
-    const start = () => {
-      const ticker = setTimeout(() => {
-        delay()
+  if (transformValue && transformValue!== 'none') {
+      const matrix = new DOMMatrix(transformValue)
+      return matrix.m42
+  }
+  return 0
+}
+    const container = document.getElementById('container');
+    let startY;
+    let startTime;
+    let isMoving = false;
 
-        if (index++ >= 5) {
-          clearTimeout(ticker)
-          return
-        }
+    container.addEventListener('touchstart', (e) => {
+      const touch = e.changedTouches[0];
+      startY = touch.pageY;
+      startTime = Date.now();
+      isMoving = true;
+    });
 
-      }, 100)
-    }
-    start()
+    container.addEventListener('touchmove', (e) => {
+      if (!isMoving) return;
+      const touch = e.changedTouches[0];
+      const currentY = touch.pageY;
+      const distance = startY - currentY;
 
+      const currentTime = Date.now();
+      const duration = currentTime - startTime;
+
+      // 计算速度
+      const speed = distance / duration;
+
+      // 计算阻尼系数，越接近最大偏移距离阻尼越大
+      let damping = 1;
+      const currentTranslateY = getMatrixTransform(container) || 0;
+      const remainingDistance = 120 - currentTranslateY;
+      damping = remainingDistance / 120;
+
+      // 计算新的 translateY
+      let newTranslateY = currentTranslateY + (distance * speed * damping);
+      newTranslateY = Math.min(newTranslateY, 120);
+      newTranslateY = Math.max(newTranslateY, 0);
+
+      container.style.transform = `translateY(${newTranslateY}px)`;
+    });
+
+    container.addEventListener('touchend', () => {
+      isMoving = false;
+      startY = 0;
+      startTime = 0;
+      container.style.transform = 'translateY(0px)'
+    });
   </script>
 </body>
 
