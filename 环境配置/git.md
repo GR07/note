@@ -200,18 +200,6 @@ reflog 不仅仅是提交的记录，还有其他 git 的操作记录，因为�
 
 
 
-## 场景五：暂存工作区
-
-正在 feature 分支上开发新功能，这时生产环境上出现了一个 bug 需要紧急修复，但是这部分代码还没开发完，不想提交，怎么办？
-这个时候可以用 git stash 命令先把工作区已经修改的文件暂存起来。然后切换分支进行 bug 的修复，修复完成后，切换回 feature 分支，从堆栈中恢复刚刚保存的内容。
-
-1. git stash save "message" 执行存储时，添加备注，方便查找。
-2. git stash list 查看 stash 存储列表
-3. git stash pop 应用最近一次暂存的修改，并删除暂存的记录。
-4. git stash apply stash@${num} 应用某个存储，但不会把存储从存储列表中删除即 stash@{xx}。
-5. git stash clear 删除所有缓存的 stash
-
-
 
 
 ## 场景六：合并 commit
