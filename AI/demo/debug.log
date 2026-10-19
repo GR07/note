@@ -1,0 +1,402 @@
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:openai.agents:Tracing is disabled. Not creating trace
+DEBUG:openai.agents:Setting current trace: no-op
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 1, current_agent=TriageAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D78C20>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0C85D10>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'9842f0e7c73cd4ca2feac172bbf4f79d'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:47:33 GMT'), (b'EO-LOG-UUID', b'12328735162857874528'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:openai.agents:Processing output item type=function_call class=ResponseFunctionToolCall
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Turn 1 complete, next_step type=NextStepHandoff
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 2, current_agent=MultiplyByTwoAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A2368690>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0C7D350>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'4aaa835ee0992aa4d30b31747f288645'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:47:38 GMT'), (b'EO-LOG-UUID', b'5447914815335191983'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=function_call class=ResponseFunctionToolCall
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Invoking tool multiply_by_two
+DEBUG:openai.agents:Tool multiply_by_two completed.
+DEBUG:openai.agents:Turn 2 complete, next_step type=NextStepRunAgain
+DEBUG:openai.agents:Starting turn 3, current_agent=MultiplyByTwoAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0C7D5B0>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D5C050>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'3f64e05f33f9ce0c089578fd7a8c09ff'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:47:42 GMT'), (b'EO-LOG-UUID', b'8652976560078192274'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Turn 3 complete, next_step type=NextStepFinalOutput
+DEBUG:openai.agents:Resetting current trace
+DEBUG:openai.agents:Tracing is disabled. Not creating trace
+DEBUG:openai.agents:Setting current trace: no-op
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 1, current_agent=TriageAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D7CE20>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D7CF30>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'a5d1886f4fe3e361bb52f312b7eedf02'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:47:45 GMT'), (b'EO-LOG-UUID', b'11421727162348475687'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:openai.agents:Processing output item type=function_call class=ResponseFunctionToolCall
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Turn 1 complete, next_step type=NextStepHandoff
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 2, current_agent=AddOneAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0C79C50>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0C7A850>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'c034def0359f401ec0bf9a8ecbae896f'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:47:51 GMT'), (b'EO-LOG-UUID', b'2145512768571308370'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=function_call class=ResponseFunctionToolCall
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Invoking tool add_one
+DEBUG:openai.agents:Tool add_one completed.
+DEBUG:openai.agents:Turn 2 complete, next_step type=NextStepRunAgain
+DEBUG:openai.agents:Starting turn 3, current_agent=AddOneAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D9EE40>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D9F4D0>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'79f62c25178547ca1576f2a91e7f8507'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:48:00 GMT'), (b'EO-LOG-UUID', b'10049350535869745514'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Turn 3 complete, next_step type=NextStepFinalOutput
+DEBUG:openai.agents:Resetting current trace
+DEBUG:openai.agents:Tracing is disabled. Not creating trace
+DEBUG:openai.agents:Setting current trace: no-op
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 1, current_agent=TriageAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A2384590>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A23852B0>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'00a81847189e8396c5c112ba0b96db9e'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:48:05 GMT'), (b'EO-LOG-UUID', b'14994649806779158459'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:openai.agents:Processing output item type=function_call class=ResponseFunctionToolCall
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Turn 1 complete, next_step type=NextStepHandoff
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 2, current_agent=MultiplyByTwoAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0E6CA10>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D74350>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'5749d272c23da8dbf3a69f153346b10c'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:48:15 GMT'), (b'EO-LOG-UUID', b'13926708103681312121'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=function_call class=ResponseFunctionToolCall
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Invoking tool multiply_by_two
+DEBUG:openai.agents:Tool multiply_by_two completed.
+DEBUG:openai.agents:Turn 2 complete, next_step type=NextStepRunAgain
+DEBUG:openai.agents:Starting turn 3, current_agent=MultiplyByTwoAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0A6BF50>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C99D511BD0>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'19679ed006d98c83b09a2f8625f221e0'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:48:18 GMT'), (b'EO-LOG-UUID', b'18330503271107588980'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Turn 3 complete, next_step type=NextStepFinalOutput
+DEBUG:openai.agents:Resetting current trace
+DEBUG:openai.agents:Tracing is disabled. Not creating trace
+DEBUG:openai.agents:Setting current trace: no-op
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 1, current_agent=TriageAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C99D575DE0>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D87390>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'9428ed0e242f38240162d9410f2b0d6a'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:48:21 GMT'), (b'EO-LOG-UUID', b'16261942717227577575'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:openai.agents:Processing output item type=function_call class=ResponseFunctionToolCall
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Turn 1 complete, next_step type=NextStepHandoff
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 2, current_agent=AddOneAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A0D87250>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A22C1760>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'bc0060a39586f41635d3418a5a2ea03b'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:48:24 GMT'), (b'EO-LOG-UUID', b'12484733179185193513'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=function_call class=ResponseFunctionToolCall
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Invoking tool add_one
+DEBUG:openai.agents:Tool add_one completed.
+DEBUG:openai.agents:Turn 2 complete, next_step type=NextStepRunAgain
+DEBUG:openai.agents:Starting turn 3, current_agent=AddOneAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A23955D0>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A23968D0>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'0ba88664d6ab62b83088ef3488a4eae1'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:48:25 GMT'), (b'EO-LOG-UUID', b'7600557092940364249'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Turn 3 complete, next_step type=NextStepFinalOutput
+DEBUG:openai.agents:Resetting current trace
+DEBUG:openai.agents:Tracing is disabled. Not creating trace
+DEBUG:openai.agents:Setting current trace: no-op
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Starting turn 1, current_agent=TriageAgent
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:No conversation_id available for request
+DEBUG:openai.agents:Tracing is disabled. Not creating span
+DEBUG:openai.agents:Calling LLM
+DEBUG:openai._base_client:Building HTTP request: method=POST retries_taken=0
+DEBUG:openai._base_client:Sending HTTP Request: POST
+DEBUG:httpcore2.connection:connect_tcp.started host='api.deepseek.com' port=443 local_address=None timeout=5.0 socket_options=None
+DEBUG:httpcore2.connection:connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A22ECEC0>
+DEBUG:httpcore2.connection:start_tls.started ssl_context=<truststore._api.SSLContext object at 0x000001C9A09F23C0> server_hostname='api.deepseek.com' timeout=5.0
+DEBUG:httpcore2.connection:start_tls.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x000001C9A22ED470>
+DEBUG:httpcore2.http11:send_request_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_headers.complete
+DEBUG:httpcore2.http11:send_request_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:send_request_body.complete
+DEBUG:httpcore2.http11:receive_response_headers.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'openresty'), (b'Content-Type', b'text/event-stream; charset=utf-8'), (b'vary', b'accept-encoding'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'content-encoding', b'zstd'), (b'access-control-allow-credentials', b'true'), (b'x-ds-trace-id', b'358ac2a17d152408f82b835f4b08cfd9'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'X-Content-Type-Options', b'nosniff'), (b'Cache-Control', b'no-cache'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Fri, 16 Oct 2026 14:48:28 GMT'), (b'EO-LOG-UUID', b'11766775364700285401'), (b'EO-Cache-Status', b'MISS')])
+INFO:httpx2:HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+DEBUG:openai._base_client:HTTP Response: POST 200
+DEBUG:openai._base_client:request_id: None
+DEBUG:httpcore2.http11:receive_response_body.started request=<Request [b'POST']>
+DEBUG:httpcore2.http11:response_closed.started
+DEBUG:httpcore2.http11:response_closed.complete
+DEBUG:openai.agents:Processing output item type=reasoning class=ResponseReasoningItem
+DEBUG:openai.agents:Processing output item type=message class=ResponseOutputMessage
+DEBUG:httpcore2.http11:receive_response_body.failed exception=GeneratorExit()
+DEBUG:openai.agents:Turn 1 complete, next_step type=NextStepFinalOutput
+DEBUG:openai.agents:Resetting current trace
+DEBUG:openai.agents:Shutting down trace provider
+DEBUG:openai.agents:Shutting down trace processor

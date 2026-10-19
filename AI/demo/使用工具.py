@@ -1,0 +1,33 @@
+import asyncio
+
+from agents import Agent, Runner, function_tool  
+import config  
+
+import httpx
+
+@function_tool
+def get_weather(latitude, longitude):
+    """根据指定坐标提供当地摄氏温度"""
+
+    # 补全了 API 参数，直接获取当前温度
+    url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m"
+    response = httpx.get(url)
+    data = response.json()
+    # 提取当前温度并格式化返回
+    return f"{data['current']['temperature_2m']}℃"
+
+
+agent = Agent(
+    name="AI助手",
+    instructions="你是一个友好的AI助手。使用中文进行问答",
+    model="deepseek-flash",
+    tools=[get_weather],
+)
+
+async def main():  
+    result = await Runner.run(agent, '今天北京天气如何')  
+    print(result.final_output)  
+
+if __name__ == '__main__':  
+    # 使用 asyncio.run() 启动事件循环，执行异步主函数 main
+    asyncio.run(main())  
